@@ -1,0 +1,30 @@
+#my-sections {
+	list-style-type: none;
+}
+
+#my-sections li div {
+	background-color: #B48484;
+	padding: 0 8px;
+	border-radius: 4px;
+	margin-bottom: 4px;
+}
+
+#course-id {
+
+}
+
+#section-id-days {
+
+}
+
+#section-start-end {
+
+}
+
+#section-location {
+
+}
+
+#section-instructor {
+
+}

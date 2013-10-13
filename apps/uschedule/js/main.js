@@ -118,11 +118,33 @@ function addSection(section) {
 	if (section != null) {
 		var mySections = $("#my-sections");
 		var sectionDiv = $("<div>");
-		sectionDiv.append($("<h3>").text(section.course.id));
-		sectionDiv.append($("<span>").text(section.id + '|' + section.days + '|'));
-		sectionDiv.append($("<span>").text(section.start + " - " + section.end));
-		sectionDiv.append($("<span>").text(section.location));
-		sectionDiv.append($("<span>").text(section.instructor[0].first + ' ' + section.instructor[0].last));
+		sectionDiv.append($("<h3>").attr('id', 'course-id').text(section.course.id));
+		var days = "";
+		for(var i = 0; i < section.days.length; i++) {
+			switch (section.days.charAt(i)) {
+				case 'M':
+					days += 'Monday';
+					break;
+				case 'T':
+					days += 'Tuesday';
+					break;
+				case 'W':
+					days += 'Wednesday';
+					break;
+				case 'H':
+					days += 'Thursday';
+					break;
+				case 'F':
+					days += 'Friday';
+					break;
+			}
+			if (i != section.days.length - 1) {
+				days += ', ';
+			}
+		}
+		sectionDiv.append($("<h5>").attr('id', 'section-id-days').text(section.id + ' | ' + days + ' | ' + section.start + " - " + section.end));
+		sectionDiv.append($("<p>").attr('id', 'section-location').text(section.location));
+		sectionDiv.append($("<p>").attr('id', 'section-instructor').text(section.instructor[0].first + ' ' + section.instructor[0].last));
 		mySections.append($("<li>").append(sectionDiv));
 	}
 }
