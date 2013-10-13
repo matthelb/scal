@@ -67,7 +67,7 @@ $("#courses").chosen().change(function () {
 			if (result.length > 0) {
 				/*sections.show();*/
 				$.each(result, function(i, section) {
-		    		sections.append($("<option />").val(section.id).text(section.id + ' - ' + section.location));
+		    		sections.append($("<option />").val(section.id).text(section.id + ' - ' + section.location + ' (' + section.days + ': ' + section.start + ')'));
 				});
 				$('#courses :nth-child(0)').prop('selected', true);
 				$("#add-section").prop('disabled', false);
@@ -152,7 +152,7 @@ function getParameterByName( name,href ) {
   }
 }
 
-    	function helpPopup(){
-    		alert("How to use SCal to Google: \n1. Select your section.\n2. Press \"Add\" to add it to your class list.\n3. When all classes have been added, press \"Export\" to send to Google Calendar");
-    	}
+function helpPopup(){
+	alert("How to use SCal to Google: \n1. Select your section.\n2. Press \"Add\" to add it to your class list.\n3. When all classes have been added, press \"Export\" to send to Google Calendar");
+}
 
