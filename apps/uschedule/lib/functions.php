@@ -30,6 +30,23 @@ function get_all_departments($semester) {
 	return $departments;
 }
 
+function get_all_sections($course, $semester) {
+	foreach (get_all_courses(substr($course, 0, strpos($course, '-')), $semester) as $c) {
+		if (strcmp($c->getId(), $course) == 0) {
+			return $c->getSections();
+		}
+	}
+	return null;
+}
+
+function get_section($section, $course, $semester) {
+	foreach(get_all_sections($course, $semester) as $s) {
+		if (strcmp($section, $s->getId()) == 0) {
+			return $s;
+		}
+	}
+	return null;
+}
 function get_session($id, $semester) {
 	$json_object = get_json(sprintf(API_SESSIONS, $id, $semester));
 	return json_decode($json_object, true);
@@ -41,9 +58,11 @@ function get_all_terms() {
 }
 
 function add_section_to_calendar($cal, $section) {
+	$urls = array();
 	foreach($section->toCalendarEvents() as $event) {
-		var_dump($cal->events->insert('primary', $event));
+		array_push($urls, $cal->events->insert('primary', $event)['htmlLink']);
 	}
+	return $urls;
 }
 
 function get_google_client() {

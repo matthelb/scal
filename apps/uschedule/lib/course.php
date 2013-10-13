@@ -3,11 +3,11 @@ require_once('section.php');
 
 class Course {
 
-	private $id;
-	private $title;
-	private $description;
+	public $id;
+	public $title;
+	public $description;
 	private $sections;
-	private $semester;
+	public $semester;
 
 	public function __construct($json_object, $semester) {
 		$this->id = $json_object['ScheduledCourseID'];

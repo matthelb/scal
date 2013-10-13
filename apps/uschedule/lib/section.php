@@ -5,17 +5,17 @@ require_once('instructor.php');
 require_once('course.php');
 require_once('session.php');
 
-define(DEFAULT_TZ, 'America/Los_Angeles');
+define('DEFAULT_TZ', 'America/Los_Angeles');
 
 class Section {
-	private $id;
+	public $id;
 	private $course;
-	private $start;
-	private $end;
-	private $days;
-	private $location;
-	private $instructor;
-	private $session;
+	public $start;
+	public $end;
+	public $days;
+	public $location;
+	public $instructor;
+	public $session;
 	private $sessionObject;
 
 	public function __construct(Course $course, $json_object) {
@@ -39,7 +39,7 @@ class Section {
 	}
 
 	public function getId() {
-		return $id;
+		return $this->id;
 	}
 	public function getCourse() {
 		return $this->course;

@@ -2,12 +2,12 @@
 require_once('functions.php');
 
 class Session {
-	private $term;
-	private $id;
-	private $firstDayClasses;
-	private $lastDayAdd;
-	private $lastDayDropWithW;
-	private $end;
+	public $term;
+	public $id;
+	public $firstDayClasses;
+	public $lastDayAdd;
+	public $lastDayDropWithW;
+	public $end;
 
 	public function __construct($json_object) {
 		$this->term = $json_object['term'];

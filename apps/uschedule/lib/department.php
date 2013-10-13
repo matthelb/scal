@@ -1,8 +1,8 @@
 <?php
 class Department {
-	private $code;
-	private $name;
-	private $type;
+	public $code;
+	public $name;
+	public $type;
 
 	public function __construct($json_object) {
 		$this->code = $json_object['code'];

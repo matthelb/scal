@@ -32,7 +32,6 @@ class Google_REST {
    *  invalid or malformed post body, invalid url)
    */
   static public function execute(Google_HttpRequest $req) {
-    var_dump($req);
     $httpRequest = Google_Client::$io->makeRequest($req);
     $decodedResponse = self::decodeHttpResponse($httpRequest);
     $ret = isset($decodedResponse['data'])
@@ -49,7 +48,6 @@ class Google_REST {
    * @return mixed|null
    */
   public static function decodeHttpResponse($response) {
-    var_dump($response);
     $code = $response->getResponseHttpCode();
     $body = $response->getResponseBody();
     $decoded = null;

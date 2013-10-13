@@ -1,7 +1,7 @@
 <?php
 class Instructor {
-	private $first;
-	private $last;
+	public $first;
+	public $last;
 
 	public function __construct($json_object) {
 		$this->first = $json_object['first_name'];

@@ -22,15 +22,15 @@ $apiConfig = array(
     'use_objects' => false,
   
     // The application_name is included in the User-Agent HTTP header.
-    'application_name' => '',
+    'application_name' => 'USChedule',
 
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
-    'oauth2_client_id' => '',
-    'oauth2_client_secret' => '',
-    'oauth2_redirect_uri' => '',
+    'oauth2_client_id' => '341773837040.apps.googleusercontent.com',
+    'oauth2_client_secret' => '1L3Ee1ll1BdL3LjhzV4KekUp',
+    'oauth2_redirect_uri' => 'http://localhost/uschedule',
 
     // The developer key, you get this at https://code.google.com/apis/console
-    'developer_key' => '',
+    'developer_key' => 'AIzaSyDR8dWrsfhluXwHCEdfjKtsHJNyqJ3lR_0',
   
     // Site name to show in the Google's OAuth 1 authentication screen.
     'site_name' => 'www.example.org',
