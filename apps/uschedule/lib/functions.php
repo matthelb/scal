@@ -27,8 +27,20 @@ function get_all_departments($semester) {
 	$departments = array();
 	$json_object = json_decode($json_object, true);
 	foreach($json_object['department'] as $department) {
-		array_push($departments, new Department($department));
+		if (array_key_exists('department', $department)) {
+			$department2 = $department['department'];
+			if (array_key_exists('code', $department2)) {
+				array_push($departments, new Department($department2));
+			} else {
+				foreach ($department2 as $department3) {
+					array_push($departments, new Department($department3));
+				}
+			}
+		} else {
+			array_push($departments, new Department($department));
+		}
 	}
+	sort($departments);
 	return $departments;
 }
 

@@ -8,7 +8,7 @@ if (isset($_GET['logout'])) {
   unset($_SESSION['token']);
 }
 
-if (isset($_GET['code'])) {
+if (isset($_GET['code']) && !isset($_SESSION['token'])) {
   $client->authenticate($_GET['code']);
   $_SESSION['token'] = $client->getAccessToken();
   header('Location: http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
@@ -31,6 +31,9 @@ if ($client->getAccessToken()) {
 	$_SESSION['token'] = $client->getAccessToken();
 } else {
 	$authUrl = $client->createAuthUrl();
-	header('Location: ' . $authUrl);
+	echo json_encode(array(
+  		'error' => 1,
+  		'login_url' => $authUrl 
+    ));
 }
 ?>

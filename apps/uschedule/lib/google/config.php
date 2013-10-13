@@ -26,8 +26,8 @@ $apiConfig = array(
 
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
     'oauth2_client_id' => '341773837040.apps.googleusercontent.com',
-    'oauth2_client_secret' => '1L3Ee1ll1BdL3LjhzV4KekUp',
-    'oauth2_redirect_uri' => 'http://localhost/uschedule',
+    'oauth2_client_secret' => '9etbME8Kq7CF2_-PCIxmro4L',
+    'oauth2_redirect_uri' => 'http://localhost/uschedule/',
 
     // The developer key, you get this at https://code.google.com/apis/console
     'developer_key' => 'AIzaSyDR8dWrsfhluXwHCEdfjKtsHJNyqJ3lR_0',

@@ -80,7 +80,7 @@
 										foreach ($depts as $dept) {
 											$code = $dept->getCode();
 											$name = $dept->getName();
-											echo "<option value=\"$code\">$name</option>";
+											echo "<option value=\"$code\">$code - $name</option>";
 										}
 									?>
 								</select>
@@ -93,15 +93,16 @@
 						            <option value="">Section</option>
 						        </select>
 						     <br/>
-							<a id="add-section" class="btn btn-primary btn-large" href="#">Add »</a>
+							<a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add »</a>
 						</p>
 						<p>
 							<h3> View all your classes! </h3>
                             <ul id="my-sections"></ul>
-							<a id="clear-sections" class="btn btn-primary btn-large" href="#">Clear All »</a>
+							<a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All »</a>
 						<p>
 							<h3> Now you're ready to export! </h3>
-							<a id="create-calendar" class="btn btn-primary btn-large" href="#">Export »</a>
+							<a id="create-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Export »</a>
+							<a id="calendar-url" style="display: none;" target="_blank">View calendar!</a>
 						</p>
 					</div>
 				</div>
