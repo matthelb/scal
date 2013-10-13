@@ -1,5 +1,5 @@
 <?php
-	/*$curl = curl_init();
+$curl = curl_init();
 	curl_setopt($curl,CURLOPT_URL,'http://web-app.usc.edu/ws/soc/api/depts/20133');
 	curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
 	$result = curl_exec($curl);
