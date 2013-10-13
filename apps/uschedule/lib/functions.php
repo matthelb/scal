@@ -49,6 +49,7 @@ function get_section($section, $course, $semester) {
 	}
 	return null;
 }
+
 function get_session($id, $semester) {
 	$json_object = get_json(sprintf(API_SESSIONS, $id, $semester));
 	return json_decode($json_object, true);
@@ -65,16 +66,6 @@ function add_section_to_calendar($cal, $section) {
 		array_push($urls, $cal->events->insert('primary', $event)['htmlLink']);
 	}
 	return $urls;
-}
-
-function get_google_client() {
-	$client = new Google_Client();
-	$client->setApplicationName("USChedule");
-    $client->setClientId('341773837040.apps.googleusercontent.com');
-    $client->setClientSecret('1L3Ee1ll1BdL3LjhzV4KekUp');
-    $client->setRedirectUri('http://localhost/uschedule');
-    $client->setDeveloperKey('AIzaSyDR8dWrsfhluXwHCEdfjKtsHJNyqJ3lR_0');
-	return $client;	
 }
 
 function get_json($url) {

@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -24,33 +23,38 @@
 
         <!-- Add your site or application content here -->
         <?php
-            $curl = curl_init();
-            curl_setopt($curl,CURLOPT_URL,'http://web-app.usc.edu/ws/soc/api/depts/20133');
-            curl_setopt($curl,CURLOPT_RETURNTRANSFER,true);
-            $result = curl_exec($curl);
-            curl_close($curl);
-            $classes = json_decode($result,true);
-            var_dump($classes);
-            for($i=0;$i<sizeof($classes['department']);$i++){
-                echo $classes['department'][$i]['name'];
-                echo "<br />";
-            }
-            $curl2 = curl_init();
-            curl_setopt($curl2, CURLOPT_URL, 'http://web-app.usc.edu/ws/soc/api/classes/csci/20133');
-            curl_setopt($curl2,CURLOPT_RETURNTRANSFER,true);
-            $result2 = curl_exec($curl2);
-            curl_close($curl2);
-            $classes2 = json_decode($result2, true);
-            var_dump($classes2['OfferedCourses']['course']);
-            for($i=0;$i<sizeof($classes2['OfferedCourses']['course']);$i++){
-                for($j=0;$j<sizeof($classes2['OfferedCourses']['course'][$i]['CourseData']);$j++){
-                echo $classes2['OfferedCourses']['course'][$i]['CourseData']['title'];
-                //echo $classes2['OfferedCourses']['course'][$i]['CourseData']['SectionData'][$j];
-                echo "<br />";
-                }
-            }
-        ?>
-
+			require_once('lib/functions.php');
+			$depts = get_all_departments(20133);
+		?>
+		<select id="departments">
+            <option value="">Department</option>
+		<?php
+			foreach ($depts as $dept) {
+				$code = $dept->getCode();
+				$name = $dept->getName();
+				echo "<option value=\"$code\">$name</option>";
+			}
+		?>
+		</select>
+		<br/>
+		<select id="courses">
+            <option value="">Course</option>
+		</select>
+        <br/>
+        <select id="sections">
+            <option value="">Section</option>
+        </select>
+        <br/>
+        <input id="add-section" type="button" value="Add Section"/>
+        <br/>
+        <input id="clear-sections" type="button" value="Clear Sections"/>
+        <br/>
+        <div id="my-sections"></div>
+        <br/>
+        <input id="create-calendar" type="button" value="Add to Calendar"/>
+        <br/>
+        <a id="calendar-url"></a>
+        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
@@ -67,3 +71,4 @@
         </script>
     </body>
 </html>
+

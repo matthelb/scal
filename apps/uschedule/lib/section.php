@@ -14,35 +14,37 @@ class Section {
 	public $end;
 	public $days;
 	public $location;
+	public $type;
 	public $instructor;
 	public $session;
 	private $sessionObject;
 
-	public function __construct(Course $course, $json_object) {
-		$this->id = $json_object['id'];
-		$this->course = $course;
-		$this->start = @$json_object['start_time'];
-		$this->end = @$json_object['end_time'];
-		$this->days = @$json_object['day'];
-		$this->location = @$json_object['location'];
-		$this->instructor = array();
-		$instructors = $json_object['instructor'];
-		if(isset($instructors[0])) {
-			foreach ($instructors as $instructor) {
-				array_push($this->instructor, new Instructor($instructor));
-			}
+	public function __construct($json_object, Course $course) {
+			$this->id = $json_object['id'];
+			$this->course = $course;
+			$this->start = @$json_object['start_time'];
+			$this->end = @$json_object['end_time'];
+			$this->days = @$json_object['day'];
+			$this->location = @$json_object['location'];
+			$this->type = @$json_object['type'];
+			$this->instructor = array();
+			$instructors = $json_object['instructor'];
+			if(isset($instructors[0])) {
+				foreach ($instructors as $instructor) {
+					array_push($this->instructor, new Instructor($instructor));
+				}
 
-		} else {
-			array_push($this->instructor, new Instructor($json_object['instructor']));
-		}
-		$this->session = $json_object['session'];
+			} else {
+				array_push($this->instructor, new Instructor($json_object['instructor']));
+			}
+			$this->session = $json_object['session'];
 	}
 
 	public function getId() {
 		return $this->id;
 	}
 	public function getCourse() {
-		return $this->course;
+		return $this->course;	
 	}
 
 	public function getStartTime() {
