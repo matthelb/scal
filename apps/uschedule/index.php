@@ -35,6 +35,9 @@
 </head>
 
 <body>
+<table border="0" align="center">
+<tr>
+<td>
 <div class="container-fluid">
 	<div class="row-fluid">
 		<div class="span12">
@@ -50,6 +53,15 @@
 				<ul class="nav nav-tabs">
 					<li class="active">
 						<a href="#panel-350864" data-toggle="tab">Add your Classes</a>
+					</li>
+					<li class="active">
+						<a href='#' data-toggle="tab">Clubs</a>
+					</li>
+					<li class="active">
+						<a href='#' data-toggle="tab">My Account</a>
+					</li>
+					<li class="active">
+						<a href='#' data-toggle="tab">Friends</a>
 					</li>
 				</ul>
 				<div class="tab-content">
@@ -95,6 +107,9 @@
 		</div>
 	</div>
 </div>
+</td>
+</tr>
+</table>
 <script src="js/plugins.js"></script>
 <script src="js/main.js"></script>
 </body>
