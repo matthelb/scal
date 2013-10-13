@@ -22,8 +22,37 @@
         <![endif]-->
 
         <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
+        <?php
+			require_once('lib/functions.php');
+			$depts = get_all_departments(20133);
 
+		?>
+		<select id="departments">
+		<?php
+			foreach ($depts as $dept) {
+				$code = $dept->getCode();
+				$name = $dept->getName();
+				echo "<option value=\"$code\">$name</option>";
+			}
+		?>
+		</select>
+		<br/>
+		<select id="courses">
+		</select>
+        <br/>
+        <select id="sections">
+        </select>
+        <br/>
+        <input id="add-section" type="button" value="Add Section"/>
+        <br/>
+        <input id="clear-sections" type="button" value="Clear Sections"/>
+        <br/>
+        <div id="my-sections"></div>
+        <br/>
+        <input id="create-calendar" type="button" value="Add to Calendar"/>
+        <br/>
+        <a id="calendar-url"></a>
+        
         <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
         <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.2.min.js"><\/script>')</script>
         <script src="js/plugins.js"></script>
@@ -40,3 +69,4 @@
         </script>
     </body>
 </html>
+
