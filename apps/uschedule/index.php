@@ -81,7 +81,7 @@
 												foreach ($depts as $dept) {
 													$code = $dept->getCode();
 													$name = $dept->getName();
-													echo "<option value=\"$code\">$name</option>";
+													echo "<option value=\"$code\">$code - $name</option>";
 												}
 												?>
 											</select>
