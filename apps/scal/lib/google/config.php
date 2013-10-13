@@ -22,12 +22,12 @@ $apiConfig = array(
     'use_objects' => false,
   
     // The application_name is included in the User-Agent HTTP header.
-    'application_name' => 'USChedule',
+    'application_name' => 'SCal',
 
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
     'oauth2_client_id' => '341773837040.apps.googleusercontent.com',
-    'oauth2_client_secret' => '9etbME8Kq7CF2_-PCIxmro4L',
-    'oauth2_redirect_uri' => 'http://localhost/uschedule/',
+    'oauth2_client_secret' => '1WMs7X9ve5APZ2nusonhRfja',
+    'oauth2_redirect_uri' => 'http://localhost/scal/',
 
     // The developer key, you get this at https://code.google.com/apis/console
     'developer_key' => 'AIzaSyDR8dWrsfhluXwHCEdfjKtsHJNyqJ3lR_0',

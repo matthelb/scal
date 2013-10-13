@@ -103,7 +103,7 @@
 											<p>
 												<h3> Now you're ready to export! </h3>
 												<a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export »</a>
-												<a id="calendar-url" class="btn" style="display: none;" target="_blank"  onclick="return false;">View calendar!</a>
+												<a id="calendar-url" class="btn" style="display: none;" target="_blank">View calendar!</a>
 											</p>
 										</div>
 									</div>
