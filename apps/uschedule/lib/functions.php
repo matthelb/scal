@@ -30,18 +30,37 @@ function get_all_departments($semester) {
 		if (array_key_exists('department', $department)) {
 			$department2 = $department['department'];
 			if (array_key_exists('code', $department2)) {
-				array_push($departments, new Department($department2));
+				$d = new Department($department2);
+				if (!isDuplicate($d, $departments)) {
+					array_push($departments, $d);
+				}	
 			} else {
 				foreach ($department2 as $department3) {
-					array_push($departments, new Department($department3));
+					$d = new Department($department3);
+					if (!isDuplicate($d, $departments)) {
+						array_push($departments, $d);
+					}	
 				}
 			}
 		} else {
-			array_push($departments, new Department($department));
+			$d = new Department($department);
+			if (!isDuplicate($d, $departments)) {
+				array_push($departments, $d);
+			}
 		}
+
 	}
 	sort($departments);
 	return $departments;
+}
+
+function isDuplicate($department, $departments) {
+	foreach ($departments as $d) {
+		if (strcmp($department->getCode(), $d->getCode()) == 0) {
+			return true;
+		}
+	}
+	return false;
 }
 
 function get_all_sections($course, $semester) {

@@ -9,7 +9,7 @@ define('DEFAULT_TZ', 'America/Los_Angeles');
 
 class Section {
 	public $id;
-	private $course;
+	public $course;
 	public $start;
 	public $end;
 	public $days;

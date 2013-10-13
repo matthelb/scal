@@ -117,8 +117,13 @@ $('#create-calendar').click(function() {
 function addSection(section) {
 	if (section != null) {
 		var mySections = $("#my-sections");
-		var sectionDiv = $("<li>").text(section.id + '\n' + section.days + '\n' + section.start + '\n' + section.end + '\n' + section.location + '\n' + section.instructor[0].first + ' ' + section.instructor[0].last);
-		mySections.append(sectionDiv);
+		var sectionDiv = $("<div>");
+		sectionDiv.append($("<h3>").text(section.course.id));
+		sectionDiv.append($("<span>").text(section.id + '|' + section.days + '|'));
+		sectionDiv.append($("<span>").text(section.start + " - " + section.end));
+		sectionDiv.append($("<span>").text(section.location));
+		sectionDiv.append($("<span>").text(section.instructor[0].first + ' ' + section.instructor[0].last));
+		mySections.append($("<li>").append(sectionDiv));
 	}
 }
 

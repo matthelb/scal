@@ -18,10 +18,10 @@ class Course {
 		$sections = $json_object['CourseData']['SectionData'];
 		if (isset($sections[0])) {
 			foreach ($sections as $section) {
-				array_push($this->sections, new Section($section, $this, null));
+				array_push($this->sections, new Section($section, $this));
 			}
 		} else {
-			array_push($this->sections, new Section($sections, $this, null));
+			array_push($this->sections, new Section($sections, $this));
 		}
 	}
 
