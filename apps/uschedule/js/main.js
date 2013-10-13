@@ -1,15 +1,20 @@
 $(document).ready(function() {
+	$('#departments').chosen();
+	$('#courses').chosen();
+	$('#sections').chosen();
 	$('#departments :nth-child(0)').prop('selected', true);
 	$('#departments').trigger('change');
 	$('#courses').trigger('change');
 });
 
-$('#departments').change(function () {
+$('#departments').chosen().change(function () {
 	var dept = $( "#departments option:selected").val();
 	var courses = $("#courses");
 	var sections = $("#sections");
 	courses.children('option:not(:first)').remove();
+	courses.trigger("chosen:updated");
 	sections.children('option:not(:first)').remove();
+	sections.trigger("chosen:updated");
 	if (dept != '') {
 		$.ajax({ type: 'POST', url : "ajax/courses.php", data : {dept : dept}, success : function(result) {
 			if (result.length > 0) {
@@ -20,11 +25,13 @@ $('#departments').change(function () {
 				$('#departments :nth-child(0)').prop('selected', true);
 				courses.children('option:first').text('Course');
 				courses.prop('disabled', false);
+				courses.trigger("chosen:updated");
 			} else {
 				/*courses.hide();
 				$('<span>').attr('id', 'empty-courses').text('No courses for selected department.').insertAfter($('#departments'));*/
 				courses.children('option:first').text('No courses for department.');
 				courses.prop('disabled', true);
+				courses.trigger("chosen:updated");
 			}
 			courses.trigger('change');
 		}, error : function () {
@@ -37,10 +44,11 @@ $('#departments').change(function () {
 	}
 });
 
-$("#courses").change(function () {
+$("#courses").chosen().change(function () {
 	var course = $( "#courses option:selected").val();
 	var sections = $("#sections");
 	sections.children('option:not(:first)').remove();
+	sections.trigger("chosen:updated");
 	if (course != '') {
 		$.ajax({type: 'POST', url : "ajax/sections.php", data : {course : course}, success : function(result) {
 			if (result.length > 0) {
@@ -52,12 +60,14 @@ $("#courses").change(function () {
 				$("#add-section").prop('disabled', false);
 				sections.children('option:first').text('Section');
 				sections.prop('disabled', false);
+				sections.trigger("chosen:updated");
 			} else {
 				/*sections.hide();
 				$('<span>').attr('id', 'empty-sections').text('No sections for selected department.').insertAfter($('#courses'));*/
 				$("#add-section").prop('disabled', true);
 				sections.children('option:first').text('No sections for course.');
 				sections.prop('disabled', true);
+				sections.trigger("chosen:updated");
 			}
 		}, error : function() {
 			/*sections.hide();
@@ -76,7 +86,7 @@ $("#add-section").click(function() {
 	var course = $( "#courses option:selected").val();
 	$.post("ajax/add_section.php", {section : section, course : course}, function(result) {
 		var mySections = $("#my-sections");
-		var sectionDiv = $("<div>").append($("<p>").text(result.id + '\n' + result.days + '\n' + result.start + '\n' + result.end + '\n' + result.location + '\n' + result.instructor[0].first + ' ' + result.instructor[0].last));
+		var sectionDiv = $("<li>").text(result.id + '\n' + result.days + '\n' + result.start + '\n' + result.end + '\n' + result.location + '\n' + result.instructor[0].first + ' ' + result.instructor[0].last);
 		mySections.append(sectionDiv);
 	}, 'json');
 });

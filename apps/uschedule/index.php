@@ -15,6 +15,7 @@
 	
 	<link href="css/bootstrap.min.css" rel="stylesheet">
 	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
+	<link href="css/chosen.min.css" rel="stylesheet">
 	<link href="css/style.css" rel="stylesheet">
 
   <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -84,6 +85,7 @@
 						</p>
 						<p>
 							<h3> View all your classes! </h3>
+                            <ul id="my-sections"></ul>
 							<a id="clear-sections" class="btn btn-primary btn-large" href="#">Clear All »</a>
 						<p>
 							<h3> Now you're ready to export! </h3>
