@@ -147,3 +147,7 @@ function getParameterByName( name,href ) {
   }
 }
 
+    	function helpPopup(){
+    		alert("How to use SCal to Google: \n1. Select your section.\n2. Press \"Add\" to add it to your class list.\n3. When all classes have been added, press \"Export\" to send to Google Calendar");
+    	}
+
