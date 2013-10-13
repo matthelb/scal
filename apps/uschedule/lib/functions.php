@@ -14,8 +14,10 @@ function get_all_courses($dept, $semester) {
 	$json_object = get_json(sprintf(API_COURSES, $dept, $semester));
 	$courses = array();
 	$json_object = json_decode($json_object, true);
-	foreach ($json_object['OfferedCourses']['course'] as $course) {
-		array_push($courses, new Course($course, $semester));
+	if(array_key_exists('course', $json_object['OfferedCourses'])) {
+		foreach ($json_object['OfferedCourses']['course'] as $course) {
+			array_push($courses, new Course($course, $semester));
+		}
 	}
 	return $courses;
 }

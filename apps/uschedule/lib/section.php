@@ -21,10 +21,10 @@ class Section {
 	public function __construct(Course $course, $json_object) {
 		$this->id = $json_object['id'];
 		$this->course = $course;
-		$this->start = $json_object['start_time'];
-		$this->end = $json_object['end_time'];
-		$this->days = $json_object['day'];
-		$this->location = $json_object['location'];
+		$this->start = @$json_object['start_time'];
+		$this->end = @$json_object['end_time'];
+		$this->days = @$json_object['day'];
+		$this->location = @$json_object['location'];
 		$this->instructor = array();
 		$instructors = $json_object['instructor'];
 		if(isset($instructors[0])) {
