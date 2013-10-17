@@ -1,123 +1,173 @@
-
 <!DOCTYPE html>
-<html lang="en">
+<!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js"> <!--<![endif]-->
 <head>
-	<meta charset="utf-8">
-	<title>SCal to Google</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="description" content="">
-	<meta name="author" content="">
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
 
-	<!--link rel="stylesheet/less" href="less/bootstrap.less" type="text/css" /-->
-	<!--link rel="stylesheet/less" href="less/responsive.less" type="text/css" /-->
-	<!--script src="js/less-1.3.3.min.js"></script-->
-	<!--append ‘#!watch’ to the browser URL, then refresh the page. -->
-	
-	<link href="css/bootstrap.min.css" rel="stylesheet">
-	<link href="css/bootstrap-responsive.min.css" rel="stylesheet">
-	<link href="css/chosen.min.css" rel="stylesheet">
-	<link href="css/style.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/bootstrap.min.css">
+  <style>
+  body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+  }
+  </style>
+  <!--<link rel="stylesheet" href="css/bootstrap-theme.min.css">-->
+  <link rel="stylesheet" href="css/chosen.min.css">
+  <link rel="stylesheet" href="css/main.css">
 
-	<!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
-  <!--[if lt IE 9]>
-    <script src="js/html5shiv.js"></script>
-    <![endif]-->
-
-    <!-- Fav and touch icons -->
-    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="img/apple-touch-icon-144-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="img/apple-touch-icon-114-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="img/apple-touch-icon-72-precomposed.png">
-    <link rel="apple-touch-icon-precomposed" href="img/apple-touch-icon-57-precomposed.png">
-    <link rel="shortcut icon" href="img/favicon.png">
-
-    <script type="text/javascript" src="js/jquery.min.js"></script>
-    <script type="text/javascript" src="js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="js/scripts.js"></script>
+  <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-
 <body>
-	<table border="0" align="center">
-		<tr>
-			<td>
-				<div class="container-fluid">
-					<div class="row-fluid">
-						<div class="span12">
-							<div class="hero-unit">
-								<h1>
-									<img src="logo.gif" height="600" width = "310"/>
-								</h1>
-								<p>
-									<a class="btn btn-primary btn-large" onclick="helpPopup()">How it works »</a>
-								</p>
-							</div>
-							<div class="tabbable" id="tabs-533001">
-								<ul class="nav nav-tabs">
-									<li class="active">
-										<a href="#panel-350864" data-toggle="add">Add your Classes</a>
-									</li>
-									<li class="inactive">
-										<a href='#' data-toggle="clubs">Clubs</a>
-									</li>
-									<li class="inactive">
-										<a href='#' data-toggle="friends">Friends</a>
-									</li>
-									<li class="inactive">
-										<a href='#' data-toggle="my_account">My Account</a>
-									</li>
-									
-								</ul>
-								<div class="tab-content">
-									<div class="tab-pane active" id="panel-350864">
-										<p>
-											<h3> Choose your classes! </h3>
-											<h4> Departments: </h4>
-											<?php
-											require_once('lib/functions.php');
-											$depts = get_all_departments(20133);
-											?>
-											<select id="departments" name="departments">
-												<option value="">Department</option>
-												<?php
-												foreach ($depts as $dept) {
-													$code = $dept->getCode();
-													$name = $dept->getName();
-													echo "<option value=\"$code\">$code - $name</option>";
-												}
-												?>
-											</select>
-											<h4> Courses: </h4>
-											<select id="courses" name="courses">
-												<option value="">Course</option>
-											</select>
-											<h4> Sections: </h4>
-											<select id="sections" name="sections">
-												<option value="">Section</option>
-											</select>
-											<br/>
-											<a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add »</a>
-										</p>
-										<p>
-											<h3> View all your classes! </h3>
-											<ul id="my-sections"></ul>
-											<a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All »</a>
-											<p>
-												<h3> Now you're ready to export! </h3>
-												<a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export »</a>
-												<a id="calendar-url" class="btn" style="display: none;" target="_blank">View calendar!</a>
-											</p>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</td>
-			</tr>
-		</table>
-		<script src="js/plugins.js"></script>
-		<script src="js/main.js"></script>
-	</body>
-	<footer>
-		<div id="hack_sc"> <img src="hack_sc.jpg" height="31.5" width = "85.1"/> </div>
-	</footer>
-	</html>
+      <!--[if lt IE 7]>
+          <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+          <![endif]-->
+          <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+              <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                  <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">SCal to Google</a>
+              </div>
+              <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav">
+                  <li class="active"><a href="#">Home</a></li>
+                  <li><a href="#about">Clubs</a></li>
+                  <li><a href="#contact">Friends</a></li>
+                  <!--<li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+                    <ul class="dropdown-menu">
+                      <li><a href="#">Action</a></li>
+                      <li><a href="#">Another action</a></li>
+                      <li><a href="#">Something else here</a></li>
+                      <li class="divider"></li>
+                      <li class="dropdown-header">Nav header</li>
+                      <li><a href="#">Separated link</a></li>
+                      <li><a href="#">One more separated link</a></li>
+                    </ul>
+                  </li>-->
+                </ul>
+                <!--<form class="navbar-form navbar-right">
+                  <div class="form-group">
+                    <input type="text" placeholder="Email" class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <input type="password" placeholder="Password" class="form-control">
+                  </div>
+                  <button type="submit" class="btn btn-success">Sign in</button>
+                </form>-->
+              </div><!--/.navbar-collapse -->
+            </div>
+          </div>
+
+          <!-- Main jumbotron for a primary marketing message or call to action -->
+          <div class="jumbotron">
+            <div class="container">
+              <h1><img src="img/usc-logo.png" width="96px" height="auto"/><span class="text-logo">al to Google</span><!--<img src="img/logo.gif" height="128px" width="auto"/>--></h1>
+                <p>How to use SCal to Google:</p>
+                <ol>
+                  <li>Select your section.</li>
+                  <li>Press "Add" to add it to your class list.</li>
+                  <li>When all classes have been added, press "Export" to send to Google Calendar"</li>
+                </ol>
+              <p><a id="get-started-link" href="#get-started" class="btn btn-primary btn-lg">Get started &raquo;</a></p>
+            </div>
+          </div>
+
+          <div class="container">
+            <div class="row">
+                <div id="content" class="col-lg-4 center">
+                    <ul id="semesters" class="list-inline">
+                      <?php
+                      require_once('lib/functions.php');
+                      $semesters = get_all_semesters();
+                      $size = sizeof($semesters);
+                      $current = floor($size / 2);
+                      for($i = 0; $i < $size; $i++) {
+                        $semester = $semesters[$i];
+                        $year = substr($semester, 0, 4);
+                        $season = "";
+                        switch (intval(substr($semester, 4, 5))) {
+                          case 1:
+                            $season = "Spring";
+                            break;  
+                          case 2:
+                            $season = "Summer";
+                            break;
+                          case 3:
+                            $season = "Fall";
+                            break;
+                        }
+                        $id = ($i == $current) ? 'id="semester-highlighted"' : '';
+                        echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$season $year</strong></li>";
+                      }
+                      ?>
+                    </ul>
+                  <p>
+                    <h3 id="get-started" class="anchor"> Choose your classes! </h3>
+                    <h4> Departments: </h4>
+                    <select id="departments" data-placeholder="Department" name="departments">
+                      <option value=""></option>
+                      <?php
+                      $depts = get_all_departments($semesters[$current]);
+                      foreach($depts as $dept) {
+                        $code = $dept->getCode();
+                        $name = $dept->getName();
+                        echo "<option value=$code>$code - $name</option>";
+                      }
+                      ?>
+                    </select>
+                    <h4> Courses: </h4>
+                    <select id="courses" data-placeholder="Course" name="courses">
+                      <option value=""></option>
+                    </select>
+                    <h4> Sections: </h4>
+                    <select id="sections" data-placeholder="Section" name="sections">
+                      <option value=""></option>
+                    </select>
+                    <br/>
+                    <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add »</a>
+                  </p>
+                  <p>
+                    <h3> View all your classes! </h3>
+                    <ul id="my-sections" class="list-unstyled"></ul>
+                    <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All »</a>
+                    <p>
+                      <h3> Now you're ready to export! </h3>
+                      <a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export »</a>
+                      <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar!</a>
+                    </p>
+                  </p>
+              </div>
+            </div>
+
+            <hr>
+
+            <footer>
+              <span>&copy; MMA 2013</span>
+              <img class="pull-right" id="hack-sc-logo" src="img/hack-sc.jpg" width="96px" height="auto"/>
+            </footer>
+          </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+          <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+
+          <script src="js/vendor/bootstrap.min.js"></script>
+
+          <script src="js/plugins.js"></script>
+          <script src="js/main.js"></script>
+
+          <script>
+          var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+          (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+            g.src='//www.google-analytics.com/ga.js';
+            s.parentNode.insertBefore(g,s)}(document,'script'));
+          </script>
+        </body>
+        </html>

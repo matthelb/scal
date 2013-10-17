@@ -5,18 +5,28 @@ require_once('google/Google_Client.php');
 require_once('google/contrib/Google_CalendarService.php');
 
 define('API_ROOT', 'http://web-app.usc.edu/ws/soc/api/');
-define('API_COURSES', API_ROOT . 'classes/%s/%d/');
-define('API_DEPARTMENTS', API_ROOT . 'depts/%d/');
+define('API_COURSES', API_ROOT . 'classes/%s/%s/');
+define('API_DEPARTMENTS', API_ROOT . 'depts/%s/');
 define('API_TERMS', API_ROOT . 'terms/');
-define('API_SESSIONS', API_ROOT . 'session/%s/%d');
+define('API_SESSIONS', API_ROOT . 'session/%s/%s/');
+
+function get_all_semesters() {
+	$json_object = get_json(API_TERMS);
+	return json_decode($json_object, true)['term'];
+}
 
 function get_all_courses($dept, $semester) {
 	$json_object = get_json(sprintf(API_COURSES, $dept, $semester));
 	$courses = array();
 	$json_object = json_decode($json_object, true);
 	if(array_key_exists('course', $json_object['OfferedCourses'])) {
-		foreach ($json_object['OfferedCourses']['course'] as $course) {
+		$course = $json_object['OfferedCourses']['course'];
+		if (array_key_exists('ScheduledCourseID', $course)) {
 			array_push($courses, new Course($course, $semester));
+		} else {
+			foreach ($course as $course2) {
+				array_push($courses, new Course($course2, $semester));
+			}	
 		}
 	}
 	return $courses;

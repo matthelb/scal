@@ -1,8 +1,9 @@
 <?php
 require_once('../lib/functions.php');
 
-if (isset($_POST['course'])) {
+if (isset($_POST['course']) && isset($_POST['semester'])) {
 	$course = $_POST['course'];
-	echo json_encode(get_all_sections($course, 20133));
+	$semester = $_POST['semester'];
+	echo json_encode(get_all_sections($course, $semester));
 }
 ?>

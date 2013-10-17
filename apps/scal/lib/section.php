@@ -10,6 +10,8 @@ define('DEFAULT_TZ', 'America/Los_Angeles');
 class Section {
 	public $id;
 	public $course;
+	public $title;
+	public $description;
 	public $start;
 	public $end;
 	public $days;
@@ -25,6 +27,7 @@ class Section {
 			$this->start = @$json_object['start_time'];
 			$this->end = @$json_object['end_time'];
 			$this->days = @$json_object['day'];
+			$this->days = (is_string($this->days)) ? $this->days : "";
 			$this->location = @$json_object['location'];
 			$this->type = @$json_object['type'];
 			$this->instructor = array();
@@ -38,6 +41,16 @@ class Section {
 				array_push($this->instructor, new Instructor($json_object['instructor']));
 			}
 			$this->session = $json_object['session'];
+			if (array_key_exists('section_title', $json_object)) {
+				if (is_string($json_object['section_title'])) {
+					$this->title = $json_object['section_title'];
+				}
+			}
+			if (array_key_exists('section_description', $json_object)) {
+				if (is_string($json_object['section_description'])) {
+					$this->description = $json_object['section_description'];
+				}
+			}
 	}
 
 	public function getId() {
