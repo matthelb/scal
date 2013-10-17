@@ -1,0 +1,63 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+@import url(http://fonts.googleapis.com/css?family=Graduate);
+
+.loading {
+	display: inline-block;
+	width: 16px !important;
+	height: 16px !important;
+	background-repeat: none;
+	margin: 2px;
+	vertical-align: middle;
+	background-image: url(../img/ajax-loader.gif);
+}
+
+.center {
+	float: none;
+	margin: 0 auto;
+}
+
+.anchor {
+	padding-top: 50px;
+	margin-top: -50px;
+}
+
+#my-sections li div:not(.loading) {
+	border-radius: 5px;
+	border: solid 1px #999999;
+	background: linear-gradient(top, white, #EEEEEE);
+	background: -webkit-linear-gradient(top, white, #EEEEEE);
+    background: -moz-linear-gradient(top, white, #EEEEEE);
+    background: -ms-linear-gradient(top, white, #EEEEEE);
+    background: -o-linear-gradient(top, white, #EEEEEE);
+    padding: 4px;
+}
+
+#my-sections li {
+	margin-bottom: 4px;
+}
+
+#my-sections li div:hover {
+	transform: scale(0.95);
+	-webkit-transform: scale(0.95);
+	-moz-transform: scale(0.95);
+	-ms-transform: scale(0.95);
+}
+
+.text-logo {
+	color: #990000 !important;
+}
+
+#semesters {
+	text-align: center;
+}
+
+#semesters li:hover {
+	cursor: pointer;
+}
+
+#semester-highlighted {
+	background-color: #EEEEEE;
+	border-radius: 5px;
+}
