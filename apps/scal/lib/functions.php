@@ -101,12 +101,35 @@ function get_all_terms() {
 	return json_decode($json_object, true)['terms'];
 }
 
-function add_section_to_calendar($cal, $section) {
+function get_calendar($cal, $semester) {
+	$calendar = null;
+	$calendarSummary = 'USC Classes - ' . semester_to_string($semester);
+	$calendarList = $cal->calendarList->listCalendarList();
+	foreach($calendarList->getItems() as $calendarEntry) {
+		if (strcmp($calendarSummary, $calendarEntry->getSummary()) == 0) {
+			$calendar = $calendarEntry;
+		}
+	}
+	if (!$calendar) {
+		$calendar = new Google_Calendar();
+		$calendar->setSummary($calendarSummary);
+		$calendar->setTimeZone(DEFAULT_TZ);
+		$cal->calendars->insert($calendar);
+	}
+	return $calendar;
+}
+
+function add_section_to_calendar($cal, $calendar, Section $section) {
 	$urls = array();
 	foreach($section->toCalendarEvents() as $event) {
-		array_push($urls, $cal->events->insert('primary', $event)['htmlLink']);
+		array_push($urls, $cal->events->insert($calendar->getId(), $event)->getHtmlLink());
 	}
 	return $urls;
+}
+
+function semester_to_string($semester) {
+	$seasons = array(0 => "", 1 => "Spring", 2 => "Summer", 3 => "Fall");
+    return sprintf('%s %s', $seasons[intval(substr($semester, 4, 5))], substr($semester, 0, 4));
 }
 
 function get_json($url) {

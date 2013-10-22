@@ -8,9 +8,11 @@ $(document).ready(function() {
 	$('#departments').trigger('change');
 	$('#courses').trigger('change');
 
-	var code = getParameterByName('code', document.URL);
-	if (code != "") {
-		createCalendar();
+	if (getParameterByName('auth', document.URL) != '') {
+		$('html, body').animate({
+	       	scrollTop: $('#create-calendar').offset().top
+	   	}, 500);
+	   	createCalendar();
 	}	
 	populateSections();
 });
@@ -24,12 +26,13 @@ function bindEvents() {
 			var semester = $(this).attr('data-semester-id');
 			var departments = $('#departments');
 			departments.children('option:not(:first)').remove();
+			$("#calendar-url").hide();
 			$('#departments_chosen > .chosen-single').append($('<div>').attr('id', 'departments-loading').attr('class', 'loading'));
 			$('#departments_chosen > .chosen-single > div > b').hide();
-			$.ajax({ type: 'POST', url : "ajax/departments.php", data : {semester : semester}, success : function(result) {
+			$.ajax({ type: 'GET', url : "ajax/departments.php", data : {semester : semester}, success : function(result) {
 					if (result.length > 0) {
 						$.each(result, function(i, dept) {
-							departments.append($("<option/>").val(dept.code).text(dept.code + ' - ' + dept.name));
+							departments.append($("<option/>").val(dept.code).html(dept.code + ' - ' + dept.name));
 						});
 						departments.attr('data-placeholder', 'Department');
 						departments.prop('disabled', false);
@@ -55,19 +58,19 @@ function bindEvents() {
 	});
 
 	$('#departments').change(function () {
-		var dept = $( "#departments option:selected").val();
-		var courses = $("#courses");
-		var sections = $("#sections");
+		var dept = $('#departments option:selected').val();
+		var courses = $('#courses');
+		var sections = $('#sections');
 		var semester = $('#semester-highlighted').attr('data-semester-id');
 		courses.children('option:not(:first)').remove();	
 		sections.children('option:not(:first)').remove();
 		if (dept != '') {
 			$('#courses_chosen > .chosen-single').append($('<div>').attr('id', 'courses-loading').attr('class', 'loading'));
 			$('#courses_chosen > .chosen-single > div > b').hide();
-			$.ajax({ type: 'POST', url : "ajax/courses.php", data : {dept : dept, semester : semester}, success : function(result) {
+			$.ajax({ type: 'GET', url : "ajax/courses.php", data : {dept : dept, semester : semester}, success : function(result) {
 				if (result.length > 0) {
 					$.each(result, function(i, course) {
-						courses.append($("<option />").val(course.id).text(course.id + ' - ' + course.title));
+						courses.append($("<option />").val(course.id).html(course.id + ' - ' + course.title));
 					});
 					courses.attr('data-placeholder', 'Course');
 					courses.prop('disabled', false);
@@ -94,7 +97,7 @@ function bindEvents() {
 		courses.trigger("chosen:updated");
 	});
 
-	$("#courses").change(function () {
+	$('#courses').change(function () {
 		var course = $( "#courses option:selected").val();
 		var sections = $("#sections");
 		var semester = $('#semester-highlighted').attr('data-semester-id');
@@ -102,11 +105,26 @@ function bindEvents() {
 		if (course != '') {
 			$('#sections_chosen > .chosen-single').append($('<div>').attr('id', 'sections-loading').attr('class', 'loading').css('background-image', 'url(img/ajax-loader.gif)'));
 			$('#sections_chosen > .chosen-single > div > b').hide();
-			$.ajax({type: 'POST', url : "ajax/sections.php", data : {course : course, semester : semester}, success : function(result) {
+			$.ajax({type: 'GET', url : "ajax/sections.php", data : {course : course, semester : semester}, success : function(result) {
 				if (result.length > 0) {
 					$.each(result, function(i, section) {
 						var title = (section.title != null) ? section.title : section.id;
-						sections.append($("<option />").val(section.id).text(title + ' - ' + section.location + ' (' + dayCodeToString(section.days) + ': ' + section.start + ')'));
+						var information = '';
+						if (section.location) {
+							information += section.location;
+						}
+						if (section.days) {
+							information += ' (' + dayCodeToString(section.days);
+						}
+						if (section.start) {
+							information += ': ' + section.start;
+						}
+						if (information.indexOf('(') != -1) {
+							information += ')';
+						} else {
+							information = 'No information available.';
+						}
+						sections.append($("<option />").val(section.id).html(title + ' - ' + information));
 					});
 					sections.attr('data-placeholder', 'Section');
 					sections.prop('disabled', false);
@@ -127,12 +145,12 @@ function bindEvents() {
 		} else {
 			sections.prop('disabled', true);
 		}
-		sections.trigger("chosen:updated");
+		sections.trigger('chosen:updated');
 	});
 
-	$("#add-section").click(function() {
-		var section = $( "#sections option:selected").val();
-		var course = $( "#courses option:selected").val();
+	$('#add-section').click(function() {
+		var section = $('#sections option:selected').val();
+		var course = $( '#courses option:selected').val();
 		var semester = $('#semester-highlighted').attr('data-semester-id');
 		if (section.length) {
 		$('#my-sections').prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading').css('background-image', 'url(img/ajax-loader.gif)')));
@@ -146,10 +164,10 @@ function bindEvents() {
 		}
 	});
 
-	$("#clear-sections").click(function() {
-		var mySections = $("#my-sections");
+	$('#clear-sections').click(function() {
+		var mySections = $('#my-sections');
 		if (!mySections.is(":empty")) {
-			$.post("ajax/clear_sections.php", {semester : $('#semester-highlighted').attr('data-semester-id')});
+			$.post('ajax/clear_sections.php', {semester : $('#semester-highlighted').attr('data-semester-id')});
 			mySections.empty();
 		}
 	});
@@ -168,14 +186,18 @@ function bindEvents() {
 
 function addSection(section) {
 	if (section != null) {
-		var mySections = $("#my-sections");
-		var sectionDiv = $("<div>").attr('data-section-id', section.id);
+		var mySections = $('#my-sections');
+		var sectionDiv = $('<div>').attr('data-section-id', section.id);
 		var title = (section.title != null) ? section.title : section.course.title;
 		sectionDiv.append($("<h4>").attr('class', 'course-id').text(title + ' - ' + section.type).append($('<span>').click(function() {
     		removeSection($(this).parents('div').data('section-id'));
     	}).attr('class', 'close pull-right').html('&times;')));
-		sectionDiv.append($("<p>").attr('class', 'section-days-time').text(dayCodeToString(section.days) + ' | ' + section.start + " - " + section.end));
-		sectionDiv.append($("<p>").attr('class', 'section-location').text(section.location));
+    	if (sections.days || section.start || section.end) {
+			sectionDiv.append($("<p>").attr('class', 'section-days-time').text(((section.days) ? (dayCodeToString(section.days) + ' | ') : '') + section.start + " - " + section.end));
+		}
+		if (section.location) {
+			sectionDiv.append($("<p>").attr('class', 'section-location').text(section.location));
+		}
 		sectionDiv.append($("<p>").attr('class', 'section-instructor').text(section.instructor[0].first + ' ' + section.instructor[0].last));
 		var loading = mySections.children('li').css('text-align', '').children('.loading');
 		if (loading.length) {
@@ -195,7 +217,7 @@ function removeSection(section) {
 }
 
 function dayCodeToString(code) {
-	var days = "";
+	var days = '';
 	for(var i = 0; i < code.length; i++) {
 		switch (code.charAt(i)) {
 			case 'M':
@@ -222,7 +244,7 @@ function dayCodeToString(code) {
 }
 
 function populateSections() {
-	$("#my-sections").empty();
+	$('#my-sections').empty();
 	$.get("ajax/get_sections.php", {semester : $('#semester-highlighted').attr('data-semester-id')}, function(result) {
 		$.each(result, function(i, section) {
 			addSection(section);
@@ -232,15 +254,15 @@ function populateSections() {
 
 function createCalendar() {
 	var code = getParameterByName('code', document.URL);
-	var data = (code != "") ? {code : code} : {semester : $('#semester-highlighted').attr('data-semester-id')};
+	var data = (code != '') ? {code : code, semester : $('#semester-highlighted').attr('data-semester-id')} : {semester : $('#semester-highlighted').attr('data-semester-id')};
 	$('#calendar-url').hide();
 	$('<div>').attr('id', 'export-loading').attr('class', 'loading').css('background-image', 'url(img/ajax-loader.gif)').insertAfter($('#create-calendar'));
 	$.post("ajax/create_calendar.php", data, function(result) {
 		if (result) {
 			if (result.success) {
-				$("#calendar-url").attr('href', result.urls[0][0]).text("View your Calendar").show();
+				$("#calendar-url").attr('href', result.urls[0][0]).show();
 			} else {	
-				window.location.replace(result.login_url);
+				window.location.href = result.auth_url;
 			}
 		}
 		$('#export-loading').remove();

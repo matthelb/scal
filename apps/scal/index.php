@@ -93,21 +93,9 @@
                       $current = floor($size / 2);
                       for($i = 0; $i < $size; $i++) {
                         $semester = $semesters[$i];
-                        $year = substr($semester, 0, 4);
-                        $season = "";
-                        switch (intval(substr($semester, 4, 5))) {
-                          case 1:
-                            $season = "Spring";
-                            break;  
-                          case 2:
-                            $season = "Summer";
-                            break;
-                          case 3:
-                            $season = "Fall";
-                            break;
-                        }
+                        $display = semester_to_string($semester);
                         $id = ($i == $current) ? 'id="semester-highlighted"' : '';
-                        echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$season $year</strong></li>";
+                        echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
                       }
                       ?>
                     </ul>
@@ -164,7 +152,7 @@
           <script src="js/main.js"></script>
 
           <script>
-          var _gaq=[['_setAccount','UA-XXXXX-X'],['_trackPageview']];
+          var _gaq=[['_setAccount','UA-44989976-1'],['_trackPageview']];
           (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
             g.src='//www.google-analytics.com/ga.js';
             s.parentNode.insertBefore(g,s)}(document,'script'));
