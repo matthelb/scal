@@ -2,34 +2,38 @@
 require_once('../lib/functions.php');
 session_start();
 $client = new Google_Client();
+$client->setUseObjects(true);
 $cal = new Google_CalendarService($client);
-
-if (isset($_POST['code']) && !isset($_SESSION['token'])) {
-  $client->authenticate($_POST['code']);
-  $_SESSION['token'] = $client->getAccessToken();
-  header('Location: http://' . $_SERVER['HTTP_HOST'] . $_SERVER['PHP_SELF']);
-}
+$semester = isset($_SESSION['authorization']['calendar']) ? $_SESSION['authorization']['calendar'] : (array_key_exists('semester', $_POST) ? $_POST['semester'] : null);
 
 if (isset($_SESSION['token'])) {
-  $client->setAccessToken($_SESSION['token']);
+	$client->setAccessToken($_SESSION['token']);
+} else {
+	$_SESSION['authorization']['redirect'] = $_SERVER['HTTP_REFERER'];
 }
 
-if ($client->getAccessToken() && isset($_POST['semester'])) {
-	if (isset($_SESSION['sections']) && isset($_SESSION['sections'][$_POST['semester']])) {
+if ($client->getAccessToken() && $semester) {
+	if (isset($_SESSION['sections']) && isset($_SESSION['sections'][$semester])) {
 		$urls = array();
-		foreach($_SESSION['sections'][$_POST['semester']] as $section) {
+		$calendar = get_calendar($cal, $semester);
+		foreach($_SESSION['sections'][$semester] as $section) {
 			if ($section) {
-				array_push($urls, add_section_to_calendar($cal, $section));
+				array_push($urls, add_section_to_calendar($cal, $calendar, $section));
 			}
+		}
+		if (isset($_SESSION['authorization'])) {
+			unset($_SESSION['authorization']);
 		}
 		echo json_encode(array('success' => true, 'urls' => $urls));
 	}
 	$_SESSION['token'] = $client->getAccessToken();
 } else {
-	$authUrl = $client->createAuthUrl();
-	echo json_encode(array(
-  		'success' => false,
-  		'login_url' => $authUrl 
-    ));
+	if (isset($_POST['semester'])) {
+		$_SESSION['authorization']['calendar'] = $semester;	
+	}
+	$_SESSION['authorization']['service'] = 'Google_CalendarService';
+	$_SESSION['authorization']['referer'] = $_SERVER['HTTP_REFERER'];
+	header('Location: http://' . $_SERVER['HTTP_HOST'] .
+		substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '/', 1)) . '/auth/google/');
 }
 ?>

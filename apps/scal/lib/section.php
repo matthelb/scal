@@ -27,7 +27,7 @@ class Section {
 			$this->start = @$json_object['start_time'];
 			$this->end = @$json_object['end_time'];
 			$this->days = @$json_object['day'];
-			$this->days = (is_string($this->days)) ? $this->days : "";
+			$this->days = (is_string($this->days)) ? $this->days : null;
 			$this->location = @$json_object['location'];
 			$this->type = @$json_object['type'];
 			$this->instructor = array();
@@ -102,25 +102,52 @@ class Section {
 	public function toCalendarEvents() {
 		$sessionObject = $this->getSessionObject();
 		$events = array();
-		foreach (str_split($this->getDays()) as $day) {
+		if ($this->getDays()) {
+			foreach (str_split($this->getDays()) as $day) {
+				$start = new Google_EventDateTime();
+				$start->setTimeZone(DEFAULT_TZ);
+				$end = new Google_EventDateTime();
+				$end->setTimeZone(DEFAULT_TZ);	
+				$event = $this->getBaseEvent();
+				$date = new DateTime($sessionObject->getFirstDayOfClasses());
+				$offset = date('N', $date->getTimestamp()) - 1;
+				$date->modify(sprintf('+%d days', Section::getDayOffset($day) - $offset));
+
+				$startTime = $this->getStartTime();
+				if ($startTime) {
+					$date->modify($this->getStartTime());
+					$start->setDateTime($date->format('Y-m-d\TH:i:s.u'));
+					$event->setStart($start);	
+
+					$date->modify($this->getEndTime());
+					$end->setDateTime($date->format('Y-m-d\TH:i:s.u'));
+					$event->setEnd($end);
+				} else {
+					$start->setDate($date->format('Y-m-d'));
+					$end->setDate($date->format('Y-m-d'));
+					$event->setStart($start);
+					$event->setEnd($end);
+				}
+				$endDate = new DateTime($sessionObject->getEnd());
+				$endDate->setTimeZone(new DateTimeZone(DEFAULT_TZ));
+				$endDate->modify('-14 day');
+				$event->setRecurrence(array('RRULE:FREQ=WEEKLY;UNTIL=' . $endDate->format('Ymd\THms\Z')));
+				array_push($events, $event);
+			}
+		} else {
 			$start = new Google_EventDateTime();
 			$start->setTimeZone(DEFAULT_TZ);
 			$end = new Google_EventDateTime();
 			$end->setTimeZone(DEFAULT_TZ);	
 			$event = $this->getBaseEvent();
 			$date = new DateTime($sessionObject->getFirstDayOfClasses());
-			$date->modify(sprintf('+%d days', Section::getDayOffset($day)));
-
-			$date->modify($this->getStartTime());
-			$start->setDateTime($date->format('Y-m-d\TH:i:s.u'));
-			$event->setStart($start);	
-
-			$date->modify($this->getEndTime());
-			$end->setDateTime($date->format('Y-m-d\TH:i:s.u'));
+			$start->setDate($date->format('Y-m-d'));
+			$end->setDate($date->format('Y-m-d'));
+			$event->setStart($start);
 			$event->setEnd($end);
 			$endDate = new DateTime($sessionObject->getEnd());
 			$endDate->setTimeZone(new DateTimeZone(DEFAULT_TZ));
-			$endDate->modify("+1 day");
+			$endDate->modify('-14 day');
 			$event->setRecurrence(array('RRULE:FREQ=WEEKLY;UNTIL=' . $endDate->format('Ymd\THms\Z')));
 			array_push($events, $event);
 		}

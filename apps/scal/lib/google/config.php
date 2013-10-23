@@ -27,7 +27,7 @@ $apiConfig = array(
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
     'oauth2_client_id' => '341773837040.apps.googleusercontent.com',
     'oauth2_client_secret' => '1WMs7X9ve5APZ2nusonhRfja',
-    'oauth2_redirect_uri' => 'http://localhost/scal/',
+    'oauth2_redirect_uri' => 'http://localhost/scal/auth/google/',
 
     // The developer key, you get this at https://code.google.com/apis/console
     'developer_key' => 'AIzaSyDR8dWrsfhluXwHCEdfjKtsHJNyqJ3lR_0',
