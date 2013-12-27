@@ -163,7 +163,6 @@ function bindEvents() {
 			}, 'json');
 		}
 	});
-
 	$('#clear-sections').click(function() {
 		var mySections = $('#my-sections');
 		if (!mySections.is(":empty")) {
@@ -173,13 +172,17 @@ function bindEvents() {
 	});
 
 	$('#create-calendar').click(function() {
-		createCalendar();
+		var mySections = $('#my-sections');
+		if(!mySections.is(":empty")){
+			createCalendar();
+		}
 	});
 
 	$('#get-started-link').click(function() {
 	   	$('html, body').animate({
 	       	scrollTop: $( $.attr(this, 'href') ).offset().top
-	   	}, 500);
+	   	}, 700);
+	   	$('#startModal').modal('hide')
 	   	return false;
 	});
 }
@@ -189,9 +192,21 @@ function addSection(section) {
 		var mySections = $('#my-sections');
 		var sectionDiv = $('<div>').attr('data-section-id', section.id);
 		var title = (section.title != null) ? section.title : section.course.title;
-		sectionDiv.append($("<h4>").attr('class', 'course-id').text(title + ' - ' + section.type).append($('<span>').click(function() {
+		sectionDiv.append($("<h4>").attr('class', 'course-id').text(title + ' - ' + section.type).append($('<div>').click(function() {
     		removeSection($(this).parents('div').data('section-id'));
-    	}).attr('class', 'close pull-right').html('&times;')));
+    	}).hover(function(){
+    		$(this).animate({
+    			width: "+=45"
+    		}, 'fast', function(){
+    			$(this).html('remove');
+    		});
+    	}, function(){
+    		$(this).animate({
+    			width: "-=45"
+    		}, 'fast', function(){
+    			$(this).html('&times;');
+    		});
+    	}).attr('class', 'close').html('&times;')));
     	if (sections.days || section.start || section.end) {
 			sectionDiv.append($("<p>").attr('class', 'section-days-time').text(((section.days) ? (dayCodeToString(section.days) + ' | ') : '') + section.start + " - " + section.end));
 		}
@@ -211,7 +226,7 @@ function addSection(section) {
 function removeSection(section) {
 	$.post("ajax/remove_section.php", {section : section, semester : $('#semester-highlighted').attr('data-semester-id')}, function(result) {
 		if (result.success) {
-			$("[data-section-id=\"" + section + "\"]").remove();
+			$("[data-section-id=\"" + section + "\"]").parent().remove();
 		}
 	}, 'json');
 }

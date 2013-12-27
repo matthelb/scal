@@ -15,10 +15,10 @@ session_start();
 
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <style>
-  body {
-    padding-top: 50px;
-    padding-bottom: 20px;
-  }
+    body {
+      padding-top: 50px;
+      padding-bottom: 20px;
+    }
   </style>
   <!--<link rel="stylesheet" href="css/bootstrap-theme.min.css">-->
   <link rel="stylesheet" href="css/chosen.min.css">
@@ -38,7 +38,7 @@ session_start();
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/">SCal to Google</a>
+                <a class="navbar-brand" href="/scal">SCal to Google</a>
               </div>
               <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -75,19 +75,37 @@ session_start();
           <div class="jumbotron">
             <div class="container">
               <h1><img src="img/usc-logo.png" width="96px" height="auto"/><span class="text-logo">al to Google</span><!--<img src="img/logo.gif" height="128px" width="auto"/>--></h1>
-                <p>How to use SCal to Google:</p>
-                <ol>
-                  <li>Select your section.</li>
-                  <li>Press "Add" to add it to your class list.</li>
-                  <li>When all classes have been added, press "Export" to send to Google Calendar"</li>
-                </ol>
-              <p><a id="get-started-link" href="#get-started" class="btn btn-primary btn-lg">Get started &raquo;</a></p>
+              <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#startModal">Get started &raquo;</button>
+
+              <!-- Modal -->
+              <div class="modal fade" id="startModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h4 class="modal-title" id="myModalLabel"></h4>
+                    </div>
+                    <div class="modal-body">
+                      <p>How to use SCal to Google:</p>
+                      <ol>
+                        <li>Select your section.</li>
+                        <li>Press "Add" to add it to your class list.</li>
+                        <li>When all classes have been added, press "Export" to send to Google Calendar</li>
+                      </ol>
+                    </div>
+                    <div class="modal-footer">
+                      <button type="button" class="btn btn-default" id="get-started-link" href="#semester-choice">Got it!</button>
+                    </div>
+                  </div><!-- /.modal-content -->
+                </div><!-- /.modal-dialog -->
+              </div>
             </div>
           </div>
 
           <div class="container">
             <div class="row">
-                <div id="content" class="col-lg-4 center">
+
+
+              <div id="semester-choice" class="anchor">
                     <ul id="semesters" class="list-inline">
                       <?php
                       require_once('lib/functions.php');
@@ -105,41 +123,42 @@ session_start();
                       }
                       ?>
                     </ul>
+                <p>
+                  <h3 id="get-started"> Choose your classes! </h3>
+                  <h4> Departments: </h4>
+                  <select id="departments" data-placeholder="Department" name="departments">
+                    <option value=""></option>
+                    <?php
+                    $depts = get_all_departments($semesters[$current]);
+                    foreach($depts as $dept) {
+                      $code = $dept->getCode();
+                      $name = $dept->getName();
+                      echo "<option value=$code>$code - $name</option>";
+                    }
+                    ?>
+                  </select>
+                  <h4> Courses: </h4>
+                  <select id="courses" data-placeholder="Course" name="courses">
+                    <option value=""></option>
+                  </select>
+                  <h4> Sections: </h4>
+                  <select id="sections" data-placeholder="Section" name="sections">
+                    <option value=""></option>
+                  </select>
+                  <br>
+                  <br>
+                  <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add »</a>
+                </p>
+                <p>
+                  <h3> View all your classes! </h3>
+                  <ul id="my-sections" class="list-unstyled"></ul>
+                  <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All »</a>
                   <p>
-                    <h3 id="get-started" class="anchor"> Choose your classes! </h3>
-                    <h4> Departments: </h4>
-                    <select id="departments" data-placeholder="Department" name="departments">
-                      <option value=""></option>
-                      <?php
-                      $depts = get_all_departments($semesters[$current]);
-                      foreach($depts as $dept) {
-                        $code = $dept->getCode();
-                        $name = $dept->getName();
-                        echo "<option value=$code>$code - $name</option>";
-                      }
-                      ?>
-                    </select>
-                    <h4> Courses: </h4>
-                    <select id="courses" data-placeholder="Course" name="courses">
-                      <option value=""></option>
-                    </select>
-                    <h4> Sections: </h4>
-                    <select id="sections" data-placeholder="Section" name="sections">
-                      <option value=""></option>
-                    </select>
-                    <br/>
-                    <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add »</a>
+                    <h3> Now you're ready to export! </h3>
+                    <a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export »</a>
+                    <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar!</a>
                   </p>
-                  <p>
-                    <h3> View all your classes! </h3>
-                    <ul id="my-sections" class="list-unstyled"></ul>
-                    <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All »</a>
-                    <p>
-                      <h3> Now you're ready to export! </h3>
-                      <a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export »</a>
-                      <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar!</a>
-                    </p>
-                  </p>
+                </p>
               </div>
             </div>
 
@@ -158,10 +177,10 @@ session_start();
           <script src="js/main.js"></script>
 
           <script>
-          var _gaq=[['_setAccount','UA-44989976-1'],['_trackPageview']];
-          (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-            g.src='//www.google-analytics.com/ga.js';
-            s.parentNode.insertBefore(g,s)}(document,'script'));
+            var _gaq=[['_setAccount','UA-44989976-1'],['_trackPageview']];
+            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+              g.src='//www.google-analytics.com/ga.js';
+              s.parentNode.insertBefore(g,s)}(document,'script'));
           </script>
         </body>
         </html>

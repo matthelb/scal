@@ -5563,7 +5563,7 @@ a.list-group-item:focus {
 
 .close {
   float: right;
-  font-size: 21px;
+  font-size: 17px;
   font-weight: bold;
   line-height: 1;
   color: #000000;
@@ -5582,7 +5582,7 @@ a.list-group-item:focus {
 }
 
 button.close {
-  padding: 0;
+  padding: 0px;
   cursor: pointer;
   background: transparent;
   border: 0;
