@@ -1,3 +1,6 @@
+<?php
+session_start();
+?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
 <!--[if IE 7]>         <html class="no-js lt-ie9 lt-ie8"> <![endif]-->
@@ -6,7 +9,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title></title>
+  <title>SCal to Google</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
 
@@ -40,8 +43,8 @@
               <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                   <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#about">Clubs</a></li>
-                  <li><a href="#contact">Friends</a></li>
+                  <li><a href="#">Clubs</a></li>
+                  <li><a href="#">Friends</a></li>
                   <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -91,6 +94,9 @@
                       $semesters = get_all_semesters();
                       $size = sizeof($semesters);
                       $current = floor($size / 2);
+                      if (isset($_SESSION['authorization']['calendar'])) {
+                        $current = array_search($_SESSION['authorization']['calendar'], $semesters);
+                      }
                       for($i = 0; $i < $size; $i++) {
                         $semester = $semesters[$i];
                         $display = semester_to_string($semester);

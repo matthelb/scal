@@ -6,7 +6,7 @@ require_once('../../lib/google/contrib/' . $_SESSION['authorization']['service']
 $client = new Google_Client();
 $service = new $_SESSION['authorization']['service']($client);
 if (isset($_GET['code'])) {
-	$client->authenticate($_POST['code']);
+	$client->authenticate($_GET['code']);
 	$_SESSION['token'] = $client->getAccessToken();
 } 
 if (isset($_SESSION['token'])) {

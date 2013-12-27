@@ -153,7 +153,7 @@ function bindEvents() {
 		var course = $( '#courses option:selected').val();
 		var semester = $('#semester-highlighted').attr('data-semester-id');
 		if (section.length) {
-		$('#my-sections').prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading').css('background-image', 'url(img/ajax-loader.gif)')));
+		$('#my-sections').prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
 			$.post("ajax/add_section.php", {section : section, course : course, semester : semester}, function(result) {
 				if (result.success) {
 					addSection(result.section);
@@ -244,19 +244,26 @@ function dayCodeToString(code) {
 }
 
 function populateSections() {
-	$('#my-sections').empty();
-	$.get("ajax/get_sections.php", {semester : $('#semester-highlighted').attr('data-semester-id')}, function(result) {
+	var mySections = $('#my-sections');
+	mySections.empty();
+	mySections.prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
+	$.ajax({type: 'GET',  url: 'ajax/get_sections.php', data: {semester : $('#semester-highlighted').attr('data-semester-id')}, success : function(result) {
 		$.each(result, function(i, section) {
 			addSection(section);
 		});
-	}, 'json');
+		mySections.children('li').css('text-align', '').children('.loading').remove();
+	}, error: function() {
+		mySections.children('li').css('text-align', '').children('.loading').remove();
+	}, dataType : 'json'});
 }
 
 function createCalendar() {
 	var code = getParameterByName('code', document.URL);
 	var data = (code != '') ? {code : code, semester : $('#semester-highlighted').attr('data-semester-id')} : {semester : $('#semester-highlighted').attr('data-semester-id')};
 	$('#calendar-url').hide();
-	$('<div>').attr('id', 'export-loading').attr('class', 'loading').css('background-image', 'url(img/ajax-loader.gif)').insertAfter($('#create-calendar'));
+	if (!$('#export-loading').length) {
+		$('<div>').attr('id', 'export-loading').attr('class', 'loading').css('background-image', 'url(img/ajax-loader.gif)').insertAfter($('#create-calendar'));
+	}
 	$.post("ajax/create_calendar.php", data, function(result) {
 		if (result) {
 			if (result.success) {

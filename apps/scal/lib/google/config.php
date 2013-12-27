@@ -25,9 +25,12 @@ $apiConfig = array(
     'application_name' => 'SCal',
 
     // OAuth2 Settings, you can get these keys at https://code.google.com/apis/console
-    'oauth2_client_id' => '341773837040.apps.googleusercontent.com',
-    'oauth2_client_secret' => '1WMs7X9ve5APZ2nusonhRfja',
-    'oauth2_redirect_uri' => 'http://localhost/scal/auth/google/',
+    'oauth2_client_id' => (strcmp($_SERVER['HTTP_HOST'], 'localhost') == 0) ? 
+        '341773837040-tnm2npg36ups0m9ut40c0jq0va09d9lj.apps.googleusercontent.com' : '341773837040.apps.googleusercontent.com',
+    'oauth2_client_secret' => (strcmp($_SERVER['HTTP_HOST'], 'localhost') == 0) ?
+        'wn7w-Q1Iih_TudxjKwMX6ESE' : '1WMs7X9ve5APZ2nusonhRfja',
+    'oauth2_redirect_uri' => (strcmp($_SERVER['HTTP_HOST'], 'localhost') == 0) ?
+        'http://localhost/scal/auth/google' : 'http://scal.heuristix.me/auth/google/',
 
     // The developer key, you get this at https://code.google.com/apis/console
     'developer_key' => 'AIzaSyDR8dWrsfhluXwHCEdfjKtsHJNyqJ3lR_0',

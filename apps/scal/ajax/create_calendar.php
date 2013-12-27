@@ -32,8 +32,8 @@ if ($client->getAccessToken() && $semester) {
 		$_SESSION['authorization']['calendar'] = $semester;	
 	}
 	$_SESSION['authorization']['service'] = 'Google_CalendarService';
-	$_SESSION['authorization']['referer'] = $_SERVER['HTTP_REFERER'];
 	header('Location: http://' . $_SERVER['HTTP_HOST'] .
-		substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '/', 1)) . '/auth/google/');
+		((strcmp($_SERVER['HTTP_HOST'], 'localhost') == 0) ?
+		substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '/', 1)) : '' ). '/auth/google/');
 }
 ?>
