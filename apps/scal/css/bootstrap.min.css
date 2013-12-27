@@ -4811,7 +4811,7 @@ a.list-group-item:focus {
 }
 .close {
   float: right;
-  font-size: 21px;
+  font-size: 17px;
   font-weight: bold;
   line-height: 1;
   color: #000000;
