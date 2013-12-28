@@ -103,8 +103,7 @@ session_start();
 
           <div class="container">
             <div class="row">
-
-
+		<div id="content" class="col-lg-4 center">
               <div id="semester-choice" class="anchor">
                     <ul id="semesters" class="list-inline">
                       <?php
