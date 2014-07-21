@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Author's custom styles
+   ========================================================================== */
+
+.loading {
+	display: inline-block;
+	width: 16px !important;
+	height: 16px !important;
+	background-repeat: none;
+	margin: 2px;
+	vertical-align: middle;
+	background-image: url(../img/ajax-loader.gif);
+}
+
+.center {
+	float: none;
+	margin: 0 auto;
+}
+
+.anchor {
+	padding-top: 50px;
+	margin-top: -50px;
+}
+#my-sections li div:not(.loading) {
+	border-radius: 5px;
+	border: solid 1px #999999;
+	background: linear-gradient(top, white, #EEEEEE);
+	background: -webkit-linear-gradient(top, white, #EEEEEE);
+    background: -moz-linear-gradient(top, white, #EEEEEE);
+    background: -ms-linear-gradient(top, white, #EEEEEE);
+    background: -o-linear-gradient(top, white, #EEEEEE);
+    padding: 4px;
+}
+
+#my-sections li {
+	position: relative;
+	margin-bottom: 4px;
+}
+
+.close {
+	position: absolute;
+	right: 0;
+	bottom: 0;
+}
+
+#my-sections li > div:hover {
+	-webkit-box-shadow: 0px 0px 4px 2px #D50E0E;
+    -moz-box-shadow: 0px 0px 4px 2px #D50E0E;
+    -o-box-shadow: 0px 0px 4px 2px #D50E0E;
+    -ms-box-shadow: 0px 0px 4px 2px #D50E0E;
+    box-shadow: 0px 0px 4px 2px #D50E0E;
+}
+
+/*#my-sections li div .close{
+	font-size:16px;
+	background: linear-gradient(top, #990000, #800000);
+	background: -webkit-linear-gradient(top, #990000, #800000);
+    background: -moz-linear-gradient(top, #990000, #800000);
+    background: -ms-linear-gradient(top, #990000, #800000);
+    background: -o-linear-gradient(top, #990000, #800000);
+}*/
+.text-logo {
+	color: #990000 !important;
+}
+
+#semesters {
+	text-align: center;
+}
+
+#semesters li:hover {
+	cursor:pointer;
+}
+
+#semester-highlighted {
+	background-color: #EEEEEE;
+	border-radius: 5px;
+}
