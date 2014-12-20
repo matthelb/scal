@@ -113,6 +113,10 @@ class Section {
 		return $event;
 	}
 
+	private function getSCalId() {
+		return base64_encode(implode(';', array($this->getSessionObject()->getTerm(), $this->getCourse()->getId(), $this->getId())));
+	}
+
 	public function toCalendarEvent() {
 		$sessionObject = $this->getSessionObject();
 		$event = $this->getBaseEvent();
@@ -140,6 +144,9 @@ class Section {
 		$endDate->setTimeZone(new DateTimeZone(DEFAULT_TZ));
 		$endDate->modify('-10 day');
 		$event->setRecurrence(array('RRULE:FREQ=WEEKLY;' . $byDay . 'UNTIL=' . $endDate->format('Ymd\THms\Z')));
+		$properties = New Google_EventExtendedProperties();
+		$properties->setPrivate(array('scal'=>$this->getSCalId()));
+		$event->setExtendedProperties($properties);
 		return $event;
 	}
 

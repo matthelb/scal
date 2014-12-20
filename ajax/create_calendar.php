@@ -15,7 +15,7 @@ if (isset($_SESSION['token'])) {
 if ($client->getAccessToken() && $semester) {
 	if (isset($_SESSION['sections']) && isset($_SESSION['sections'][$semester])) {
 		$urls = array();
-		$calendar = get_calendar($cal, $semester);
+		$calendar = get_or_create_calendar($cal, $semester);
 		foreach($_SESSION['sections'][$semester] as $section) {
 			if ($section) {
 				array_push($urls, add_section_to_calendar($cal, $calendar, $section));
@@ -29,7 +29,7 @@ if ($client->getAccessToken() && $semester) {
 	$_SESSION['token'] = $client->getAccessToken();
 } else {
 	if (isset($_POST['semester'])) {
-		$_SESSION['authorization']['calendar'] = $semester;	
+		$_SESSION['authorization']['calendar'] = $semester;
 	}
 	$_SESSION['authorization']['service'] = 'Google_CalendarService';
 	header('Location: http://' . $_SERVER['HTTP_HOST'] .

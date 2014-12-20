@@ -101,20 +101,23 @@ function get_all_terms() {
 	return json_decode($json_object, true)['terms'];
 }
 
-function get_calendar($cal, $semester) {
-	$calendar = null;
-	$calendarSummary = 'USC Classes - ' . semester_to_string($semester);
+function retrieve_calendar($cal, $semester) {
 	$calendarList = $cal->calendarList->listCalendarList();
 	foreach($calendarList->getItems() as $calendarEntry) {
-		if (strcmp($calendarSummary, $calendarEntry->getSummary()) == 0) {
-			$calendar = $calendarEntry;
-			break;
+		if (strcmp($semester, base64_decode($calendarEntry->getDescription())) == 0) {
+			return $calendarEntry;
 		}
 	}
-	if (!$calendar) {
+	return null;
+}
+
+function get_or_create_calendar($cal, $semester) {
+	$calendar = retrieve_calendar($cal, $semester);
+	if ($calendar == null) {
 		$calendar = new Google_Calendar();
-		$calendar->setSummary($calendarSummary);
+		$calendar->setSummary('USC Classes - ' . semester_to_string($semester));
 		$calendar->setTimeZone(DEFAULT_TZ);
+		$calendar->setDescription(base64_encode($semester));
 		$calendar = $cal->calendars->insert($calendar);
 	}
 	return $calendar;

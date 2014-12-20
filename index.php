@@ -151,6 +151,7 @@ session_start();
                 <p>
                   <h3> View all your classes! </h3>
                   <ul id="my-sections" class="list-unstyled"></ul>
+                  <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections »</a>
                   <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All »</a>
                   <p>
                     <h3> Now you're ready to export! </h3>

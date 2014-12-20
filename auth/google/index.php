@@ -10,8 +10,7 @@ if (isset($_GET['code'])) {
 	$_SESSION['token'] = $client->getAccessToken();
 }
 if (isset($_SESSION['token'])) {
-	echo "HI";
-	header('Location: ' . $_SESSION['authorization']['redirect'] . '?auth=1');
+	header('Location: ' . $_SESSION['authorization']['redirect']);
 } else {
 	echo json_encode(array('success' => false, 'auth_url' => $client->createAuthUrl()));
 }

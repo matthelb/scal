@@ -171,6 +171,10 @@ function bindEvents() {
 		}
 	});
 
+	$('#load-calendar').click(function() {
+		loadCalendar();
+	});
+
 	$('#create-calendar').click(function() {
 		var mySections = $('#my-sections');
 		if(!mySections.is(":empty")){
@@ -272,6 +276,24 @@ function populateSections() {
 	}, dataType : 'json'});
 }
 
+function loadCalendar() {
+	var mySections = $('#my-sections');
+	mySections.empty();
+	mySections.prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
+	$.ajax({type: 'POST',  url: 'ajax/load_calendar.php', data: {semester : $('#semester-highlighted').attr('data-semester-id')}, success : function(result) {
+		if (result.success) {
+			$.each(result.sections, function(i, section) {
+				addSection(section);
+			});
+		} else if (result.auth_url) {
+			window.location.href = result.auth_url;
+		}
+		mySections.children('li').css('text-align', '').children('.loading').remove();
+	}, error: function() {
+		mySections.children('li').css('text-align', '').children('.loading').remove();
+	}, dataType : 'json'});
+}
+
 function createCalendar() {
 	var code = getParameterByName('code', document.URL);
 	var data = (code != '') ? {code : code, semester : $('#semester-highlighted').attr('data-semester-id')} : {semester : $('#semester-highlighted').attr('data-semester-id')};
@@ -282,8 +304,6 @@ function createCalendar() {
 	$.post("ajax/create_calendar.php", data, function(result) {
 		if (result) {
 			if (result.success) {
-				console.log(result.urls);
-				console.log(result.urls[0]);
 				$("#calendar-url").attr('href', result.urls[0]).show();
 			} else {
 				window.location.href = result.auth_url;
