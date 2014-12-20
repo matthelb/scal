@@ -26,7 +26,7 @@ function get_all_courses($dept, $semester) {
 		} else {
 			foreach ($course as $course2) {
 				array_push($courses, new Course($course2, $semester));
-			}	
+			}
 		}
 	}
 	return $courses;
@@ -43,13 +43,13 @@ function get_all_departments($semester) {
 				$d = new Department($department2);
 				if (!isDuplicate($d, $departments)) {
 					array_push($departments, $d);
-				}	
+				}
 			} else {
 				foreach ($department2 as $department3) {
 					$d = new Department($department3);
 					if (!isDuplicate($d, $departments)) {
 						array_push($departments, $d);
-					}	
+					}
 				}
 			}
 		} else {
@@ -108,23 +108,20 @@ function get_calendar($cal, $semester) {
 	foreach($calendarList->getItems() as $calendarEntry) {
 		if (strcmp($calendarSummary, $calendarEntry->getSummary()) == 0) {
 			$calendar = $calendarEntry;
+			break;
 		}
 	}
 	if (!$calendar) {
 		$calendar = new Google_Calendar();
 		$calendar->setSummary($calendarSummary);
 		$calendar->setTimeZone(DEFAULT_TZ);
-		$cal->calendars->insert($calendar);
+		$calendar = $cal->calendars->insert($calendar);
 	}
 	return $calendar;
 }
 
 function add_section_to_calendar($cal, $calendar, Section $section) {
-	$urls = array();
-	foreach($section->toCalendarEvents() as $event) {
-		array_push($urls, $cal->events->insert($calendar->getId(), $event)->getHtmlLink());
-	}
-	return $urls;
+	return $cal->events->insert($calendar->getId(), $section->toCalendarEvent())->getHtmlLink();
 }
 
 function semester_to_string($semester) {

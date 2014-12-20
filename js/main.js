@@ -13,7 +13,7 @@ $(document).ready(function() {
 	       	scrollTop: $('#create-calendar').offset().top
 	   	}, 500);
 	   	createCalendar();
-	}	
+	}
 	populateSections();
 });
 function bindEvents() {
@@ -62,7 +62,7 @@ function bindEvents() {
 		var courses = $('#courses');
 		var sections = $('#sections');
 		var semester = $('#semester-highlighted').attr('data-semester-id');
-		courses.children('option:not(:first)').remove();	
+		courses.children('option:not(:first)').remove();
 		sections.children('option:not(:first)').remove();
 		if (dept != '') {
 			$('#courses_chosen > .chosen-single').append($('<div>').attr('id', 'courses-loading').attr('class', 'loading'));
@@ -213,7 +213,7 @@ function addSection(section) {
 		if (section.location) {
 			sectionDiv.append($("<p>").attr('class', 'section-location').text(section.location));
 		}
-		sectionDiv.append($("<p>").attr('class', 'section-instructor').text(section.instructor[0].first + ' ' + section.instructor[0].last));
+		sectionDiv.append($("<p>").attr('class', 'section-instructor').text(section.instructor[0].full_name));
 		var loading = mySections.children('li').css('text-align', '').children('.loading');
 		if (loading.length) {
 			loading.replaceWith(sectionDiv);
@@ -282,8 +282,10 @@ function createCalendar() {
 	$.post("ajax/create_calendar.php", data, function(result) {
 		if (result) {
 			if (result.success) {
-				$("#calendar-url").attr('href', result.urls[0][0]).show();
-			} else {	
+				console.log(result.urls);
+				console.log(result.urls[0]);
+				$("#calendar-url").attr('href', result.urls[0]).show();
+			} else {
 				window.location.href = result.auth_url;
 			}
 		}

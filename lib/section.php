@@ -57,7 +57,7 @@ class Section {
 		return $this->id;
 	}
 	public function getCourse() {
-		return $this->course;	
+		return $this->course;
 	}
 
 	public function getStartTime() {
@@ -70,6 +70,17 @@ class Section {
 
 	public function getDays() {
 		return $this->days;
+	}
+
+	public function getRFCDays() {
+		$str = '';
+		foreach (str_split($this->getDays()) as $day) {
+			$str .= Section::toRFCDay($day) . ',';
+		}
+		if (substr($str, -1) == ',') {
+			$str = substr($str, 0, -1);
+		}
+		return $str;
 	}
 
 	public function getLocation() {
@@ -95,63 +106,41 @@ class Section {
 		$event = new Google_Event();
 		$event->setSummary($this->getCourse()->getId() . ' - ' . $this->getCourse()->getTitle());
 		$event->setLocation($this->getLocation());
-		$event->setDescription($this->getCourse()->getDescription());
+		$event->setDescription(
+			'Instructor: ' . $this->getInstructor()[0]->getFullName() . "\n" .
+			$this->getCourse()->getDescription()
+		);
 		return $event;
 	}
 
-	public function toCalendarEvents() {
+	public function toCalendarEvent() {
 		$sessionObject = $this->getSessionObject();
-		$events = array();
-		if ($this->getDays()) {
-			foreach (str_split($this->getDays()) as $day) {
-				$start = new Google_EventDateTime();
-				$start->setTimeZone(DEFAULT_TZ);
-				$end = new Google_EventDateTime();
-				$end->setTimeZone(DEFAULT_TZ);	
-				$event = $this->getBaseEvent();
-				$date = new DateTime($sessionObject->getFirstDayOfClasses());
-				$offset = date('N', $date->getTimestamp()) - 1;
-				$date->modify(sprintf('+%d days', Section::getDayOffset($day) - $offset));
-
-				$startTime = $this->getStartTime();
-				if ($startTime) {
-					$date->modify($this->getStartTime());
-					$start->setDateTime($date->format('Y-m-d\TH:i:s.u'));
-					$event->setStart($start);	
-
-					$date->modify($this->getEndTime());
-					$end->setDateTime($date->format('Y-m-d\TH:i:s.u'));
-					$event->setEnd($end);
-				} else {
-					$start->setDate($date->format('Y-m-d'));
-					$end->setDate($date->format('Y-m-d'));
-					$event->setStart($start);
-					$event->setEnd($end);
-				}
-				$endDate = new DateTime($sessionObject->getEnd());
-				$endDate->setTimeZone(new DateTimeZone(DEFAULT_TZ));
-				$endDate->modify('-14 day');
-				$event->setRecurrence(array('RRULE:FREQ=WEEKLY;UNTIL=' . $endDate->format('Ymd\THms\Z')));
-				array_push($events, $event);
-			}
+		$event = $this->getBaseEvent();
+		$start = new Google_EventDateTime();
+		$start->setTimeZone(DEFAULT_TZ);
+		$end = new Google_EventDateTime();
+		$end->setTimeZone(DEFAULT_TZ);
+		$date = new DateTime($sessionObject->getFirstDayOfClasses());
+		$byDay = $this->getDays() ? 'BYDAY=' . $this->getRFCDays() . ';' : '';
+		$offset = date('N', $date->getTimestamp()) - 1;
+		$day = $this->getDays()[0];
+		$date->modify(sprintf('+%d days', Section::getDayOffset($day) - $offset));
+		if ($this->getStartTime()) {
+			$date->modify($this->getStartTime());
+			$start->setDateTime($date->format('Y-m-d\TH:i:s.u'));
+			$date->modify($this->getEndTime());
+			$end->setDateTime($date->format('Y-m-d\TH:i:s.u'));
 		} else {
-			$start = new Google_EventDateTime();
-			$start->setTimeZone(DEFAULT_TZ);
-			$end = new Google_EventDateTime();
-			$end->setTimeZone(DEFAULT_TZ);	
-			$event = $this->getBaseEvent();
-			$date = new DateTime($sessionObject->getFirstDayOfClasses());
 			$start->setDate($date->format('Y-m-d'));
 			$end->setDate($date->format('Y-m-d'));
-			$event->setStart($start);
-			$event->setEnd($end);
-			$endDate = new DateTime($sessionObject->getEnd());
-			$endDate->setTimeZone(new DateTimeZone(DEFAULT_TZ));
-			$endDate->modify('-14 day');
-			$event->setRecurrence(array('RRULE:FREQ=WEEKLY;UNTIL=' . $endDate->format('Ymd\THms\Z')));
-			array_push($events, $event);
 		}
-		return $events;
+		$event->setStart($start);
+		$event->setEnd($end);
+		$endDate = new DateTime($sessionObject->getEnd());
+		$endDate->setTimeZone(new DateTimeZone(DEFAULT_TZ));
+		$endDate->modify('-10 day');
+		$event->setRecurrence(array('RRULE:FREQ=WEEKLY;' . $byDay . 'UNTIL=' . $endDate->format('Ymd\THms\Z')));
+		return $event;
 	}
 
 	public static function getDayOffset($day) {
@@ -162,6 +151,16 @@ class Section {
 			}
 		}
 		return 0;
+	}
+
+	public static function toRFCDay($day) {
+		return array(
+			'M' => 'MO',
+			'T' => 'TU',
+			'W' => 'WE',
+			'H' => 'TH',
+			'F' => 'FR'
+		)[$day];
 	}
 }
 ?>
