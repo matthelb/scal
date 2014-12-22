@@ -12,7 +12,7 @@ session_start();
   <title>SCal to Google</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
-
+  <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <style>
     body {
@@ -38,13 +38,13 @@ session_start();
                   <span class="icon-bar"></span>
                   <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="/scal">SCal to Google</a>
+                <a class="navbar-brand" href="/scal">SCal</a>
               </div>
               <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">Home</a></li>
-                  <li><a href="#">Clubs</a></li>
-                  <li><a href="#">Friends</a></li>
+                  <li class="active"><a href="#">about</a></li>
+                  <li><a href="#">create</a></li>
+                  <li><a href="#">export</a></li>
                   <!--<li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
                     <ul class="dropdown-menu">
@@ -74,8 +74,16 @@ session_start();
           <!-- Main jumbotron for a primary marketing message or call to action -->
           <div class="jumbotron">
             <div class="container">
-              <h1><img src="img/usc-logo.png" width="96px" height="auto"/><span class="text-logo">al to Google</span><!--<img src="img/logo.gif" height="128px" width="auto"/>--></h1>
-              <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#startModal">Get started &raquo;</button>
+              <div id="top-content">
+                <h1><span class="top-text">Convert your USC course list to a Google Calendar with SCal</span><!--<img src="img/logo.gif" height="128px" width="auto"/>--></h1>
+                <div id="steps">
+                  <p>1. Enter your courses.</p> <br />
+                  <p>2. Review your selections.</p> <br />
+                  <p>3. Export.</p>
+                </div>
+                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#startModal">Get Started</button> <br />
+                <img src="img/calendar.png" />
+              </div>
 
               <!-- Modal -->
               <div class="modal fade" id="startModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -101,7 +109,7 @@ session_start();
             </div>
           </div>
 
-          <div class="container">
+          <div class="container" id="main">
             <div class="row">
 		<div id="content" class="col-lg-4 center">
               <div id="semester-choice" class="anchor">

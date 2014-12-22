@@ -1,7 +1,10 @@
 /* ==========================================================================
    Author's custom styles
    ========================================================================== */
-
+body {
+	font-family: 'Raleway';
+	background-color: #dedede;
+}
 .loading {
 	display: inline-block;
 	width: 16px !important;
@@ -10,6 +13,38 @@
 	margin: 2px;
 	vertical-align: middle;
 	background-image: url(../img/ajax-loader.gif);
+}
+
+#top-content {
+	width: 90%;
+	text-align: center;
+	margin: 0 auto;
+}
+
+#top-content img {
+	width: 80%;
+	margin: 40px auto;
+	margin-bottom: -100px;
+}
+
+#steps {
+	margin: 30px 0;
+	color: #ffffff;
+	font-family: 'Raleway';
+	line-height: 5px;
+	font-size: 30px;
+}
+
+#steps p {
+	margin: 0;
+}
+
+.top-text {
+	font-family: 'Raleway';
+}
+
+#main {
+	padding-top: 40px;
 }
 
 .center {
@@ -59,9 +94,6 @@
     background: -ms-linear-gradient(top, #990000, #800000);
     background: -o-linear-gradient(top, #990000, #800000);
 }*/
-.text-logo {
-	color: #990000 !important;
-}
 
 #semesters {
 	text-align: center;
@@ -72,6 +104,6 @@
 }
 
 #semester-highlighted {
-	background-color: #EEEEEE;
-	border-radius: 5px;
+	border-bottom-style: solid;
+	border-bottom-width: 1px;
 }
