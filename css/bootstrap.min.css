@@ -319,10 +319,10 @@ img {
   border-radius: 50%;
 }
 hr {
-  margin-top: 20px;
+  margin-top: 0px;
   margin-bottom: 20px;
   border: 0;
-  border-top: 1px solid #eeeeee;
+  border-top: 1px solid #bababa;
 }
 .sr-only {
   position: absolute;
@@ -393,7 +393,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Raleway', Helvetica, Arial, sans-serif;
   font-weight: 500;
   line-height: 1.1;
 }

@@ -43,8 +43,13 @@ body {
 	font-family: 'Raleway';
 }
 
+#main h4 {
+	font-size: 20px;
+}
+
 #main {
 	padding-top: 40px;
+	text-align: center;
 }
 
 .center {
@@ -96,6 +101,7 @@ body {
 }*/
 
 #semesters {
+	font-size: 15px;
 	text-align: center;
 }
 
@@ -104,6 +110,11 @@ body {
 }
 
 #semester-highlighted {
-	border-bottom-style: solid;
+	border-bottom-style: dashed;
 	border-bottom-width: 1px;
+	border-color: #bababa;
+}
+
+select {
+	padding: 10px;
 }

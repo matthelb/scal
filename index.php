@@ -113,6 +113,7 @@ session_start();
             <div class="row">
 		<div id="content" class="col-lg-4 center">
               <div id="semester-choice" class="anchor">
+                <h3 id="select-courses"> Select Your Courses </h3>
                     <ul id="semesters" class="list-inline">
                       <?php
                       require_once('lib/functions.php');
@@ -131,9 +132,10 @@ session_start();
                       ?>
                     </ul>
                 <p>
-                  <h3 id="get-started"> Choose your classes! </h3>
-                  <h4> Departments: </h4>
-                  <select id="departments" data-placeholder="Department" name="departments">
+
+                <hr />
+                  <h4> Departments </h4>
+                  <select id="departments" data-placeholder="select a department" name="departments">
                     <option value=""></option>
                     <?php
                     $depts = get_all_departments($semesters[$current]);
@@ -144,26 +146,26 @@ session_start();
                     }
                     ?>
                   </select>
-                  <h4> Courses: </h4>
-                  <select id="courses" data-placeholder="Course" name="courses">
+                  <h4> Courses </h4>
+                  <select id="courses" data-placeholder="select a course" name="courses">
                     <option value=""></option>
                   </select>
-                  <h4> Sections: </h4>
-                  <select id="sections" data-placeholder="Section" name="sections">
+                  <h4> Sections </h4>
+                  <select id="sections" data-placeholder="select a section" name="sections">
                     <option value=""></option>
                   </select>
                   <br>
                   <br>
-                  <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add »</a>
+                  <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Course</a>
                 </p>
                 <p>
                   <h3> View all your classes! </h3>
                   <ul id="my-sections" class="list-unstyled"></ul>
-                  <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections »</a>
-                  <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All »</a>
+                  <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
+                  <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All</a>
                   <p>
                     <h3> Now you're ready to export! </h3>
-                    <a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export »</a>
+                    <a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export</a>
                     <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar!</a>
                   </p>
                 </p>
