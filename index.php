@@ -26,7 +26,7 @@ session_start();
 
   <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
-<body>
+<body id="about">
     <!--[if lt IE 7]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
@@ -42,9 +42,9 @@ session_start();
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#">about</a></li>
-            <li><a href="#">create</a></li>
-            <li><a href="#">export</a></li>
+            <li class="active"><a href="#about">about</a></li>
+            <li><a href="#create">create</a></li>
+            <li><a href="#export">export</a></li>
             <!--<li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
               <ul class="dropdown-menu">
@@ -101,7 +101,7 @@ session_start();
                 </ol>
               </div>
               <div class="modal-footer">
-                <button type="button" class="btn btn-default" id="get-started-link" href="#semester-choice">Got it!</button>
+                <button type="button" class="btn btn-default" id="get-started-link" href="#create">Got it!</button>
               </div>
             </div><!-- /.modal-content -->
           </div><!-- /.modal-dialog -->
@@ -112,7 +112,7 @@ session_start();
     <div class="container" id="main">
       <div class="row">
         <div id="content" class="col-lg-4 center">
-        <div id="semester-choice" class="anchor">
+        <div id="create" class="anchor">
           <h3 id="select-courses"> Select Your Courses </h3>
           <ul id="semesters" class="list-inline">
             <?php
@@ -163,10 +163,10 @@ session_start();
     </div> 
     <div id="review">
         <h3> Review Your Courses </h3>
-        <ul id="my-sections" class="list-unstyled"></ul>
         <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
         <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All</a>
-        <p class="export">
+        <ul id="my-sections" class="list-unstyled"></ul>
+        <p id="export">
           <a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export</a>
           <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar</a>
         </p>
