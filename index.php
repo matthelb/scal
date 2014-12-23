@@ -27,170 +27,172 @@ session_start();
   <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body>
-      <!--[if lt IE 7]>
-          <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
-          <![endif]-->
-          <div class="navbar navbar-inverse navbar-fixed-top">
-            <div class="container">
-              <div class="navbar-header">
-                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                  <span class="icon-bar"></span>
-                </button>
-                <a class="navbar-brand" href="/scal">SCal</a>
-              </div>
-              <div class="navbar-collapse collapse">
-                <ul class="nav navbar-nav">
-                  <li class="active"><a href="#">about</a></li>
-                  <li><a href="#">create</a></li>
-                  <li><a href="#">export</a></li>
-                  <!--<li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-                    <ul class="dropdown-menu">
-                      <li><a href="#">Action</a></li>
-                      <li><a href="#">Another action</a></li>
-                      <li><a href="#">Something else here</a></li>
-                      <li class="divider"></li>
-                      <li class="dropdown-header">Nav header</li>
-                      <li><a href="#">Separated link</a></li>
-                      <li><a href="#">One more separated link</a></li>
-                    </ul>
-                  </li>-->
-                </ul>
-                <!--<form class="navbar-form navbar-right">
-                  <div class="form-group">
-                    <input type="text" placeholder="Email" class="form-control">
-                  </div>
-                  <div class="form-group">
-                    <input type="password" placeholder="Password" class="form-control">
-                  </div>
-                  <button type="submit" class="btn btn-success">Sign in</button>
-                </form>-->
-              </div><!--/.navbar-collapse -->
+    <!--[if lt IE 7]>
+    <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
+    <![endif]-->
+    <div class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="/scal">SCal</a>
+        </div>
+        <div class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="#">about</a></li>
+            <li><a href="#">create</a></li>
+            <li><a href="#">export</a></li>
+            <!--<li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                <li><a href="#">Action</a></li>
+                <li><a href="#">Another action</a></li>
+                <li><a href="#">Something else here</a></li>
+                <li class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li>
+              </ul>
+            </li>-->
+          </ul>
+          <!--<form class="navbar-form navbar-right">
+            <div class="form-group">
+              <input type="text" placeholder="Email" class="form-control">
             </div>
+            <div class="form-group">
+              <input type="password" placeholder="Password" class="form-control">
+            </div>
+            <button type="submit" class="btn btn-success">Sign in</button>
+          </form>-->
+        </div><!--/.navbar-collapse -->
+      </div>
+    </div>
+
+    <!-- Main jumbotron for a primary marketing message or call to action -->
+    <div class="jumbotron">
+      <div class="container">
+        <div id="top-content">
+          <h1><span class="top-text">Convert your USC course list to a Google Calendar with SCal</span><!--<img src="img/logo.gif" height="128px" width="auto"/>--></h1>
+          <div id="steps">
+            <p>1. Enter your courses.</p> <br />
+            <p>2. Review your selections.</p> <br />
+            <p>3. Export.</p>
           </div>
+          <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#startModal">Get Started</button> <br />
+          <img src="img/calendar.png" />
+        </div>
 
-          <!-- Main jumbotron for a primary marketing message or call to action -->
-          <div class="jumbotron">
-            <div class="container">
-              <div id="top-content">
-                <h1><span class="top-text">Convert your USC course list to a Google Calendar with SCal</span><!--<img src="img/logo.gif" height="128px" width="auto"/>--></h1>
-                <div id="steps">
-                  <p>1. Enter your courses.</p> <br />
-                  <p>2. Review your selections.</p> <br />
-                  <p>3. Export.</p>
-                </div>
-                <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#startModal">Get Started</button> <br />
-                <img src="img/calendar.png" />
+        <!-- Modal -->
+        <div class="modal fade" id="startModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="myModalLabel"></h4>
               </div>
-
-              <!-- Modal -->
-              <div class="modal fade" id="startModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                  <div class="modal-content">
-                    <div class="modal-header">
-                      <h4 class="modal-title" id="myModalLabel"></h4>
-                    </div>
-                    <div class="modal-body">
-                      <p>How to use SCal to Google:</p>
-                      <ol>
-                        <li>Select your section.</li>
-                        <li>Press "Add" to add it to your class list.</li>
-                        <li>When all classes have been added, press "Export" to send to Google Calendar</li>
-                      </ol>
-                    </div>
-                    <div class="modal-footer">
-                      <button type="button" class="btn btn-default" id="get-started-link" href="#semester-choice">Got it!</button>
-                    </div>
-                  </div><!-- /.modal-content -->
-                </div><!-- /.modal-dialog -->
+              <div class="modal-body">
+                <p>How to use SCal to Google:</p>
+                <ol>
+                  <li>Select your section.</li>
+                  <li>Press "Add" to add it to your class list.</li>
+                  <li>When all classes have been added, press "Export" to send to Google Calendar</li>
+                </ol>
               </div>
-            </div>
-          </div>
-
-          <div class="container" id="main">
-            <div class="row">
-		<div id="content" class="col-lg-4 center">
-              <div id="semester-choice" class="anchor">
-                <h3 id="select-courses"> Select Your Courses </h3>
-                    <ul id="semesters" class="list-inline">
-                      <?php
-                      require_once('lib/functions.php');
-                      $semesters = get_all_semesters();
-                      $size = sizeof($semesters);
-                      $current = floor($size / 2);
-                      if (isset($_SESSION['authorization']['calendar'])) {
-                        $current = array_search($_SESSION['authorization']['calendar'], $semesters);
-                      }
-                      for($i = 0; $i < $size; $i++) {
-                        $semester = $semesters[$i];
-                        $display = semester_to_string($semester);
-                        $id = ($i == $current) ? 'id="semester-highlighted"' : '';
-                        echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
-                      }
-                      ?>
-                    </ul>
-                <p>
-
-                <hr />
-                  <h4> Departments </h4>
-                  <select id="departments" data-placeholder="select a department" name="departments">
-                    <option value=""></option>
-                    <?php
-                    $depts = get_all_departments($semesters[$current]);
-                    foreach($depts as $dept) {
-                      $code = $dept->getCode();
-                      $name = $dept->getName();
-                      echo "<option value=$code>$code - $name</option>";
-                    }
-                    ?>
-                  </select>
-                  <h4> Courses </h4>
-                  <select id="courses" data-placeholder="select a course" name="courses">
-                    <option value=""></option>
-                  </select>
-                  <h4> Sections </h4>
-                  <select id="sections" data-placeholder="select a section" name="sections">
-                    <option value=""></option>
-                  </select>
-                  <br>
-                  <br>
-                  <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Course</a>
-                </p>
-                <p>
-                  <h3> View all your classes! </h3>
-                  <ul id="my-sections" class="list-unstyled"></ul>
-                  <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
-                  <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All</a>
-                  <p>
-                    <h3> Now you're ready to export! </h3>
-                    <a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export</a>
-                    <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar!</a>
-                  </p>
-                </p>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-default" id="get-started-link" href="#semester-choice">Got it!</button>
               </div>
-            </div>
+            </div><!-- /.modal-content -->
+          </div><!-- /.modal-dialog -->
+        </div>
+      </div>
+    </div>
 
-            <hr>
+    <div class="container" id="main">
+      <div class="row">
+        <div id="content" class="col-lg-4 center">
+        <div id="semester-choice" class="anchor">
+          <h3 id="select-courses"> Select Your Courses </h3>
+          <ul id="semesters" class="list-inline">
+            <?php
+            require_once('lib/functions.php');
+            $semesters = get_all_semesters();
+            $size = sizeof($semesters);
+            $current = floor($size / 2);
+            if (isset($_SESSION['authorization']['calendar'])) {
+              $current = array_search($_SESSION['authorization']['calendar'], $semesters);
+            }
+            for($i = 0; $i < $size; $i++) {
+              $semester = $semesters[$i];
+              $display = semester_to_string($semester);
+              $id = ($i == $current) ? 'id="semester-highlighted"' : '';
+              echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
+            }
+            ?>
+          </ul>
+          <p>
+            <hr />
+            <h4> Departments </h4>
+            <select id="departments" data-placeholder="select a department" name="departments">
+              <option value=""></option>
+              <?php
+              $depts = get_all_departments($semesters[$current]);
+              foreach($depts as $dept) {
+                $code = $dept->getCode();
+                $name = $dept->getName();
+                echo "<option value=$code>$code - $name</option>";
+              }
+              ?>
+            </select>
+            <h4> Courses </h4>
+            <select id="courses" data-placeholder="select a course" name="courses">
+              <option value=""></option>
+            </select>
+            <h4> Sections </h4>
+            <select id="sections" data-placeholder="select a section" name="sections">
+              <option value=""></option>
+            </select>
+            <br>
+            <br>
+            <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Course</a>
+          </p>
+        </div>
+        </div>
+      </div>
+    </div> 
+    <div id="review">
+        <h3> Review Your Courses </h3>
+        <ul id="my-sections" class="list-unstyled"></ul>
+        <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
+        <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All</a>
+        <p class="export">
+          <a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export</a>
+          <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar</a>
+        </p>
+    </div>
 
-            <footer>
-              <span>&copy; MMA 2013</span>
-              <img class="pull-right" id="hack-sc-logo" src="img/hack-sc.jpg" width="96px" height="auto"/>
-            </footer>
-          </div> <!-- /container -->        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-          <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+    <footer>
+      <hr />
+      <div id="footer-content">
+        <span>&copy; MMA 2013</span>
+        <img class="pull-right" id="hack-sc-logo" src="img/hack-sc.jpg" />
+      </div>
+    </footer>
+    <!-- /container -->        
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 
-          <script src="js/vendor/bootstrap.min.js"></script>
+    <script src="js/vendor/bootstrap.min.js"></script>
 
-          <script src="js/plugins.js"></script>
-          <script src="js/main.js"></script>
+    <script src="js/plugins.js"></script>
+    <script src="js/main.js"></script>
 
-          <script>
-            var _gaq=[['_setAccount','UA-44989976-1'],['_trackPageview']];
-            (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-              g.src='//www.google-analytics.com/ga.js';
-              s.parentNode.insertBefore(g,s)}(document,'script'));
-          </script>
-        </body>
-        </html>
+    <script>
+      var _gaq=[['_setAccount','UA-44989976-1'],['_trackPageview']];
+      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+        g.src='//www.google-analytics.com/ga.js';
+        s.parentNode.insertBefore(g,s)}(document,'script'));
+    </script>
+    </body>
+  </html>

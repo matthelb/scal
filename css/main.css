@@ -4,6 +4,30 @@
 body {
 	font-family: 'Raleway';
 	background-color: #dedede;
+	padding-bottom: 0;
+}
+.container {
+	padding: 0;
+}
+
+footer {
+	background-color: #ffffff;
+	padding: 20px;
+	text-align: left;
+	font-size: 15px;
+}
+
+footer img {
+	width: 80px; 
+	height: auto;
+}
+
+#footer-content {
+	padding: 0 10px;
+}
+
+.navbar {
+	padding-left: 10px;
 }
 .loading {
 	display: inline-block;
@@ -50,6 +74,17 @@ body {
 #main {
 	padding-top: 40px;
 	text-align: center;
+}
+
+#main .btn-large {
+	border-color: black;
+	background-color: transparent;
+	color: black;
+}
+
+#main .btn-large:hover {
+	border-color: white;
+	background-color: white;
 }
 
 .center {
@@ -117,4 +152,28 @@ body {
 
 select {
 	padding: 10px;
+}
+
+#review {
+	background-color: white;
+	margin: 0;
+	margin-top: 40px;
+	padding: 15px;
+	text-align: center;
+}
+
+#review .btn-large {
+	color: black;
+	border-color: #dedede;
+	background-color: transparent;
+}
+
+#review .btn-large:hover {
+	color: black;
+	border-color: #dedede;
+	background-color: #dedede;
+}
+
+.export {
+	padding: 20px;
 }

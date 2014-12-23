@@ -3939,7 +3939,7 @@ textarea.input-group-sm > .input-group-btn > .btn {
   color: #ffffff;
   background-color: #ab2a2a;
   border-bottom-color: #ffffff;
-  border-bottom-style: solid;
+  border-bottom-style: dashed;
   border-bottom-width: 1px;
 }
 .navbar-inverse .navbar-nav > .disabled > a,
