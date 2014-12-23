@@ -38,7 +38,7 @@ session_start();
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="/scal">SCal</a>
+          <a class="navbar-brand" href="/">SCal</a>
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
@@ -160,7 +160,7 @@ session_start();
         </div>
         </div>
       </div>
-    </div> 
+    </div>
     <div id="review">
         <h3> Review Your Courses </h3>
         <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
@@ -179,7 +179,7 @@ session_start();
         <img class="pull-right" id="hack-sc-logo" src="img/hack-sc.jpg" />
       </div>
     </footer>
-    <!-- /container -->        
+    <!-- /container -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 
