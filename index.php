@@ -111,6 +111,7 @@ session_start();
 
     <div class="container" id="main">
       <div class="row">
+      <div id="content" class="col-lg-4 center">
         <div id="create">
           <h3 id="select-courses"> Select Your Courses </h3>
           <ul id="semesters" class="list-inline">
@@ -132,7 +133,7 @@ session_start();
           </ul>
           <hr/>
         </div>
-        <div id="content" class="col-lg-4 center">
+
           <div class="anchor">
             <p>
               <h4> Departments </h4>
