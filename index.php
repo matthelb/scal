@@ -42,7 +42,7 @@ session_start();
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="#about">about</a></li>
+            <li><a href="#about">about</a></li>
             <li><a href="#create">create</a></li>
             <li><a href="#export">export</a></li>
             <!--<li class="dropdown">
@@ -111,28 +111,31 @@ session_start();
 
     <div class="container" id="main">
       <div class="row">
-        <div id="content" class="col-lg-4 center">
-        <div id="create" class="anchor">
-          <h3 id="select-courses"> Select Your Courses </h3>
-          <ul id="semesters" class="list-inline">
-            <?php
-            require_once('lib/functions.php');
-            $semesters = get_all_semesters();
-            $size = sizeof($semesters);
-            $current = floor($size / 2);
-            if (isset($_SESSION['authorization']['calendar'])) {
-              $current = array_search($_SESSION['authorization']['calendar'], $semesters);
-            }
-            for($i = 0; $i < $size; $i++) {
-              $semester = $semesters[$i];
-              $display = semester_to_string($semester);
-              $id = ($i == $current) ? 'id="semester-highlighted"' : '';
-              echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
-            }
-            ?>
-          </ul>
-          <p>
+          <div id="create">
+            <h3 id="select-courses"> Select Your Courses </h3>
+            <ul id="semesters" class="list-inline">
+              <?php
+              require_once('lib/functions.php');
+              $semesters = get_all_semesters();
+              $size = sizeof($semesters);
+              $current = floor($size / 2);
+              if (isset($_SESSION['authorization']['calendar'])) {
+                $current = array_search($_SESSION['authorization']['calendar'], $semesters);
+              }
+              for($i = 0; $i < $size; $i++) {
+                $semester = $semesters[$i];
+                $display = semester_to_string($semester);
+                $id = ($i == $current) ? 'id="semester-highlighted"' : '';
+                echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
+              }
+              ?>
+            </ul>
             <hr />
+          </div>
+        <div id="content" class="col-lg-4 center">
+        <div class="anchor">
+          <p>
+
             <h4> Departments </h4>
             <select id="departments" data-placeholder="select a department" name="departments">
               <option value=""></option>
@@ -165,7 +168,9 @@ session_start();
         <h3> Review Your Courses </h3>
         <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
         <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All</a>
-        <ul id="my-sections" class="list-unstyled"></ul>
+        <div id="sections">
+          <ul id="my-sections" class="list-unstyled"></ul>
+        </div>
         <p id="export">
           <a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export</a>
           <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar</a>

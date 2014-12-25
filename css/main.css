@@ -98,24 +98,20 @@ footer img {
 }
 #my-sections li div:not(.loading) {
 	border-radius: 5px;
-	border: solid 1px #999999;
-	background: linear-gradient(top, white, #EEEEEE);
-	background: -webkit-linear-gradient(top, white, #EEEEEE);
-    background: -moz-linear-gradient(top, white, #EEEEEE);
-    background: -ms-linear-gradient(top, white, #EEEEEE);
-    background: -o-linear-gradient(top, white, #EEEEEE);
-    padding: 4px;
+	border: solid 1px #ab2a2a;
+	padding: 0 5px;
 }
 
 #my-sections li {
 	position: relative;
-	margin-bottom: 4px;
+	margin: 10px;
+	padding: 10px;
 }
 
 .close {
 	position: absolute;
-	right: 0;
-	bottom: 0;
+	right: 10px;
+	bottom: 10px;
 }
 
 #my-sections li > div:hover {
@@ -177,4 +173,14 @@ select {
 
 #export {
 	padding: 20px;
+}
+
+#create {
+	width: 80%;
+	margin: 0 auto;
+}
+
+#sections {
+	width: 80%;
+	margin: 0 auto;
 }
