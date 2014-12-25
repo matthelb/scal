@@ -111,56 +111,55 @@ session_start();
 
     <div class="container" id="main">
       <div class="row">
-          <div id="create">
-            <h3 id="select-courses"> Select Your Courses </h3>
-            <ul id="semesters" class="list-inline">
-              <?php
-              require_once('lib/functions.php');
-              $semesters = get_all_semesters();
-              $size = sizeof($semesters);
-              $current = floor($size / 2);
-              if (isset($_SESSION['authorization']['calendar'])) {
-                $current = array_search($_SESSION['authorization']['calendar'], $semesters);
-              }
-              for($i = 0; $i < $size; $i++) {
-                $semester = $semesters[$i];
-                $display = semester_to_string($semester);
-                $id = ($i == $current) ? 'id="semester-highlighted"' : '';
-                echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
-              }
-              ?>
-            </ul>
-            <hr />
-          </div>
-        <div id="content" class="col-lg-4 center">
-        <div class="anchor">
-          <p>
-
-            <h4> Departments </h4>
-            <select id="departments" data-placeholder="select a department" name="departments">
-              <option value=""></option>
-              <?php
-              $depts = get_all_departments($semesters[$current]);
-              foreach($depts as $dept) {
-                $code = $dept->getCode();
-                $name = $dept->getName();
-                echo "<option value=$code>$code - $name</option>";
-              }
-              ?>
-            </select>
-            <h4> Courses </h4>
-            <select id="courses" data-placeholder="select a course" name="courses">
-              <option value=""></option>
-            </select>
-            <h4> Sections </h4>
-            <select id="sections" data-placeholder="select a section" name="sections">
-              <option value=""></option>
-            </select>
-            <br>
-            <br>
-            <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Course</a>
-          </p>
+        <div id="create">
+          <h3 id="select-courses"> Select Your Courses </h3>
+          <ul id="semesters" class="list-inline">
+            <?php
+            require_once('lib/functions.php');
+            $semesters = get_all_semesters();
+            $size = sizeof($semesters);
+            $current = floor($size / 2);
+            if (isset($_SESSION['authorization']['calendar'])) {
+              $current = array_search($_SESSION['authorization']['calendar'], $semesters);
+            }
+            for($i = 0; $i < $size; $i++) {
+              $semester = $semesters[$i];
+              $display = semester_to_string($semester);
+              $id = ($i == $current) ? 'id="semester-highlighted"' : '';
+              echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
+            }
+            ?>
+          </ul>
+          <hr/>
         </div>
+        <div id="content" class="col-lg-4 center">
+          <div class="anchor">
+            <p>
+              <h4> Departments </h4>
+              <select id="departments" data-placeholder="select a department" name="departments">
+                <option value=""></option>
+                <?php
+                $depts = get_all_departments($semesters[$current]);
+                foreach($depts as $dept) {
+                  $code = $dept->getCode();
+                  $name = $dept->getName();
+                  echo "<option value=$code>$code - $name</option>";
+                }
+                ?>
+              </select>
+              <h4> Courses </h4>
+              <select id="courses" data-placeholder="select a course" name="courses">
+                <option value=""></option>
+              </select>
+              <h4> Sections </h4>
+              <select id="sections" data-placeholder="select a section" name="sections">
+                <option value=""></option>
+              </select>
+              <br>
+              <br>
+              <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Course</a>
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -172,6 +171,307 @@ session_start();
           previously made with SCal by clicking the 'Load Sections' button.</div>
         <div id="sections">
           <ul id="my-sections" class="list-unstyled"></ul>
+        </div>
+        <div id="calendar">
+          <div id="sections-overlay"></div>
+          <table>
+            <tr>
+              <td></td>
+              <th>Monday</th>
+              <th>Tuesday</th>
+              <th>Wednesday</th>
+              <th>Thursday</th>
+              <th>Friday</th>
+            </tr>
+            <tr>
+              <th>6:00 AM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>7:00 AM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>8:00 AM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>9:00 AM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>10:00 AM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>11:00 AM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>12:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>1:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>2:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>3:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>4:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>5:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>6:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>7:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>8:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>9:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>10:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <th>11:00 PM</th>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+            <tr>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+              <td></td>
+            </tr>
+          </table>
         </div>
         <p id="export">
           <a id="create-calendar" class="btn btn-primary btn-large btn-group" href="#"  onclick="return false;">Export</a>

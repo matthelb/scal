@@ -19,6 +19,9 @@ class Section {
 	public $type;
 	public $instructor;
 	public $session;
+	public $dayOffsets;
+	public $timeSlot;
+	public $timeSlots;
 	private $sessionObject;
 
 	public function __construct($json_object, Course $course) {
@@ -31,14 +34,16 @@ class Section {
 			$this->location = @$json_object['location'];
 			$this->type = @$json_object['type'];
 			$this->instructor = array();
-			$instructors = $json_object['instructor'];
-			if(isset($instructors[0])) {
-				foreach ($instructors as $instructor) {
-					array_push($this->instructor, new Instructor($instructor));
-				}
+			if (isset($json_object['instructor'])) {
+				$instructors = $json_object['instructor'];
+				if(isset($instructors[0])) {
+					foreach ($instructors as $instructor) {
+						array_push($this->instructor, new Instructor($instructor));
+					}
 
-			} else {
-				array_push($this->instructor, new Instructor($json_object['instructor']));
+				} else {
+					array_push($this->instructor, new Instructor($json_object['instructor']));
+				}
 			}
 			$this->session = $json_object['session'];
 			if (array_key_exists('section_title', $json_object)) {
@@ -50,6 +55,20 @@ class Section {
 				if (is_string($json_object['section_description'])) {
 					$this->description = $json_object['section_description'];
 				}
+			}
+			$this->dayOffsets = array();
+			$days = str_split($this->getDays());
+			foreach ($days as $day) {
+				array_push($this->dayOffsets, Section::getDayOffset($day));
+			}
+			if (strcmp($this->getStartTime(), 'TBA') !== 0) {
+				$date = new DateTime();
+				$date->modify($this->getStartTime());
+				$hour = intval($date->format('G')) + intval($date->format('i')) / 60;
+				$this->timeSlot = $hour / 0.5;
+				$date->modify($this->getEndTime());
+				$this->timeSlots = ((intval($date->format('G')) + (intval($date->format('i')) + 10) / 60) - $hour) / 0.5;
+				error_log($this->getCourse()->getId() . 'hour:' . $hour);
 			}
 	}
 

@@ -18,7 +18,7 @@ footer {
 }
 
 footer img {
-	width: 80px; 
+	width: 80px;
 	height: auto;
 }
 
@@ -188,4 +188,33 @@ select {
 #empty-msg {
 	width: 70%;
 	margin: 0 auto;
+}
+
+#calendar {
+	margin: 0 auto;
+	width: 50%;
+	font-size: 8px;
+	position: relative;
+}
+
+#calendar .section {
+	position: absolute;
+	background-color: red;
+	width: 16.666%;
+}
+
+#calendar table {
+	width: 100%;
+}
+
+#calendar table td {
+	height: 16px;
+	width: 16.666%;
+	border: 1px black solid;
+}
+
+#calendar table th {
+	height: 16px;
+	width: 16.666%;
+	border: 1px black solid;
 }
