@@ -184,3 +184,8 @@ select {
 	width: 80%;
 	margin: 0 auto;
 }
+
+#empty-msg {
+	width: 70%;
+	margin: 0 auto;
+}

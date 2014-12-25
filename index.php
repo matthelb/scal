@@ -42,7 +42,7 @@ session_start();
         </div>
         <div class="navbar-collapse collapse">
           <ul class="nav navbar-nav">
-            <li><a href="#about">about</a></li>
+            <li class="active"><a href="#about">about</a></li>
             <li><a href="#create">create</a></li>
             <li><a href="#export">export</a></li>
             <!--<li class="dropdown">
@@ -167,12 +167,14 @@ session_start();
     <div id="review">
         <h3> Review Your Courses </h3>
         <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
-        <a id="clear-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Clear All</a>
+        <a id="clear-sections" class="btn btn-primary btn-large btn-group" href="#" onclick="return false;">Clear All</a>
+        <div id="empty-msg">Manually add courses using the drop downs above or load a calendar 
+          previously made with SCal by clicking the 'Load Sections' button.</div>
         <div id="sections">
           <ul id="my-sections" class="list-unstyled"></ul>
         </div>
         <p id="export">
-          <a id="create-calendar" class="btn btn-primary btn-large" href="#"  onclick="return false;">Export</a>
+          <a id="create-calendar" class="btn btn-primary btn-large btn-group" href="#"  onclick="return false;">Export</a>
           <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar</a>
         </p>
     </div>

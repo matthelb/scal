@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	bindEvents();
+	$('.btn-group').hide();
 	$('#departments').chosen();
 	var departmentsWidth = $('#departments_chosen').width();
 	$('#courses').chosen({width: departmentsWidth + "px"});
@@ -168,6 +169,8 @@ function bindEvents() {
 		if (!mySections.is(":empty")) {
 			$.post('ajax/clear_sections.php', {semester : $('#semester-highlighted').attr('data-semester-id')});
 			mySections.empty();
+			$('.btn-group').hide();
+			$('#empty-msg').show();
 		}
 	});
 
@@ -193,6 +196,8 @@ function bindEvents() {
 
 function addSection(section) {
 	if (section != null) {
+		$('.btn-group').show();
+		$('#empty-msg').hide();
 		var mySections = $('#my-sections');
 		var sectionDiv = $('<div>').attr('data-section-id', section.id);
 		var title = (section.title != null) ? section.title : section.course.title;
@@ -231,6 +236,10 @@ function removeSection(section) {
 	$.post("ajax/remove_section.php", {section : section, semester : $('#semester-highlighted').attr('data-semester-id')}, function(result) {
 		if (result.success) {
 			$("[data-section-id=\"" + section + "\"]").parent().remove();
+		}
+		if ($('#my-sections').is(":empty")) {
+			$('.btn-group').hide();
+			$('#empty-msg').show();
 		}
 	}, 'json');
 }
@@ -285,6 +294,8 @@ function loadCalendar() {
 			$.each(result.sections, function(i, section) {
 				addSection(section);
 			});
+			$('.btn-group').show();
+			$('#empty-msg').hide();
 		} else if (result.auth_url) {
 			window.location.href = result.auth_url;
 		}
