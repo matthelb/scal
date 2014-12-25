@@ -197,40 +197,47 @@ function addSection(section) {
 		var sectionDiv = $('<div>').attr('data-section-id', section.id);
 		var title = (section.title != null) ? section.title : section.course.title;
 		sectionDiv.append($("<h4>").attr('class', 'course-id').text(title + ' - ' + section.type).append($('<div>').click(function() {
-    		removeSection($(this).parents('div').data('section-id'));
-    	}).hover(function(){
-    		$(this).animate({
-    			width: "+=45"
-    		}, 'fast', function(){
-    			$(this).html('remove');
-    		});
-    	}, function(){
-    		$(this).animate({
-    			width: "-=45"
-    		}, 'fast', function(){
-    			$(this).html('&times;');
-    		});
-    	}).attr('class', 'close').html('&times;')));
-    	if (sections.days || section.start || section.end) {
+    	removeSection($(this).parents('div').data('section-id'));
+    }).hover(function(){
+    	$(this).animate({
+    		width: "+=45"
+    	}, 'fast', function(){
+    		$(this).html('remove');
+    	});
+    }, function(){
+    	$(this).animate({
+    		width: "-=45"
+    	}, 'fast', function(){
+    		$(this).html('&times;');
+    	});
+    }).attr('class', 'close').html('&times;')));
+    if (sections.days || section.start || section.end) {
 			sectionDiv.append($("<p>").attr('class', 'section-days-time').text(((section.days) ? (dayCodeToString(section.days) + ' | ') : '') + section.start + " - " + section.end));
 		}
 		if (section.location) {
 			sectionDiv.append($("<p>").attr('class', 'section-location').text(section.location));
 		}
-		sectionDiv.append($("<p>").attr('class', 'section-instructor').text(section.instructor[0].full_name));
+		if (section.instructor.length > 0) {
+			sectionDiv.append($("<p>").attr('class', 'section-instructor').text(section.instructor[0].full_name));
+		}
 		var loading = mySections.children('li').css('text-align', '').children('.loading');
 		if (loading.length) {
 			loading.replaceWith(sectionDiv);
 		} else {
 			mySections.prepend($('<li>').append(sectionDiv));
 		}
+		$.each(section.dayOffsets, function(i, o) {
+			var sectionElem = $('<div>').addClass('section').attr('data-section-id', section.id).css('height', 16 * section.timeSlots).css('left', (16.666 * (o + 1)) + '%').css('top', (1 + section.timeSlot - 12) * 16).text(section.course.id);
+			$('#calendar').append(sectionElem);
+		});
 	}
 }
 
 function removeSection(section) {
 	$.post("ajax/remove_section.php", {section : section, semester : $('#semester-highlighted').attr('data-semester-id')}, function(result) {
 		if (result.success) {
-			$("[data-section-id=\"" + section + "\"]").parent().remove();
+			$("#my-sections [data-section-id*=" + section + "]").parent().remove();
+			$("#calendar [data-section-id=" + section + "]").remove();
 		}
 	}, 'json');
 }
