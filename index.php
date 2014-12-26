@@ -169,9 +169,6 @@ session_start();
         <a id="clear-sections" class="btn btn-primary btn-large btn-group" href="#" onclick="return false;">Clear All</a>
         <div id="empty-msg">Manually add courses using the drop downs above or load a calendar 
           previously made with SCal by clicking the 'Load Sections' button.</div>
-        <div id="sections">
-          <ul id="my-sections" class="list-unstyled"></ul>
-        </div>
         <div id="calendar">
           <div id="sections-overlay"></div>
           <table>
@@ -472,6 +469,9 @@ session_start();
               <td></td>
             </tr>
           </table>
+        </div>
+        <div id="sections">
+          <ul id="my-sections" class="list-unstyled"></ul>
         </div>
         <p id="export">
           <a id="create-calendar" class="btn btn-primary btn-large btn-group" href="#"  onclick="return false;">Export</a>

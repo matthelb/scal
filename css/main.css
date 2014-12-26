@@ -46,7 +46,7 @@ footer img {
 }
 
 #top-content img {
-	width: 80%;
+	width: 85%;
 	margin: 40px auto;
 	margin-bottom: -120px;
 }
@@ -181,8 +181,9 @@ select {
 }
 
 #sections {
-	width: 80%;
+	width: 65%;
 	margin: 0 auto;
+	margin-top: 30px;
 }
 
 #empty-msg {
@@ -192,15 +193,17 @@ select {
 
 #calendar {
 	margin: 0 auto;
-	width: 50%;
-	font-size: 8px;
+	width: 65%;
+	font-size: 12px;
 	position: relative;
 }
 
 #calendar .section {
 	position: absolute;
-	background-color: red;
+	background-color: #ab2a2a;
 	width: 16.666%;
+	color: white;
+	padding-top: 1%;
 }
 
 #calendar table {
