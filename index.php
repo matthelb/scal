@@ -133,34 +133,33 @@ session_start();
           </ul>
           <hr/>
         </div>
-
-          <div class="anchor">
-            <p>
-              <h4> Departments </h4>
-              <select id="departments" data-placeholder="select a department" name="departments">
-                <option value=""></option>
-                <?php
-                $depts = get_all_departments($semesters[$current]);
-                foreach($depts as $dept) {
-                  $code = $dept->getCode();
-                  $name = $dept->getName();
-                  echo "<option value=$code>$code - $name</option>";
-                }
-                ?>
-              </select>
-              <h4> Courses </h4>
-              <select id="courses" data-placeholder="select a course" name="courses">
-                <option value=""></option>
-              </select>
-              <h4> Sections </h4>
-              <select id="sections" data-placeholder="select a section" name="sections">
-                <option value=""></option>
-              </select>
-              <br>
-              <br>
-              <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Course</a>
-            </p>
-          </div>
+        <div class="anchor">
+          <p>
+            <h4> Departments </h4>
+            <select id="departments" data-placeholder="select a department" name="departments">
+              <option value=""></option>
+              <?php
+              $depts = get_all_departments($semesters[$current]);
+              foreach($depts as $dept) {
+                $code = $dept->getCode();
+                $name = $dept->getName();
+                echo "<option value=$code>$code - $name</option>";
+              }
+              ?>
+            </select>
+            <h4> Courses </h4>
+            <select id="courses" data-placeholder="select a course" name="courses">
+              <option value=""></option>
+            </select>
+            <h4> Sections </h4>
+            <select id="sections" data-placeholder="select a section" name="sections">
+              <option value=""></option>
+            </select>
+            <br>
+            <br>
+            <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Course</a>
+          </p>
+        </div>
         </div>
       </div>
     </div>

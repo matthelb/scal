@@ -170,7 +170,9 @@ function bindEvents() {
 		if (!mySections.is(":empty")) {
 			$.post('ajax/clear_sections.php', {semester : $('#semester-highlighted').attr('data-semester-id')});
 			mySections.empty();
+			$('.section').remove();
 			$('.btn-group').hide();
+			$('#calendar').hide();
 			$('#empty-msg').show();
 		}
 	});
