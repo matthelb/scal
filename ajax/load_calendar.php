@@ -4,7 +4,7 @@ session_start();
 $client = new Google_Client();
 $client->setUseObjects(true);
 $cal = new Google_CalendarService($client);
-$semester = isset($_SESSION['authorization']['calendar']) && $_SESSION['authorization']['calendar'] != '' ? $_SESSION['authorization']['calendar'] : (array_key_exists('semester', $_POST) ? $_POST['semester'] : null);
+$semester = array_key_exists('semester', $_POST) ? $_POST['semester'] : null;
 
 if (isset($_SESSION['token'])) {
 	$client->setAccessToken($_SESSION['token']);
@@ -46,9 +46,6 @@ if ($client->getAccessToken() && $semester) {
 	}
 	$_SESSION['token'] = $client->getAccessToken();
 } else {
-	if (isset($_POST['semester'])) {
-		$_SESSION['authorization']['calendar'] = $semester;
-	}
 	$_SESSION['authorization']['service'] = 'Google_CalendarService';
 	header('Location: http://' . $_SERVER['HTTP_HOST'] .
 		((strcmp($_SERVER['HTTP_HOST'], 'localhost') == 0) ?
