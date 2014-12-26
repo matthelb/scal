@@ -236,7 +236,7 @@ function addSection(section) {
 			mySections.prepend($('<li>').append(sectionDiv));
 		}
 		$.each(section.dayOffsets, function(i, o) {
-			var sectionElem = $('<div>').addClass('section').attr('data-section-id', section.id).css('height', 16 * section.timeSlots).css('left', (16.666 * (o + 1)) + '%').css('top', (1 + section.timeSlot - 12) * 16).text(section.course.id);
+			var sectionElem = $('<div>').addClass('section').attr('data-section-id', section.id).css('height', 16 * section.timeSlots).css('left', (16.666 * (o + 1)) + '%').css('top', (1 + section.timeSlot - 12) * 16.5).text(section.course.id);
 			$('#calendar').append(sectionElem);
 		});
 	}
