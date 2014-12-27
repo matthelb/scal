@@ -195,6 +195,11 @@ function bindEvents() {
 	   	$('#startModal').modal('hide')
 	   	return false;
 	});
+
+	$(".navbar-inverse a").on("click", function(){
+	   $(".navbar-inverse").find(".active").removeClass("active");
+	   $(this).parent().addClass("active");
+	});
 }
 
 function addSection(section) {

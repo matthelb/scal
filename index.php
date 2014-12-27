@@ -108,31 +108,29 @@ session_start();
         </div>
       </div>
     </div>
-
+    <div id="create"></div>
     <div class="container" id="main">
       <div class="row">
       <div id="content" class="col-lg-4 center">
-        <div id="create">
-          <h3 id="select-courses"> Select Your Courses </h3>
-          <ul id="semesters" class="list-inline">
-            <?php
-            require_once('lib/functions.php');
-            $semesters = get_all_semesters();
-            $size = sizeof($semesters);
-            $current = floor($size / 2);
-            if (isset($_SESSION['authorization']['calendar'])) {
-              $current = array_search($_SESSION['authorization']['calendar'], $semesters);
-            }
-            for($i = 0; $i < $size; $i++) {
-              $semester = $semesters[$i];
-              $display = semester_to_string($semester);
-              $id = ($i == $current) ? 'id="semester-highlighted"' : '';
-              echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
-            }
-            ?>
-          </ul>
-          <hr/>
-        </div>
+        <h3 id="select-courses"> Select Your Courses </h3>
+        <ul id="semesters" class="list-inline">
+          <?php
+          require_once('lib/functions.php');
+          $semesters = get_all_semesters();
+          $size = sizeof($semesters);
+          $current = floor($size / 2);
+          if (isset($_SESSION['authorization']['calendar'])) {
+            $current = array_search($_SESSION['authorization']['calendar'], $semesters);
+          }
+          for($i = 0; $i < $size; $i++) {
+            $semester = $semesters[$i];
+            $display = semester_to_string($semester);
+            $id = ($i == $current) ? 'id="semester-highlighted"' : '';
+            echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
+          }
+          ?>
+        </ul>
+        <hr/>
         <div class="anchor">
           <p>
             <h4> Departments </h4>
