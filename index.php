@@ -165,7 +165,7 @@ session_start();
         <h3> Review Your Courses </h3>
         <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
         <a id="clear-sections" class="btn btn-primary btn-large btn-group" href="#" onclick="return false;">Clear All</a>
-        <div id="empty-msg">Manually add courses using the drop downs above or load a calendar 
+        <div id="empty-msg">Manually add courses using the drop downs above or load a calendar
           previously made with SCal by clicking the 'Load Sections' button.</div>
         <div id="calendar">
           <div id="sections-overlay"></div>

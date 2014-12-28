@@ -169,11 +169,7 @@ function bindEvents() {
 		var mySections = $('#my-sections');
 		if (!mySections.is(":empty")) {
 			$.post('ajax/clear_sections.php', {semester : $('#semester-highlighted').attr('data-semester-id')});
-			mySections.empty();
-			$('.section').remove();
-			$('.btn-group').hide();
-			$('#calendar').hide();
-			$('#empty-msg').show();
+			clearSectionsUI();
 		}
 	});
 
@@ -241,10 +237,18 @@ function addSection(section) {
 			mySections.prepend($('<li>').append(sectionDiv));
 		}
 		$.each(section.dayOffsets, function(i, o) {
-			var sectionElem = $('<div>').addClass('section').attr('data-section-id', section.id).css('height', 16 * section.timeSlots).css('left', (16.666 * (o + 1)) + '%').css('top', (1 + section.timeSlot - 12) * 16.5).text(section.course.id);
+			var sectionElem = $('<div>').addClass('section').attr('data-section-id', section.id).css('height', 18 * section.timeSlots).css('left', (16.666 * (o + 1)) + '%').css('top', (1 + section.timeSlot - 12) * 18).text(section.course.id);
 			$('#calendar').append(sectionElem);
 		});
 	}
+}
+
+function clearSectionsUI() {
+  $('#my-sections').empty();
+	$('.section').remove();
+	$('.btn-group').hide();
+	$('#calendar').hide();
+	$('#empty-msg').show();
 }
 
 function removeSection(section) {
@@ -290,7 +294,7 @@ function dayCodeToString(code) {
 
 function populateSections() {
 	var mySections = $('#my-sections');
-	mySections.empty();
+	clearSectionsUI();
 	mySections.prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
 	$.ajax({type: 'GET',  url: 'ajax/get_sections.php', data: {semester : $('#semester-highlighted').attr('data-semester-id')}, success : function(result) {
 		$.each(result, function(i, section) {

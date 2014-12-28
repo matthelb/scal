@@ -211,13 +211,13 @@ select {
 }
 
 #calendar table td {
-	height: 16px;
+	height: 18px;
 	width: 16.666%;
 	border: 1px black solid;
 }
 
 #calendar table th {
-	height: 16px;
+	height: 18px;
 	width: 16.666%;
 	border: 1px black solid;
 }
