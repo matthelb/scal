@@ -81,30 +81,8 @@ session_start();
             <p>2. Review your selections.</p> <br />
             <p>3. Export.</p>
           </div>
-          <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#startModal">Get Started</button> <br />
+          <button class="btn btn-primary btn-lg" id="get-started-link" href="#create">Get Started</button> <br />
           <img src="img/calendar.png" />
-        </div>
-
-        <!-- Modal -->
-        <div class="modal fade" id="startModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-          <div class="modal-dialog">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h4 class="modal-title" id="myModalLabel"></h4>
-              </div>
-              <div class="modal-body">
-                <p>How to use SCal to Google:</p>
-                <ol>
-                  <li>Select your section.</li>
-                  <li>Press "Add" to add it to your class list.</li>
-                  <li>When all classes have been added, press "Export" to send to Google Calendar</li>
-                </ol>
-              </div>
-              <div class="modal-footer">
-                <button type="button" class="btn btn-default" id="get-started-link" href="#create">Got it!</button>
-              </div>
-            </div><!-- /.modal-content -->
-          </div><!-- /.modal-dialog -->
         </div>
       </div>
     </div>

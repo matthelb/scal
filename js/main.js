@@ -188,7 +188,6 @@ function bindEvents() {
 	   	$('html, body').animate({
 	       	scrollTop: $( $.attr(this, 'href') ).offset().top
 	   	}, 700);
-	   	$('#startModal').modal('hide')
 	   	return false;
 	});
 
