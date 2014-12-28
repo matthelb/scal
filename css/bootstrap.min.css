@@ -1134,7 +1134,7 @@ pre code {
   .col-lg-9,
   .col-lg-10,
   .col-lg-11 {
-    float: left;
+    float: center;
   }
   .col-lg-1 {
     width: 8.333333333333332%;
@@ -1146,7 +1146,7 @@ pre code {
     width: 25%;
   }
   .col-lg-4 {
-    width: 40%;
+    width: 70%;
   }
   .col-lg-5 {
     width: 41.66666666666667%;
