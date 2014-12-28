@@ -2,8 +2,7 @@
 require_once('../lib/functions.php');
 session_start();
 $client = new Google_Client();
-$client->setUseObjects(true);
-$cal = new Google_CalendarService($client);
+$cal = new Google_Service_Calendar($client);
 $semester = array_key_exists('semester', $_POST) ? $_POST['semester'] : null;
 
 if (isset($_SESSION['token'])) {
@@ -46,7 +45,7 @@ if ($client->getAccessToken() && $semester) {
 	}
 	$_SESSION['token'] = $client->getAccessToken();
 } else {
-	$_SESSION['authorization']['service'] = 'Google_CalendarService';
+	$_SESSION['authorization']['service'] = 'Calendar';
 	header('Location: http://' . $_SERVER['HTTP_HOST'] .
 		((strcmp($_SERVER['HTTP_HOST'], 'localhost') == 0) ?
 		substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '/', 1)) : '' ). '/auth/google/');

@@ -1,6 +1,6 @@
 <?php
-require_once('google/Google_Client.php');
-require_once('google/contrib/Google_CalendarService.php');
+require_once('google-api-php-client/src/Google/Client.php');
+require_once('google-api-php-client/src/Google/Service/Calendar.php');
 require_once('instructor.php');
 require_once('course.php');
 require_once('session.php');
@@ -68,7 +68,6 @@ class Section {
 				$this->timeSlot = $hour / 0.5;
 				$date->modify($this->getEndTime());
 				$this->timeSlots = ((intval($date->format('G')) + (intval($date->format('i')) + 10) / 60) - $hour) / 0.5;
-				error_log($this->getCourse()->getId() . 'hour:' . $hour);
 			}
 	}
 

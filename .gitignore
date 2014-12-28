@@ -20,3 +20,5 @@ www
 *.conf
 *.ini
 *.tpl
+
+config.php
