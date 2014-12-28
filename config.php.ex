@@ -1,0 +1,4 @@
+<?php
+define('GOOGLE_CLIENT_ID', '<CLIENT_ID>');
+define('GOOGLE_CLIENT_SECRET', '<CLIENT_SECRET>');
+?>
