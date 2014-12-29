@@ -2,7 +2,7 @@
 require_once('../lib/functions.php');
 session_start();
 $client = new Google_Client();
-$cal = new Google_Service_Calender($client);
+$cal = new Google_Service_Calendar($client);
 $semester = array_key_exists('semester', $_POST) ? $_POST['semester'] : null;
 
 if (isset($_SESSION['token'])) {
