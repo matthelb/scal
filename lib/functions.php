@@ -114,7 +114,7 @@ function retrieve_calendar($cal, $semester) {
 function get_or_create_calendar($cal, $semester) {
 	$calendar = retrieve_calendar($cal, $semester);
 	if ($calendar == null) {
-		$calendar = new Google_Calendar();
+		$calendar = new Google_Service_Calendar_Calendar();
 		$calendar->setSummary('USC Classes - ' . semester_to_string($semester));
 		$calendar->setTimeZone(DEFAULT_TZ);
 		$calendar->setDescription(base64_encode($semester));

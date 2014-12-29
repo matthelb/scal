@@ -121,7 +121,7 @@ class Section {
 	}
 
 	private function getBaseEvent() {
-		$event = new Google_Event();
+		$event =  new Google_Service_Calendar_Event();
 		$event->setSummary($this->getCourse()->getId() . ' - ' . $this->getCourse()->getTitle());
 		$event->setLocation($this->getLocation());
 		$event->setDescription(
@@ -138,9 +138,9 @@ class Section {
 	public function toCalendarEvent() {
 		$sessionObject = $this->getSessionObject();
 		$event = $this->getBaseEvent();
-		$start = new Google_EventDateTime();
+		$start = new Google_Service_Calendar_EventDateTime();
 		$start->setTimeZone(DEFAULT_TZ);
-		$end = new Google_EventDateTime();
+		$end = new Google_Service_Calendar_EventDateTime();
 		$end->setTimeZone(DEFAULT_TZ);
 		$date = new DateTime($sessionObject->getFirstDayOfClasses());
 		$byDay = $this->getDays() ? 'BYDAY=' . $this->getRFCDays() . ';' : '';
@@ -162,7 +162,7 @@ class Section {
 		$endDate->setTimeZone(new DateTimeZone(DEFAULT_TZ));
 		$endDate->modify('-10 day');
 		$event->setRecurrence(array('RRULE:FREQ=WEEKLY;' . $byDay . 'UNTIL=' . $endDate->format('Ymd\THms\Z')));
-		$properties = New Google_EventExtendedProperties();
+		$properties = new Google_Service_Calendar_EventExtendedProperties();
 		$properties->setPrivate(array('scal'=>$this->getSCalId()));
 		$event->setExtendedProperties($properties);
 		return $event;
