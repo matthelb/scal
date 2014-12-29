@@ -34,16 +34,14 @@ class Section {
 			$this->location = @$json_object['location'];
 			$this->type = @$json_object['type'];
 			$this->instructor = array();
-			if (isset($json_object['instructor'])) {
-				$instructors = $json_object['instructor'];
-				if(isset($instructors[0])) {
-					foreach ($instructors as $instructor) {
-						array_push($this->instructor, new Instructor($instructor));
-					}
-
-				} else {
-					array_push($this->instructor, new Instructor($json_object['instructor']));
+			$instructors = @$json_object['instructor'];
+			if(isset($instructors[0])) {
+				foreach ($instructors as $instructor) {
+					array_push($this->instructor, new Instructor($instructor));
 				}
+			} else {
+				$instructor = array_key_exists('instructor', $json_object) ? $instructors : array();
+				array_push($this->instructor, new Instructor($instructor));
 			}
 			$this->session = $json_object['session'];
 			if (array_key_exists('section_title', $json_object)) {
@@ -124,8 +122,9 @@ class Section {
 		$event =  new Google_Service_Calendar_Event();
 		$event->setSummary($this->getCourse()->getId() . ' - ' . $this->getCourse()->getTitle());
 		$event->setLocation($this->getLocation());
+		$instructorName = $this->getInstructor() ? ($this->getInstructor()[0] ? $this->getInstructor()[0]->getFullName() : 'TBA') : 'TBA';
 		$event->setDescription(
-			'Instructor: ' . $this->getInstructor()[0]->getFullName() . "\n" .
+			'Instructor: ' . $instructorName . "\n" .
 			$this->getCourse()->getDescription()
 		);
 		return $event;
