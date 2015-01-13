@@ -59,7 +59,7 @@ class Section {
 			foreach ($days as $day) {
 				array_push($this->dayOffsets, Section::getDayOffset($day));
 			}
-			if (strcmp($this->getStartTime(), 'TBA') !== 0) {
+			if (!empty($this->getStartTime()) && strcmp($this->getStartTime(), 'TBA') !== 0) {
 				$date = new DateTime();
 				$date->modify($this->getStartTime());
 				$hour = intval($date->format('G')) + intval($date->format('i')) / 60;

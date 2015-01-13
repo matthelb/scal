@@ -1,5 +1,6 @@
 $(document).ready(function() {
 	bindEvents();
+	// $.when(initCalendar()).done(function() {
 	$('.btn-group').hide();
 	$('#calendar').hide();
 	$('#departments').chosen();
@@ -17,7 +18,9 @@ $(document).ready(function() {
 	   	createCalendar();
 	}
 	populateSections();
+	// });
 });
+
 function bindEvents() {
 	$('#semesters > li').click(function() {
 		var highlighted = $('#semester-highlighted');
@@ -165,6 +168,20 @@ function bindEvents() {
 			}, 'json');
 		}
 	});
+
+	$('#add-sections').click(function() {
+		var sectionData = JSON.parse($("#sections-json").val());
+		$('#my-sections').prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
+		$.post("ajax/add_sections.php", {sectionData : sectionData}, function(result) {
+			if (result.success) {
+				for(var i = 0; i < result.sections.length; ++i) {
+					addSection(result.sections[i]);
+				};
+			}
+			$('.loading').parent().remove();
+		}, 'json');
+	});
+
 	$('#clear-sections').click(function() {
 		var mySections = $('#my-sections');
 		if (!mySections.is(":empty")) {
@@ -195,6 +212,23 @@ function bindEvents() {
 	   $(".navbar-inverse").find(".active").removeClass("active");
 	   $(this).parent().addClass("active");
 	});
+}
+
+function initCalendar() {
+	var calendar = $("#calendar-table tbody");
+	var startTime = 6;
+	var timeBlock = $("tr");
+	var eBlock = $("tr");	
+	eBlock.append($("td"));
+	for(var i = 0; i < 5; ++i) {
+		timeBlock.append($("td"));
+		eBlock.append($("td"));
+	}
+	for(var i = 0; i < 18; ++i) {
+		calendar.append(timeBlock.clone()
+										.prepend($("th").text(String.format("{0}:00 {1}", (startTime++) % 12, startTime < 12 ? "AM" : "PM"))));
+		calendar.append(eBlock.clone());
+	}
 }
 
 function addSection(section) {
@@ -355,4 +389,36 @@ function getParameterByName( name,href ) {
 	} else {
 		return decodeURIComponent(results[1].replace(/\+/g, " "));
 	}
+}
+
+String.format = function(format) {
+    var args = Array.prototype.slice.call(arguments, 1);
+    return format.replace(/{(\d+)}/g, function(match, number) { 
+      return typeof args[number] != 'undefined'
+        ? args[number] 
+        : match
+      ;
+    });
+  };
+
+function getSectionsScript() {
+	var res = {};
+	
+	var semesters = ["spring", "summer", "fall"];
+	var semData = $(".termblock")[0].innerHTML.split(' ');
+	var year = semData[1];
+	var semester = semesters.indexOf(semData[0].toLowerCase()) + 1;
+	res.semester = year + semester;
+
+	res.sectionList = [];
+	var sectionRows = $("#listWarp > table > tbody > tr");
+	for(var i = 1; i < sectionRows.length; ++i) {
+		var sectionData = {};
+		var row = $(sectionRows[i]);
+		var data = row.find("td");
+		sectionData.course = data[0].innerHTML;
+		sectionData.section = $(data[2]).text();
+		res.sectionList.push(sectionData);
+	}
+	window.prompt("Copy to clipboard:", JSON.stringify(res));
 }

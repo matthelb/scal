@@ -89,65 +89,92 @@ session_start();
     <div id="create"></div>
     <div class="container" id="main">
       <div class="row">
-      <div id="content" class="col-lg-4 center">
-        <h3 id="select-courses"> Select Your Courses </h3>
-        <ul id="semesters" class="list-inline">
-          <?php
-          require_once('lib/functions.php');
-          $semesters = get_all_semesters();
-          $size = sizeof($semesters);
-          $current = floor($size / 2);
-          if (isset($_SESSION['authorization']['calendar'])) {
-            $current = array_search($_SESSION['authorization']['calendar'], $semesters);
-          }
-          for($i = 0; $i < $size; $i++) {
-            $semester = $semesters[$i];
-            $display = semester_to_string($semester);
-            $id = ($i == $current) ? 'id="semester-highlighted"' : '';
-            echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
-          }
-          ?>
-        </ul>
-        <hr/>
-        <div class="anchor">
-          <p>
-            <h4> Departments </h4>
-            <select id="departments" data-placeholder="select a department" name="departments">
-              <option value=""></option>
-              <?php
-              $depts = get_all_departments($semesters[$current]);
-              foreach($depts as $dept) {
-                $code = $dept->getCode();
-                $name = $dept->getName();
-                echo "<option value=$code>$code - $name</option>";
-              }
-              ?>
-            </select>
-            <h4> Courses </h4>
-            <select id="courses" data-placeholder="select a course" name="courses">
-              <option value=""></option>
-            </select>
-            <h4> Sections </h4>
-            <select id="sections" data-placeholder="select a section" name="sections">
-              <option value=""></option>
-            </select>
-            <br>
-            <br>
-            <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Course</a>
-          </p>
-        </div>
+        <div id="content" class="col-lg-4 center">
+          <h3 id="select-courses"> Select Your Courses </h3>
+          <ul id="semesters" class="list-inline">
+            <?php
+            require_once('lib/functions.php');
+            $semesters = get_all_semesters();
+            $size = sizeof($semesters);
+            $current = floor($size / 2);
+            if (isset($_SESSION['authorization']['calendar'])) {
+              $current = array_search($_SESSION['authorization']['calendar'], $semesters);
+            }
+            for($i = 0; $i < $size; $i++) {
+              $semester = $semesters[$i];
+              $display = semester_to_string($semester);
+              $id = ($i == $current) ? 'id="semester-highlighted"' : '';
+              echo "<li $id class=\"semester\" data-semester-id=\"$semester\"><strong>$display</strong></li>";
+            }
+            ?>
+          </ul>
+          <hr/>
+          <div role="tabpanel">
+
+            <!-- Nav tabs -->
+
+            <!-- Tab panes -->
+
+          </div>
+          <div role="tabpanel" class="anchor">
+            <ul class="nav nav-tabs" role="tablist">
+              <li role="presentation" class="active"><a href="#regular-user" aria-controls="regular-user" role="tab" data-toggle="tab">Regular</a></li>
+              <li role="presentation"><a href="#advanced-user" aria-controls="advanced-user" role="tab" data-toggle="tab">Advanced</a></li>
+            </ul>
+            <div class="tab-content">
+              <div role="tabpanel" class="tab-pane active" id="regular-user">
+                <p>
+                  <h4> Departments </h4>
+                  <select id="departments" data-placeholder="select a department" name="departments">
+                    <option value=""></option>
+                    <?php
+                    $depts = get_all_departments($semesters[$current]);
+                    foreach($depts as $dept) {
+                      $code = $dept->getCode();
+                      $name = $dept->getName();
+                      echo "<option value=$code>$code - $name</option>";
+                    }
+                    ?>
+                  </select>
+                  <h4> Courses </h4>
+                  <select id="courses" data-placeholder="select a course" name="courses">
+                    <option value=""></option>
+                  </select>
+                  <h4> Sections </h4>
+                  <select id="sections" data-placeholder="select a section" name="sections">
+                    <option value=""></option>
+                  </select>
+                  <br>
+                  <br>
+                  <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Course</a>
+                </p>
+              </div>
+              <div role="tabpanel" class="tab-pane" id="advanced-user">
+                <p>
+                  1. Drag this button into your bookmark bar: <a class="btn btn-primary btn-large"
+                  href='javascript:var res={};var semesters=["spring","summer","fall"];var semData=$(".termblock")[0].innerHTML.split(" ");var year=semData[1];var semester=semesters.indexOf(semData[0].toLowerCase())+1;res.semester=year+semester;res.sectionList=[];var sectionRows=$("#listWarp > table > tbody > tr");for(var i=1;i<sectionRows.length;++i){var sectionData={};var row=$(sectionRows[i]);var data=row.find("td");sectionData.course=data[0].innerHTML;sectionData.section=$(data[2]).text();res.sectionList.push(sectionData)}window.prompt("Copy to clipboard:",JSON.stringify(res));'>Drag Me!</a>
+                </p>
+                <p>2. Go to the "Calendar View" tab in Web Registration</p>
+                <p>3. Click the bookmarked snippet, copy the output, and paste it below</p>
+                <textarea id="sections-json" style="width: 90%;margin-bottom: 10px;"></textarea>
+                <p>
+                  4. <a id="add-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Courses</a>
+                </p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
     <div id="review">
-        <h3> Review Your Courses </h3>
-        <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
-        <a id="clear-sections" class="btn btn-primary btn-large btn-group" href="#" onclick="return false;">Clear All</a>
-        <div id="empty-msg">Manually add courses using the drop downs above or load a calendar
-          previously made with SCal by clicking the 'Load Sections' button.</div>
+      <h3> Review Your Courses </h3>
+      <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
+      <a id="clear-sections" class="btn btn-primary btn-large btn-group" href="#" onclick="return false;">Clear All</a>
+      <div id="empty-msg">Manually add courses using the drop downs above or load a calendar
+        previously made with SCal by clicking the 'Load Sections' button.</div>
         <div id="calendar">
           <div id="sections-overlay"></div>
-          <table>
+          <table id="calendar-table">
             <tr>
               <td></td>
               <th>Monday</th>
@@ -453,29 +480,29 @@ session_start();
           <a id="create-calendar" class="btn btn-primary btn-large btn-group" href="#"  onclick="return false;">Export</a>
           <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar</a>
         </p>
-    </div>
-
-    <footer>
-      <hr />
-      <div id="footer-content">
-        <span>&copy; MMA 2013</span>
-        <img class="pull-right" id="hack-sc-logo" src="img/hack-sc.jpg" />
       </div>
-    </footer>
-    <!-- /container -->
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
-    <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 
-    <script src="js/vendor/bootstrap.min.js"></script>
+      <footer>
+        <hr />
+        <div id="footer-content">
+          <span>&copy; MMA 2013</span>
+          <img class="pull-right" id="hack-sc-logo" src="img/hack-sc.jpg" />
+        </div>
+      </footer>
+      <!-- /container -->
+      <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
+      <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
 
-    <script src="js/plugins.js"></script>
-    <script src="js/main.js"></script>
+      <script src="js/vendor/bootstrap.min.js"></script>
 
-    <script>
-      var _gaq=[['_setAccount','UA-44989976-1'],['_trackPageview']];
-      (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
-        g.src='//www.google-analytics.com/ga.js';
-        s.parentNode.insertBefore(g,s)}(document,'script'));
-    </script>
+      <script src="js/plugins.js"></script>
+      <script src="js/main.js"></script>
+
+      <script>
+        var _gaq=[['_setAccount','UA-44989976-1'],['_trackPageview']];
+        (function(d,t){var g=d.createElement(t),s=d.getElementsByTagName(t)[0];
+          g.src='//www.google-analytics.com/ga.js';
+          s.parentNode.insertBefore(g,s)}(document,'script'));
+      </script>
     </body>
-  </html>
+    </html>
