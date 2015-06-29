@@ -230,11 +230,27 @@ select {
 .nav-tabs > li, .nav-pills > li {
     float:none;
     display:inline-block;
-    *display:inline; /* ie7 fix */
-     zoom:1; /* hasLayout ie7 trigger */
+    /*display:inline; /* ie7 fix */
+    zoom:1; /* hasLayout ie7 trigger */
 }
 
 .nav-tabs, .nav-pills {
     text-align:center;
     margin-bottom: 15px;
+}
+
+.type-option > li > a {
+	border-radius: 5px !important;
+}
+
+.type-option > li.active > a {
+	background-color: #dedede;
+	border: 1px white solid;
+	color: #ab2a2a;
+}
+
+.type-option > li.active > a:focus {
+	background-color: #dedede;
+	border: 1px white solid;
+	color: #ab2a2a;
 }

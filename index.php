@@ -96,7 +96,7 @@ session_start();
             require_once('lib/functions.php');
             $semesters = get_all_semesters();
             $size = sizeof($semesters);
-            $current = floor($size / 2);
+            $current = $size - 1;
             if (isset($_SESSION['authorization']['calendar'])) {
               $current = array_search($_SESSION['authorization']['calendar'], $semesters);
             }
@@ -117,7 +117,7 @@ session_start();
 
           </div>
           <div role="tabpanel" class="anchor">
-            <ul class="nav nav-tabs" role="tablist">
+            <ul class="nav nav-tabs type-option" role="tablist">
               <li role="presentation" class="active"><a href="#regular-user" aria-controls="regular-user" role="tab" data-toggle="tab">Regular</a></li>
               <li role="presentation"><a href="#advanced-user" aria-controls="advanced-user" role="tab" data-toggle="tab">Advanced</a></li>
             </ul>

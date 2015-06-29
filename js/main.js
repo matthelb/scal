@@ -17,8 +17,19 @@ $(document).ready(function() {
 	   	}, 500);
 	   	createCalendar();
 	}
+
+	// Load stored semester selection from browser.
+	var semesterChosen = localStorage.getItem("semester-chosen");
+	console.log(semesterChosen);
+	if (semesterChosen !== null) {
+		var element = $('*[data-semester-id=\"' + semesterChosen + '\"]');
+		if (element !== null) {
+			var highlighted = $('#semester-highlighted');
+				highlighted.attr('id', '');
+				$(element).attr('id', 'semester-highlighted');
+		}
+	}
 	populateSections();
-	// });
 });
 
 function bindEvents() {
@@ -59,6 +70,7 @@ function bindEvents() {
 				}, dataType : 'json'});
 			departments.trigger('change');
 			departments.trigger('chosen:updated');
+			localStorage.setItem("semester-chosen", semester);
 		}
 	});
 
@@ -185,6 +197,7 @@ function bindEvents() {
 	$('#clear-sections').click(function() {
 		var mySections = $('#my-sections');
 		if (!mySections.is(":empty")) {
+			console.log("clearing");
 			$.post('ajax/clear_sections.php', {semester : $('#semester-highlighted').attr('data-semester-id')});
 			clearSectionsUI();
 		}
@@ -327,6 +340,7 @@ function dayCodeToString(code) {
 
 function populateSections() {
 	var mySections = $('#my-sections');
+	console.log("clearing and populating: " + $('#semester-highlighted').attr('data-semester-id'));
 	clearSectionsUI();
 	mySections.prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
 	$.ajax({type: 'GET',  url: 'ajax/get_sections.php', data: {semester : $('#semester-highlighted').attr('data-semester-id')}, success : function(result) {
