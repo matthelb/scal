@@ -12,6 +12,10 @@ session_start();
   <title>SCal to Google</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width">
+  <meta property="og:title" content="SCal" />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="http://scal.heuristix.me/" />
+  <meta property="og:image" content="http://scal.heuristix.me/img/photo.png" />
   <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/bootstrap.min.css">
   <style>
