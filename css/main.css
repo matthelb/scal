@@ -293,6 +293,14 @@ select {
 	margin-top: 15px;
 }
 
+.select2-search__field {
+	border-bottom-color: #ffab00 !important;
+}
+
+.select2-results__option--highlighted {
+	background-color: #bdbdbd !important;
+}
+
 @media only screen and (max-device-width: 480px) {
 	#top-content h2 {
 		font-size: 35px;
