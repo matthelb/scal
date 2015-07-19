@@ -464,7 +464,7 @@ session_start();
         <hr />
         <div id="footer-content">
           <span>&copy; MMA 2013</span>
-          <img class="pull-right" id="hack-sc-logo" src="img/hack-sc.jpg" />
+          <img class="right" id="hack-sc-logo" src="img/hack-sc.jpg" />
         </div>
       </footer>
       <!-- /container -->
