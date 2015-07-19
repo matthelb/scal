@@ -11,6 +11,10 @@ nav {
 	background-color: #ab2a2a;
 }
 
+nav .brand-logo {
+	padding: 0 20px;
+}
+
 .top-container {
 	background-color: #ab2a2a;
 	margin-left: 0;
@@ -20,6 +24,14 @@ nav {
 
 .container {
 	padding: 0;
+}
+
+#steps ol {
+	padding-left: 0;
+}
+
+#steps li {
+	display: block;
 }
 
 footer {
@@ -52,6 +64,7 @@ footer img {
 }
 
 #top-content {
+	padding-top: 20px;
 	width: 75%;
 	text-align: center;
 	margin: 0 auto;
@@ -60,7 +73,7 @@ footer img {
 #top-content img {
 	width: 85%;
 	margin: 40px auto;
-	margin-bottom: -120px;
+	margin-bottom: -15%;
 }
 
 #steps {
@@ -81,7 +94,7 @@ footer img {
 }
 
 #main {
-	padding-top: 40px;
+	padding-top: 12%;
 	text-align: center;
 }
 
@@ -262,4 +275,14 @@ select {
 	background-color: #dedede;
 	border: 1px white solid;
 	color: #ab2a2a;
+}
+
+@media only screen and (max-device-width: 480px) {
+	#top-content h2 {
+		font-size: 35px;
+	}
+
+	#steps {
+		font-size: 20px;
+	}
 }
