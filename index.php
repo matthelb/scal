@@ -17,8 +17,6 @@ session_start();
   <meta property="og:url" content="http://scal.heuristix.me/" />
   <meta property="og:image" content="http://scal.heuristix.me/img/photo.png" />
   <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-<!--   <link rel="stylesheet" href="css/bootstrap.min.css"> -->
-    <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
   <style>
     body {
@@ -28,7 +26,6 @@ session_start();
   <!--<link rel="stylesheet" href="css/bootstrap-theme.min.css">-->
   <link rel="stylesheet" href="css/chosen.min.css">
   <link rel="stylesheet" href="css/main.css">
-
   <script src="js/vendor/modernizr-2.6.2.min.js"></script>
 </head>
 <body id="about">
@@ -474,9 +471,7 @@ session_start();
       <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
       <!-- Compiled and minified JavaScript -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
-
-      <!--<script src="js/vendor/bootstrap.min.js"></script>-->
-
+      <script src="js/chosen.jquery.min.js"></script>
       <script src="js/plugins.js"></script>
       <script src="js/main.js"></script>
 

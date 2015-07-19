@@ -1,12 +1,10 @@
 $(document).ready(function() {
 	bindEvents();
-	// $.when(initCalendar()).done(function() {
 	$('.btn-group').hide();
 	$('#calendar').hide();
-	$('#departments').chosen();
-	var departmentsWidth = $('#departments_chosen').width();
-	$('#courses').chosen({width: departmentsWidth + "px"});
-	$('#sections').chosen({width: departmentsWidth + "px"});
+	$('#departments').chosen({width: "80%"});
+	$('#courses').chosen({width: "80%"});
+	$('#sections').chosen({width: "80%"});
 	$('#semesters-highlighted').trigger('click');
 	$('#departments').trigger('change');
 	$('#courses').trigger('change');
