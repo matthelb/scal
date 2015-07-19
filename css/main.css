@@ -236,12 +236,15 @@ select {
 	height: 18px;
 	width: 16.666%;
 	border: 1px black solid;
+	padding: 0;
 }
 
 #calendar table th {
 	height: 18px;
 	width: 16.666%;
 	border: 1px black solid;
+	padding: 0;
+	text-align: center;
 }
 
 #create {
@@ -288,5 +291,9 @@ select {
 
 	#steps {
 		font-size: 20px;
+	}
+
+	#calendar {
+		width: 95%;
 	}
 }
