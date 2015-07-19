@@ -123,19 +123,19 @@ session_start();
                   </select>
                   <br>
                   <br>
-                  <a id="add-section" class="btn btn-primary btn-small" href="#" onclick="return false;">Add Course</a>
+                  <a id="add-section" class="btn btn-primary btn-small amber accent-4" href="#" onclick="return false;">Add Course</a>
                 </p>
               </div>
               <div role="tabpanel" class="tab-pane" id="advanced-user">
                 <p>
-                  1. Drag this button into your bookmark bar: <a class="btn btn-primary btn-small"
+                  1. Drag this button into your bookmark bar: <a class="btn btn-primary btn-small grey darken-2"
                   href='javascript:var res={};var semesters=["spring","summer","fall"];var semData=$(".termblock")[0].innerHTML.split(" ");var year=semData[1];var semester=semesters.indexOf(semData[0].toLowerCase())+1;res.semester=year+semester;res.sectionList=[];var sectionRows=$("#listWarp > table > tbody > tr");for(var i=1;i<sectionRows.length;++i){var sectionData={};var row=$(sectionRows[i]);var data=row.find("td");sectionData.course=data[0].innerHTML;sectionData.section=$(data[2]).text();res.sectionList.push(sectionData)}window.prompt("Copy to clipboard:",JSON.stringify(res));'>Drag Me!</a>
                 </p>
                 <p>2. Go to the "Calendar View" tab in Web Registration</p>
                 <p>3. Click the bookmarked snippet, copy the output, and paste it below</p>
                 <textarea id="sections-json" style="width: 90%;margin-bottom: 10px;"></textarea>
                 <p>
-                  4. <a id="add-sections" class="btn btn-primary btn-small" href="#" onclick="return false;">Add Courses</a>
+                  4. <a id="add-sections" class="btn btn-primary btn-small amber accent-4" href="#" onclick="return false;">Add Courses</a>
                 </p>
               </div>
             </div>
@@ -145,8 +145,8 @@ session_start();
     </div>
     <div id="review">
       <h3> Review Your Courses </h3>
-      <a id="load-calendar" class="btn btn-primary btn-small" href="#" onclick="return false;">Load Sections</a>
-      <a id="clear-sections" class="btn btn-primary btn-small btn-group" href="#" onclick="return false;">Clear All</a>
+      <a id="load-calendar" class="btn btn-primary btn-small amber accent-4" href="#" onclick="return false;">Load Sections</a>
+      <a id="clear-sections" class="btn btn-primary btn-small btn-group amber accent-4" href="#" onclick="return false;">Clear All</a>
       <div id="empty-msg">Manually add courses using the drop downs above or load a calendar
         previously made with SCal by clicking the 'Load Sections' button.</div>
         <div id="calendar">
@@ -454,8 +454,8 @@ session_start();
           <ul id="my-sections" class="list-unstyled"></ul>
         </div>
         <p id="export">
-          <a id="create-calendar" class="btn btn-primary btn-small btn-group" href="#"  onclick="return false;">Export</a>
-          <a id="calendar-url" class="btn btn-primary btn-small" href="#" style="display: none;" target="_blank">View calendar</a>
+          <a id="create-calendar" class="btn btn-primary btn-small btn-group amber accent-4" href="#"  onclick="return false;">Export</a>
+          <a id="calendar-url" class="btn btn-primary btn-small amber accent-4" href="#" style="display: none;" target="_blank">View calendar</a>
         </p>
       </div>
 
