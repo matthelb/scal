@@ -17,7 +17,7 @@ session_start();
   <meta property="og:url" content="http://scal.heuristix.me/" />
   <meta property="og:image" content="http://scal.heuristix.me/img/photo.png" />
   <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
-  <link rel="stylesheet" href="css/bootstrap.min.css">
+<!--   <link rel="stylesheet" href="css/bootstrap.min.css"> -->
     <!-- Compiled and minified CSS -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
   <style>
@@ -91,11 +91,17 @@ session_start();
           </ul>
           <hr/>
           <div role="tabpanel" class="anchor">
-            <ul class="nav nav-tabs type-option" role="tablist">
-              <li role="presentation" class="active"><a href="#regular-user" aria-controls="regular-user" role="tab" data-toggle="tab">Regular</a></li>
-              <li role="presentation"><a href="#advanced-user" aria-controls="advanced-user" role="tab" data-toggle="tab">Advanced</a></li>
+            <ul class="tabs grey lighten-2" role="tablist">
+              <li class="tab" role="presentation" class="active">
+                <a href="#regular-user" aria-controls="regular-user" role="tab" data-toggle="tab"
+                    class="amber-text text-accent-4">Regular</a>
+              </li>
+              <li class="tab" role="presentation">
+                <a href="#advanced-user" aria-controls="advanced-user" role="tab" data-toggle="tab"
+                    class="amber-text text-accent-4">Advanced</a>
+              </li>
             </ul>
-            <div class="tab-content">
+            <div>
               <div role="tabpanel" class="tab-pane active" id="regular-user">
                 <p>
                   <h4> Departments </h4>
@@ -120,19 +126,19 @@ session_start();
                   </select>
                   <br>
                   <br>
-                  <a id="add-section" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Course</a>
+                  <a id="add-section" class="btn btn-primary btn-small" href="#" onclick="return false;">Add Course</a>
                 </p>
               </div>
               <div role="tabpanel" class="tab-pane" id="advanced-user">
                 <p>
-                  1. Drag this button into your bookmark bar: <a class="btn btn-primary btn-large"
+                  1. Drag this button into your bookmark bar: <a class="btn btn-primary btn-small"
                   href='javascript:var res={};var semesters=["spring","summer","fall"];var semData=$(".termblock")[0].innerHTML.split(" ");var year=semData[1];var semester=semesters.indexOf(semData[0].toLowerCase())+1;res.semester=year+semester;res.sectionList=[];var sectionRows=$("#listWarp > table > tbody > tr");for(var i=1;i<sectionRows.length;++i){var sectionData={};var row=$(sectionRows[i]);var data=row.find("td");sectionData.course=data[0].innerHTML;sectionData.section=$(data[2]).text();res.sectionList.push(sectionData)}window.prompt("Copy to clipboard:",JSON.stringify(res));'>Drag Me!</a>
                 </p>
                 <p>2. Go to the "Calendar View" tab in Web Registration</p>
                 <p>3. Click the bookmarked snippet, copy the output, and paste it below</p>
                 <textarea id="sections-json" style="width: 90%;margin-bottom: 10px;"></textarea>
                 <p>
-                  4. <a id="add-sections" class="btn btn-primary btn-large" href="#" onclick="return false;">Add Courses</a>
+                  4. <a id="add-sections" class="btn btn-primary btn-small" href="#" onclick="return false;">Add Courses</a>
                 </p>
               </div>
             </div>
@@ -142,8 +148,8 @@ session_start();
     </div>
     <div id="review">
       <h3> Review Your Courses </h3>
-      <a id="load-calendar" class="btn btn-primary btn-large" href="#" onclick="return false;">Load Sections</a>
-      <a id="clear-sections" class="btn btn-primary btn-large btn-group" href="#" onclick="return false;">Clear All</a>
+      <a id="load-calendar" class="btn btn-primary btn-small" href="#" onclick="return false;">Load Sections</a>
+      <a id="clear-sections" class="btn btn-primary btn-small btn-group" href="#" onclick="return false;">Clear All</a>
       <div id="empty-msg">Manually add courses using the drop downs above or load a calendar
         previously made with SCal by clicking the 'Load Sections' button.</div>
         <div id="calendar">
@@ -451,8 +457,8 @@ session_start();
           <ul id="my-sections" class="list-unstyled"></ul>
         </div>
         <p id="export">
-          <a id="create-calendar" class="btn btn-primary btn-large btn-group" href="#"  onclick="return false;">Export</a>
-          <a id="calendar-url" class="btn btn-primary btn-large" href="#" style="display: none;" target="_blank">View calendar</a>
+          <a id="create-calendar" class="btn btn-primary btn-small btn-group" href="#"  onclick="return false;">Export</a>
+          <a id="calendar-url" class="btn btn-primary btn-small" href="#" style="display: none;" target="_blank">View calendar</a>
         </p>
       </div>
 
@@ -469,7 +475,7 @@ session_start();
       <!-- Compiled and minified JavaScript -->
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
-      <script src="js/vendor/bootstrap.min.js"></script>
+      <!--<script src="js/vendor/bootstrap.min.js"></script>-->
 
       <script src="js/plugins.js"></script>
       <script src="js/main.js"></script>

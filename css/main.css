@@ -3,7 +3,7 @@
    ========================================================================== */
 body {
 	font-family: 'Raleway';
-	background-color: #dedede;
+	background-color: #e0e0e0;
 	padding-bottom: 0;
 }
 
@@ -137,11 +137,11 @@ footer img {
 }
 
 #my-sections li > div:hover {
-	-webkit-box-shadow: 0px 0px 4px 2px #dedede;
-    -moz-box-shadow: 0px 0px 4px 2px #dedede;
-    -o-box-shadow: 0px 0px 4px 2px #dedede;
-    -ms-box-shadow: 0px 0px 4px 2px #dedede;
-    box-shadow: 0px 0px 4px 2px #dedede;
+	-webkit-box-shadow: 0px 0px 4px 2px #e0e0e0;
+    -moz-box-shadow: 0px 0px 4px 2px #e0e0e0;
+    -o-box-shadow: 0px 0px 4px 2px #e0e0e0;
+    -ms-box-shadow: 0px 0px 4px 2px #e0e0e0;
+    box-shadow: 0px 0px 4px 2px #e0e0e0;
 }
 
 /*#my-sections li div .close{
@@ -182,15 +182,15 @@ select {
 
 #review .btn-large {
 	color: black;
-	border-color: #dedede;
+	border-color: #e0e0e0;
 	background-color: transparent;
 	margin-bottom: 20px;
 }
 
 #review .btn-large:hover {
 	color: black;
-	border-color: #dedede;
-	background-color: #dedede;
+	border-color: #e0e0e0;
+	background-color: #e0e0e0;
 }
 
 #export {
@@ -266,15 +266,19 @@ select {
 }
 
 .type-option > li.active > a {
-	background-color: #dedede;
+	background-color: #e0e0e0;
 	border: 1px white solid;
 	color: #ab2a2a;
 }
 
 .type-option > li.active > a:focus {
-	background-color: #dedede;
+	background-color: #e0e0e0;
 	border: 1px white solid;
 	color: #ab2a2a;
+}
+
+.tabs > .indicator {
+	background-color: #ffab00 !important;
 }
 
 @media only screen and (max-device-width: 480px) {
