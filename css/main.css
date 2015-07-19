@@ -6,6 +6,18 @@ body {
 	background-color: #dedede;
 	padding-bottom: 0;
 }
+
+nav {
+	background-color: #ab2a2a;
+}
+
+.top-container {
+	background-color: #ab2a2a;
+	margin-left: 0;
+	margin-right: 0;
+	width: 100%;
+}
+
 .container {
 	padding: 0;
 }
@@ -40,7 +52,7 @@ footer img {
 }
 
 #top-content {
-	width: 90%;
+	width: 75%;
 	text-align: center;
 	margin: 0 auto;
 }
@@ -55,16 +67,13 @@ footer img {
 	margin: 30px 0;
 	color: #ffffff;
 	font-family: 'Raleway';
-	line-height: 5px;
 	font-size: 30px;
-}
-
-#steps p {
-	margin: 0;
 }
 
 .top-text {
 	font-family: 'Raleway';
+	color: #ffffff;
+	width: 85%;
 }
 
 #main h4 {

@@ -11,16 +11,17 @@ session_start();
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <title>SCal to Google</title>
   <meta name="description" content="">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta property="og:title" content="SCal" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="http://scal.heuristix.me/" />
   <meta property="og:image" content="http://scal.heuristix.me/img/photo.png" />
   <link href='http://fonts.googleapis.com/css?family=Raleway' rel='stylesheet' type='text/css'>
   <link rel="stylesheet" href="css/bootstrap.min.css">
+    <!-- Compiled and minified CSS -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/css/materialize.min.css">
   <style>
     body {
-      padding-top: 50px;
       padding-bottom: 20px;
     }
   </style>
@@ -34,62 +35,38 @@ session_start();
     <!--[if lt IE 7]>
     <p class="chromeframe">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> or <a href="http://www.google.com/chromeframe/?redirect=true">activate Google Chrome Frame</a> to improve your experience.</p>
     <![endif]-->
-    <div class="navbar navbar-inverse navbar-fixed-top">
-      <div class="container">
-        <div class="navbar-header">
-          <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-            <span class="icon-bar"></span>
-          </button>
-          <a class="navbar-brand" href="/">SCal</a>
+    <nav>
+      <div class="nav-wrapper">
+        <div class="col s12">
+          <a href="#" class="brand-logo">SCal</a>
         </div>
-        <div class="navbar-collapse collapse">
-          <ul class="nav navbar-nav">
-            <li class="active"><a href="#about">about</a></li>
-            <li><a href="#create">create</a></li>
-            <li><a href="#export">export</a></li>
-            <!--<li class="dropdown">
-              <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <b class="caret"></b></a>
-              <ul class="dropdown-menu">
-                <li><a href="#">Action</a></li>
-                <li><a href="#">Another action</a></li>
-                <li><a href="#">Something else here</a></li>
-                <li class="divider"></li>
-                <li class="dropdown-header">Nav header</li>
-                <li><a href="#">Separated link</a></li>
-                <li><a href="#">One more separated link</a></li>
-              </ul>
-            </li>-->
-          </ul>
-          <!--<form class="navbar-form navbar-right">
-            <div class="form-group">
-              <input type="text" placeholder="Email" class="form-control">
-            </div>
-            <div class="form-group">
-              <input type="password" placeholder="Password" class="form-control">
-            </div>
-            <button type="submit" class="btn btn-success">Sign in</button>
-          </form>-->
-        </div><!--/.navbar-collapse -->
+        <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <li class="active"><a href="#about">about</a></li>
+          <li><a href="#create">create</a></li>
+          <li><a href="#export">export</a></li>
+        </ul>
       </div>
-    </div>
+    </nav>
 
     <!-- Main jumbotron for a primary marketing message or call to action -->
-    <div class="jumbotron">
-      <div class="container">
+    <!-- <div class="jumbotron"> -->
+      <div class="top-container">
         <div id="top-content">
-          <h1><span class="top-text">Convert your USC course list to a Google Calendar with SCal</span><!--<img src="img/logo.gif" height="128px" width="auto"/>--></h1>
+          <h2 style="padding-top:5px;margin-top:0px;">
+            <span class="top-text">Convert your USC course list to a Google Calendar with SCal</span>
+          </h2>
           <div id="steps">
-            <p>1. Enter your courses.</p> <br />
-            <p>2. Review your selections.</p> <br />
-            <p>3. Export.</p>
+            <ol>
+              <li>Enter your courses.</li>
+              <li>Review your selections.</li>
+              <li>Export.</li>
+            </ol>
           </div>
           <button class="btn btn-primary btn-lg" id="get-started-link" href="#create">Get Started</button> <br />
           <img src="img/calendar.png" />
         </div>
       </div>
-    </div>
+    <!-- </div> -->
     <div id="create"></div>
     <div class="container" id="main">
       <div class="row">
@@ -113,13 +90,6 @@ session_start();
             ?>
           </ul>
           <hr/>
-          <div role="tabpanel">
-
-            <!-- Nav tabs -->
-
-            <!-- Tab panes -->
-
-          </div>
           <div role="tabpanel" class="anchor">
             <ul class="nav nav-tabs type-option" role="tablist">
               <li role="presentation" class="active"><a href="#regular-user" aria-controls="regular-user" role="tab" data-toggle="tab">Regular</a></li>
@@ -496,6 +466,8 @@ session_start();
       <!-- /container -->
       <script src="//ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js"></script>
       <script>window.jQuery || document.write('<script src="js/vendor/jquery-1.10.1.min.js"><\/script>')</script>
+      <!-- Compiled and minified JavaScript -->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.0/js/materialize.min.js"></script>
 
       <script src="js/vendor/bootstrap.min.js"></script>
 
