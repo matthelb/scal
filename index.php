@@ -28,6 +28,7 @@ session_start();
   <!--<link rel="stylesheet" href="css/bootstrap-theme.min.css">-->
   <link rel="stylesheet" href="css/main.css">
   <script src="js/vendor/modernizr-2.6.2.min.js"></script>
+  <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body id="about">
     <!--[if lt IE 7]>
@@ -452,7 +453,7 @@ session_start();
           </table>
         </div>
         <div id="sections">
-          <ul id="my-sections" class="list-unstyled"></ul>
+          <div id="my-sections" class="list-unstyled"></div>
         </div>
         <p id="export">
           <a id="create-calendar" class="btn btn-primary btn-small btn-group amber accent-4" href="#"  onclick="return false;">Export</a>

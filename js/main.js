@@ -169,7 +169,7 @@ function bindEvents() {
 		var course = $( '#courses option:selected').val();
 		var semester = $('#semester-highlighted').attr('data-semester-id');
 		if (section.length) {
-		$('#my-sections').prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
+		$('#my-sections').prepend($('<div>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
 			$.post('ajax/add_section.php', {section : section, course : course, semester : semester}, function(result) {
 				if (result.success) {
 					addSection(result.section);
@@ -182,7 +182,7 @@ function bindEvents() {
 
 	$('#add-sections').click(function() {
 		var sectionData = JSON.parse($('#sections-json').val());
-		$('#my-sections').prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
+		$('#my-sections').prepend($('<div>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
 		$.post('ajax/add_sections.php', {sectionData : sectionData}, function(result) {
 			if (result.success) {
 				for(var i = 0; i < result.sections.length; ++i) {
@@ -208,7 +208,7 @@ function bindEvents() {
 
 	$('#create-calendar').click(function() {
 		var mySections = $('#my-sections');
-		if(!mySections.is(':empty')){
+		if(!mySections.is(':empty')) {
 			createCalendar();
 		}
 	});
@@ -244,43 +244,40 @@ function initCalendar() {
 }
 
 function addSection(section) {
-	if (section != null) {
+	if (section !== null) {
 		$('.btn-group').show();
 		$('#empty-msg').hide();
 		$('#calendar').show();
 		var mySections = $('#my-sections');
-		var sectionDiv = $('<div>').attr('data-section-id', section.id);
+		var sectionDiv = $('<div>').attr('data-section-id', section.id).addClass('card');
 		var title = (section.title != null) ? section.title : section.course.title;
-		sectionDiv.append($('<h4>').attr('class', 'course-id').text(title + ' - ' + section.type).append($('<div>').click(function() {
-    	removeSection($(this).parents('div').data('section-id'));
-    }).hover(function(){
-    	$(this).animate({
-    		width: '+=45'
-    	}, 'fast', function(){
-    		$(this).html('remove');
-    	});
-    }, function(){
-    	$(this).animate({
-    		width: '-=45'
-    	}, 'fast', function(){
-    		$(this).html('&times;');
-    	});
-    }).attr('class', 'close').html('&times;')));
+
+		var cardContent = $('<div>').addClass('card-content black-text')
+				.append($('<span>').addClass('card-title course-id').text(title + ' - ' + section.type));
+		
+		sectionDiv.append($('<i>').addClass('remove-section material-icons').text('close').click(function() {
+			removeSection($(this).parent().data('section-id'));
+		}));
+
     if (sections.days || section.start || section.end) {
-			sectionDiv.append($('<p>').attr('class', 'section-days-time').text(((section.days) ? (dayCodeToString(section.days) + ' | ') : '') + section.start + ' - ' + section.end));
+			cardContent.append($('<p>').attr('class', 'section-days-time').text(((section.days) ? (dayCodeToString(section.days) + ' | ') : '') + section.start + ' - ' + section.end));
 		}
 		if (section.location) {
-			sectionDiv.append($('<p>').attr('class', 'section-location').text(section.location));
+			cardContent.append($('<p>').attr('class', 'section-location').text(section.location));
 		}
 		if (section.instructor.length > 0) {
-			sectionDiv.append($('<p>').attr('class', 'section-instructor').text(section.instructor[0].full_name));
+			cardContent.append($('<p>').attr('class', 'section-instructor').text(section.instructor[0].full_name));
 		}
-		var loading = mySections.children('li').css('text-align', '').children('.loading');
+		sectionDiv.append(cardContent);
+
+		var loading = mySections.children('div').css('text-align', '').children('.loading');
 		if (loading.length) {
 			loading.replaceWith(sectionDiv);
 		} else {
-			mySections.prepend($('<li>').append(sectionDiv));
+			mySections.prepend(sectionDiv);
 		}
+
+		
 		$.each(section.dayOffsets, function(i, o) {
 			var sectionElem = $('<div>').addClass('section').attr('data-section-id', section.id).css('height', 18 * section.timeSlots).css('left', (16.666 * (o + 1)) + '%').css('top', (1 + section.timeSlot - 12) * 18).text(section.course.id);
 			$('#calendar').append(sectionElem);
@@ -341,7 +338,7 @@ function populateSections() {
 	var mySections = $('#my-sections');
 	console.log('clearing and populating: ' + $('#semester-highlighted').attr('data-semester-id'));
 	clearSectionsUI();
-	mySections.prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
+	mySections.prepend($('<div>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
 	$.ajax({type: 'GET',  url: 'ajax/get_sections.php', data: {semester : $('#semester-highlighted').attr('data-semester-id')}, success : function(result) {
 		$.each(result, function(i, section) {
 			addSection(section);
@@ -355,7 +352,7 @@ function populateSections() {
 function loadCalendar() {
 	var mySections = $('#my-sections');
 	mySections.empty();
-	mySections.prepend($('<li>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
+	mySections.prepend($('<div>').css('text-align', 'center').append($('<div>').attr('class', 'loading')));
 	$.ajax({type: 'POST',  url: 'ajax/load_calendar.php', data: {semester : $('#semester-highlighted').attr('data-semester-id')}, success : function(result) {
 		if (result.success) {
 			$.each(result.sections, function(i, section) {

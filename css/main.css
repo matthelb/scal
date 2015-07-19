@@ -98,6 +98,11 @@ footer img {
 	text-align: center;
 }
 
+.list-inline > li {
+	display: inline;
+	margin-right: 15px;
+}
+
 #main .btn-large {
 	border-color: black;
 	background-color: transparent;
@@ -136,12 +141,22 @@ footer img {
 	bottom: 10px;
 }
 
+
 #my-sections li > div:hover {
 	-webkit-box-shadow: 0px 0px 4px 2px #e0e0e0;
     -moz-box-shadow: 0px 0px 4px 2px #e0e0e0;
     -o-box-shadow: 0px 0px 4px 2px #e0e0e0;
     -ms-box-shadow: 0px 0px 4px 2px #e0e0e0;
     box-shadow: 0px 0px 4px 2px #e0e0e0;
+}
+
+.remove-section {
+	float: right;
+	padding: 5px;
+}
+
+.remove-section:hover {
+	cursor: pointer;
 }
 
 /*#my-sections li div .close{
@@ -264,6 +279,15 @@ select {
     zoom:1; /* hasLayout ie7 trigger */
 }
 
+.card {
+	margin-top: 2rem;
+	margin-bottom: 2rem;
+}
+
+.card-title {
+	color: black !important;
+}
+
 .nav-tabs, .nav-pills {
     text-align:center;
     margin-bottom: 15px;
@@ -317,5 +341,14 @@ select {
 	#calendar table th {
 		white-space: nowrap;
   	overflow: hidden;
+	}
+
+	#sections {
+		width: 95%;
+	}
+
+	.card-title {
+		line-height: 0px !important;
+		font-size: 20px !important;
 	}
 }
