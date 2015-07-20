@@ -41,32 +41,29 @@ session_start();
         </div>
         <ul id="nav-mobile" class="right hide-on-med-and-down">
           <li class="active"><a href="#about">about</a></li>
-          <li><a href="#create">create</a></li>
+          <li><a href="#content">create</a></li>
           <li><a href="#export">export</a></li>
         </ul>
       </div>
     </nav>
 
-    <!-- Main jumbotron for a primary marketing message or call to action -->
-    <!-- <div class="jumbotron"> -->
-      <div class="top-container">
-        <div id="top-content">
-          <h2 style="padding-top:5px;margin-top:0px;">
-            <span class="top-text">Convert your USC course list to a Google Calendar with SCal</span>
-          </h2>
-          <div id="steps">
-            <ol>
-              <li>1. Enter your courses.</li>
-              <li>2. Review your selections.</li>
-              <li>3. Export.</li>
-            </ol>
-          </div>
-          <button class="btn btn-primary btn-lg amber accent-4" id="get-started-link" href="#create">Get Started</button> <br />
-          <img src="img/calendar.png" />
+    <div class="top-container">
+      <div id="top-content">
+        <h2 style="padding-top:5px;margin-top:0px;">
+          <span class="top-text">Convert your USC course list to a Google Calendar with SCal</span>
+        </h2>
+        <div id="steps">
+          <ol>
+            <li>1. Enter your courses.</li>
+            <li>2. Review your selections.</li>
+            <li>3. Export.</li>
+          </ol>
         </div>
+        <button class="btn btn-primary btn-lg amber accent-4" id="get-started-link" href="#content">Get Started</button> <br />
+        <img src="img/calendar.png" />
       </div>
-    <!-- </div> -->
-    <div id="create"></div>
+    </div>
+
     <div class="container" id="main">
       <div class="row">
         <div id="content" class="col-lg-4 center">
