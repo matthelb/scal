@@ -87,7 +87,7 @@ session_start();
           </ul>
           <hr/>
           <div role="tabpanel" class="anchor">
-            <ul class="tabs grey lighten-2" role="tablist">
+            <ul class="tabs grey lighten-2 advanced-regular-tabs" role="tablist">
               <li class="tab" role="presentation" class="active">
                 <a href="#regular-user" aria-controls="regular-user" role="tab" data-toggle="tab"
                     class="amber-text text-accent-4">Regular</a>
@@ -461,8 +461,7 @@ session_start();
       <footer>
         <hr />
         <div id="footer-content">
-          <span>&copy; MMA 2013</span>
-          <img class="right" id="hack-sc-logo" src="img/hack-sc.jpg" />
+          <span>&copy; MMAS 2015</span>
         </div>
       </footer>
       <!-- /container -->

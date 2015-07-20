@@ -28,6 +28,11 @@ $(document).ready(function() {
 				$(element).attr('id', 'semester-highlighted');
 		}
 	}
+	
+	if ($(window).width() < 480) {
+		$('.advanced-regular-tabs').hide();
+	}
+
 	populateSections();
 });
 
