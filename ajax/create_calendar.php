@@ -13,13 +13,9 @@ if (isset($_SESSION['token'])) {
 
 if ($client->getAccessToken() && $semester) {
 	if (isset($_SESSION['sections']) && isset($_SESSION['sections'][$semester])) {
-		$urls = array();
+		$urls = [];
 		$calendar = get_or_create_calendar($cal, $semester);
-		foreach($_SESSION['sections'][$semester] as $section) {
-			if ($section) {
-				array_push($urls, add_section_to_calendar($cal, $calendar, $section));
-			}
-		}
+		add_all_sections_to_calendar($cal, $calendar, $_SESSION['sections'][$semester]);
 		if (isset($_SESSION['authorization'])) {
 			unset($_SESSION['authorization']);
 		}

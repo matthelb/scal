@@ -126,6 +126,17 @@ function add_section_to_calendar($cal, $calendar, Section $section) {
 	return $cal->events->insert($calendar->getId(), $section->toCalendarEvent())->getHtmlLink();
 }
 
+function add_all_sections_to_calendar($cal, $calendar, $sections) {
+	$useBatch = $cal->getClient()->shouldDefer();
+	$cal->getClient()->setUseBatch(true);
+	$batch = new Google_Http_Batch($cal->getClient());
+	foreach ($sections as $section) {
+		$batch->add($cal->events->insert($calendar->getId(), $section->toCalendarEvent()), $section->title);
+	}
+	$batch->execute();
+	$cal->getClient()->setUseBatch($useBatch);
+}
+
 function semester_to_string($semester) {
 	$seasons = array(0 => "", 1 => "Spring", 2 => "Summer", 3 => "Fall");
     return sprintf('%s %s', $seasons[intval(substr($semester, 4, 5))], substr($semester, 0, 4));
