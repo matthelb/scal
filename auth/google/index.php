@@ -1,8 +1,7 @@
 <?php
+require(__DIR__ . '/../../vendor/autoload.php');
 require_once('../../config.php');
-require_once('../../lib/google-api-php-client/src/Google/Client.php');
 session_start();
-require_once('../../lib/google-api-php-client/src/Google/Service/' . $_SESSION['authorization']['service'] . '.php');
 
 $client = new Google_Client();
 $client->setApplicationName("SCal");

@@ -22,3 +22,6 @@ www
 *.tpl
 
 config.php
+vendor
+
+*.swp

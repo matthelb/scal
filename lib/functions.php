@@ -1,8 +1,7 @@
 <?php
+require(__DIR__ . '/../vendor/autoload.php');
 require_once('course.php');
 require_once('department.php');
-require_once('google-api-php-client/src/Google/Client.php');
-require_once('google-api-php-client/src/Google/Service/Calendar.php');
 
 define('API_ROOT', 'http://web-app.usc.edu/web/soc/api/');
 define('API_COURSES', API_ROOT . 'classes/%s/%s/');

@@ -1,6 +1,5 @@
 <?php
-require_once('google-api-php-client/src/Google/Client.php');
-require_once('google-api-php-client/src/Google/Service/Calendar.php');
+require(__DIR__ . '/../vendor/autoload.php');
 require_once('instructor.php');
 require_once('course.php');
 require_once('session.php');
