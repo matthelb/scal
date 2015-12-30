@@ -12,20 +12,22 @@ if (isset($_SESSION['token'])) {
 }
 
 if ($client->getAccessToken() && $semester) {
-	if (isset($_SESSION['sections']) && isset($_SESSION['sections'][$semester])) {
-		$urls = [];
-		$calendar = get_or_create_calendar($cal, $semester);
-		add_all_sections_to_calendar($cal, $calendar, $_SESSION['sections'][$semester]);
-		if (isset($_SESSION['authorization'])) {
-			unset($_SESSION['authorization']);
-		}
-		echo json_encode(array('success' => true, 'urls' => $urls));
-	}
-	$_SESSION['token'] = $client->getAccessToken();
+	try {
+    if (isset($_SESSION['sections']) && isset($_SESSION['sections'][$semester])) {
+      $urls = [];
+      $calendar = get_or_create_calendar($cal, $semester);
+      add_all_sections_to_calendar($cal, $calendar, $_SESSION['sections'][$semester]);
+      if (isset($_SESSION['authorization'])) {
+        unset($_SESSION['authorization']);
+      }
+      echo json_encode(array('success' => true, 'urls' => $urls));
+    }
+    $_SESSION['token'] = $client->getAccessToken();
+  } catch (Google_Auth_Exception $e) {
+    $_SESSION['authorization']['redirect'] = $_SERVER['HTTP_REFERER'];
+    do_google_authorization();
+  }
 } else {
-	$_SESSION['authorization']['service'] = 'Calendar';
-	header('Location: http://' . $_SERVER['HTTP_HOST'] .
-		((strcmp($_SERVER['HTTP_HOST'], 'localhost') == 0) ?
-		substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '/', 1)) : '' ). '/auth/google/');
+  do_google_authorization();
 }
 ?>

@@ -34,6 +34,10 @@ class Section {
 			$this->type = @$json_object['type'];
 			$this->instructor = array();
 			$instructors = @$json_object['instructor'];
+      if (is_array($this->start)) {
+        $this->start = $this->start[0];
+        $this->end = $this->end[0];
+      }
 			if(isset($instructors[0])) {
 				foreach ($instructors as $instructor) {
 					array_push($this->instructor, new Instructor($instructor));
@@ -133,6 +137,7 @@ class Section {
 		return base64_encode(implode(';', array($this->getSessionObject()->getTerm(), $this->getCourse()->getId(), $this->getId())));
 	}
 
+
 	public function toCalendarEvent() {
 		$sessionObject = $this->getSessionObject();
 		$event = $this->getBaseEvent();
@@ -157,9 +162,20 @@ class Section {
 		$event->setStart($start);
 		$event->setEnd($end);
 		$endDate = new DateTime($sessionObject->getEnd());
-		$endDate->setTimeZone(new DateTimeZone(DEFAULT_TZ));
-		$endDate->modify('-10 day');
-		$event->setRecurrence(array('RRULE:FREQ=WEEKLY;' . $byDay . 'UNTIL=' . $endDate->format('Ymd\THms\Z')));
+    $endDate->setTimezone(new DateTimeZone(DEFAULT_TZ));
+		$endDate->modify('-11 days');
+    $startTime = $this->getStartTime();
+    $exFmt = function ($dt) use ($startTime) {
+      $dt->modify($startTime);
+      $dt->setTimezone(new DateTimeZone('UTC'));
+      error_log($dt->format('Ymd\THis\Z P'));
+      return $dt->format('Ymd\THis\Z');
+    };
+		$event->setRecurrence(array(
+          'RRULE:FREQ=WEEKLY;' . $byDay . 'UNTIL=' . $endDate->format('Ymd\THis\Z'),
+          'EXDATE;TZID=' . DEFAULT_TZ . ':' . implode(',', array_map($exFmt, $sessionObject->getExcludedDates(new DateTimeZone(DEFAULT_TZ)))),
+        )
+      );
 		$properties = new Google_Service_Calendar_EventExtendedProperties();
 		$properties->setPrivate(array('scal'=>$this->getSCalId()));
 		$event->setExtendedProperties($properties);

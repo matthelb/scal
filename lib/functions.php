@@ -9,6 +9,13 @@ define('API_DEPARTMENTS', API_ROOT . 'depts/%s/');
 define('API_TERMS', API_ROOT . 'terms/');
 define('API_SESSIONS', API_ROOT . 'session/%s/%s/');
 
+function do_google_authorization() {
+  $_SESSION['authorization']['service'] = 'Calendar';
+	header('Location: http://' . $_SERVER['HTTP_HOST'] .
+		((strcmp($_SERVER['HTTP_HOST'], 'localhost') == 0) ?
+		substr($_SERVER['PHP_SELF'], 0, strpos($_SERVER['PHP_SELF'], '/', 1)) : '' ). '/auth/google/');
+}
+
 function get_all_semesters() {
 	$json_object = get_json(API_TERMS);
 	return json_decode($json_object, true)['term'];
@@ -101,12 +108,12 @@ function get_all_terms() {
 }
 
 function retrieve_calendar($cal, $semester) {
-	$calendarList = $cal->calendarList->listCalendarList();
-	foreach($calendarList->getItems() as $calendarEntry) {
-		if (strcmp($semester, base64_decode($calendarEntry->getDescription())) == 0) {
-			return $calendarEntry;
-		}
-	}
+  $calendarList = $cal->calendarList->listCalendarList();
+  foreach($calendarList->getItems() as $calendarEntry) {
+    if (strcmp($semester, base64_decode($calendarEntry->getDescription())) == 0) {
+      return $calendarEntry;
+    }
+  }
 	return null;
 }
 
@@ -133,7 +140,7 @@ function add_all_sections_to_calendar($cal, $calendar, $sections) {
 	foreach ($sections as $section) {
 		$batch->add($cal->events->insert($calendar->getId(), $section->toCalendarEvent()), $section->title);
 	}
-	$batch->execute();
+  $batch->execute();
 	$cal->getClient()->setUseBatch($useBatch);
 }
 
